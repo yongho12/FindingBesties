@@ -1,0 +1,14 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+.navbar__logo {
+    align-self: flex-start;
+}
+
+.navbar__menu {
+    align-self: flex-end;
+}
