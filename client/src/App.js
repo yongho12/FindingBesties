@@ -10,7 +10,7 @@ import styles from './app.module.css';
 function App() {
 
   return (
-    <>
+    <div className={styles.app}>
     <Switch>
         <Route path="/users">
             <UserList />
@@ -18,7 +18,7 @@ function App() {
 
         <Route path="/" exact={true} component={HomePage}/>
     </Switch>
-    </>
+    </div>
   );
 }
 
