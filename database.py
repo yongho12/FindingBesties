@@ -16,19 +16,33 @@ with app.app_context():
   alissa = User(name='Alissa', email='alissa@aa.io',  password='password')
   demo = User(name='demo', email='demo@example.com',  password='password')
 
-  question1 = Question(category='hobby', question='When you have spare time, what do you do?')
+  question1 = Question(category='hobby', question='When you have spare time, what do you mostly do?')
 
   example1 = Example(question_id = 1, choice = "reading books")
   example2 = Example(question_id = 1, choice = "watching TV")
   example3 = Example(question_id = 1, choice = "taking naps")
-  example4 = Example(question_id = 1, choice = "do nothing")
+  example4 = Example(question_id = 1, choice = "playing sports")
 
-  question2 = Question(category='habbit', question='When you are in bed for sleep, what do you thik?')
+  question2 = Question(category='habbit', question='When you are in bed before sleeping, what do you mostly think about?')
 
-  example2_1 = Example(question_id = 2, choice = "thinking about what I am going to do tomorrow")
-  example2_2 = Example(question_id = 2, choice = "thinking about lovers")
-  example2_3 = Example(question_id = 2, choice = "thinking aobut foods")
-  example2_4 = Example(question_id = 2, choice = "thinking about the miserable past")
+  example2_1 = Example(question_id = 2, choice = "what am I going to do tomorrow")
+  example2_2 = Example(question_id = 2, choice = "my exgirlfriends or exboyfriends ")
+  example2_3 = Example(question_id = 2, choice = "what am I going to eat tomorrow.")
+  example2_4 = Example(question_id = 2, choice = "what I have to do at work tomorrow")
+
+  question3 = Question(category='habbit', question='Where do you prefer to live?')
+
+  example3_1 = Example(question_id = 3, choice = "in a trendy downtown apartment")
+  example3_2 = Example(question_id = 3, choice = "in the suburbs")
+  example3_3 = Example(question_id = 3, choice = "in a rural or farm location")
+  example3_4 = Example(question_id = 3, choice = "in a tent or homeless shelter")
+
+  # question4 = Question(category='habbit', question='What kind of car would you like to drive')
+
+  # example3_1 = Example(question_id = 2, choice = "a minivan for kids")
+  # example3_2 = Example(question_id = 2, choice = "a mid-size sedan")
+  # example3_3 = Example(question_id = 2, choice = "a pickup truck")
+  # example3_4 = Example(question_id = 2, choice = "I don't drive")
 
   db.session.add(ian)
   db.session.add(javier)
@@ -51,6 +65,14 @@ with app.app_context():
   db.session.add(example2_2)
   db.session.add(example2_3)
   db.session.add(example2_4)
+
+  db.session.add(question3)
+
+  db.session.add(example3_1)
+  db.session.add(example3_2)
+  db.session.add(example3_3)
+  db.session.add(example3_4)
+
 
 
 

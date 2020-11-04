@@ -45,18 +45,20 @@ class Question(db.Model):
   examples = db.relationship("Example", back_populates="question")
 
   def to_dict(self):
+    example_list = [ ex.to_dict_for_question() for ex in self.examples]
+
     return {
       "id": self.id,
       "category": self.category,
       "question": self.question,
-      # "choice" : self.examples.choice
+      "examples": example_list
     }
 
 class Example(db.Model):
   __tablename__='examples'
 
   id = db.Column(db.Integer, primary_key=True)
-  question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
+  question_id = db.Column(db.Integer, db.ForeignKey('questions.id', ondelete='cascade'),nullable=False)
   choice = db.Column(db.String(100), nullable=False)
 
   question = db.relationship("Question", back_populates="examples")
@@ -67,6 +69,12 @@ class Example(db.Model):
       "question_id": self.question_id,
       "choice": self.choice,
       "question":self.question.question
+    }
+  
+  def to_dict_for_question(self):
+    return {
+      "ex_id": self.id,
+      "choice": self.choice,
     }
 
 
