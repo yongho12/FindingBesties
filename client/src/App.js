@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 // import LoginPanel from './components/LoginPanel';
 import HomePage from './components/HomePage/HomePage'
+import LoginPanel from './components/LoginPannel'
 import UserList from './components/UsersList';
 import styles from './app.module.css';
 
@@ -17,6 +18,7 @@ function App() {
         </Route>
 
         <Route path="/" exact={true} component={HomePage}/>
+        <Route path="/login" component={LoginPanel} />
     </Switch>
     </div>
   );

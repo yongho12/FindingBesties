@@ -39,3 +39,9 @@
     margin: 30px;
     /* justify-content: space-between; */
 }
+
+button {
+    height: 50px;
+    width: 70px;
+    margin-top: 20px;
+}
