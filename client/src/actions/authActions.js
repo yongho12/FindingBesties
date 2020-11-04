@@ -27,7 +27,7 @@ export const removeUser = (user) => {
 }
 
 export const logout = () => (dispatch, getState) => {
-    const fetchWithCSRF = getState().authentication.csrf;
+    const fetchWithCSRF = getState().authReducer.csrf;
     fetchWithCSRF(`/api/session/logout`, {
         method: 'POST'
     }).then(() => dispatch(removeUser()));
@@ -35,7 +35,7 @@ export const logout = () => (dispatch, getState) => {
 
 export const login = (email, password) => {
     return async (dispatch, getState) => {
-        const fetchWithCSRF = getState().authentication.csrf;
+        const fetchWithCSRF = getState().authReducer.csrf;
         const res = await fetchWithCSRF('/api/session/login', {
             method: "POST",
             headers: {
@@ -61,7 +61,7 @@ export const error = (message) => {
 
 export const signup = (name, email, password, city, state, points) => {
     return async (dispatch, getState) => {
-        const fetchWithCSRF = getState().authentication.csrf;
+        const fetchWithCSRF = getState().authReducer.csrf;
         const res = await fetchWithCSRF('/api/session/signup', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -83,7 +83,7 @@ export const signup = (name, email, password, city, state, points) => {
 
 export const patchUser = (formState) => {
     return async (dispatch, getState) => {
-        const fetchWithCSRF = getState().authentication.csrf;
+        const fetchWithCSRF = getState().authReducer.csrf;
         const res = await fetchWithCSRF(`/api/users/${formState.id}/patch`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },

@@ -40,7 +40,7 @@ class Question(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   category = db.Column(db.String(15), nullable=False)
-  content = db.Column(db.String(400), nullable=False)
+  question = db.Column(db.String(400), nullable=False)
 
   examples = db.relationship("Example", back_populates="question")
 
@@ -48,7 +48,8 @@ class Question(db.Model):
     return {
       "id": self.id,
       "category": self.category,
-      "content": self.content,
+      "question": self.question,
+      # "choice" : self.examples.choice
     }
 
 class Example(db.Model):
@@ -56,7 +57,7 @@ class Example(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
-  question_content = db.Column(db.String(100), nullable=False)
+  choice = db.Column(db.String(100), nullable=False)
 
   question = db.relationship("Question", back_populates="examples")
 
@@ -64,7 +65,8 @@ class Example(db.Model):
     return {
       "id": self.id,
       "question_id": self.question_id,
-      "question_content": self.question_content,
+      "choice": self.choice,
+      "question":self.question.question
     }
 
 
