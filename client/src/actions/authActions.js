@@ -1,7 +1,7 @@
 
-export const SET_USER = 'FOODIE/AUTH/SET_USER'
-export const REMOVE_USER = 'FOODIE/AUTH/REMOVE_USER'
-export const SET_CSRF = 'FOODIE/AUTH/SET_CSRF'
+export const SET_USER = 'SET_USER'
+export const REMOVE_USER = 'REMOVE_USER'
+export const SET_CSRF = 'SET_CSRF'
 export const ERROR_MSG = 'ERROR_MSG'
 
 

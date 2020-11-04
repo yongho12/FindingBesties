@@ -15,8 +15,6 @@ const LoginHandler = () => {
 
 }
 
-
-
 const NavBar = () => {
 
     return (
