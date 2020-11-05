@@ -17,11 +17,16 @@ function Questions() {
         setIndex(idx);
     }
 
-     useEffect(() => {
-       
-    }, []);
+    // useEffect(() => {
+        
+    // }, [index]); 
+  
 
-    if (!questions.length || index >= questions.length) return null;
+    if (!questions.length || index === (questions.length -1)) return null;
+
+    // if (index === (questions.length -1)) {
+    //     console.log("Question: going to submit")
+    // }
     
     return (
         <>
