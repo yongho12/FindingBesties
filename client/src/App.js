@@ -13,10 +13,6 @@ function App() {
   return (
     <div className={styles.app}>
     <Switch>
-        <Route path="/users">
-            <UserList />
-        </Route>
-
         <Route path="/" exact={true} component={HomePage}/>
         <Route path="/login" component={LoginPanel} />
     </Switch>
