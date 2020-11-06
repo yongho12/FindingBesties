@@ -3,6 +3,7 @@ export const SET_USER = 'SET_USER'
 export const REMOVE_USER = 'REMOVE_USER'
 export const SET_CSRF = 'SET_CSRF'
 export const ERROR_MSG = 'ERROR_MSG'
+export const SET_ANSWERS = 'SET_ANSWERS'
 
 
 export const setUser = (user) => {
@@ -102,5 +103,13 @@ export const patchUser = (formState) => {
             return { res, user, errors };
         }
 
+    }
+}
+
+
+export const setAnswers = (choiceId) => {
+    return {
+        type: SET_ANSWERS,
+        answers: choiceId
     }
 }

@@ -77,4 +77,24 @@ class Example(db.Model):
       "choice": self.choice,
     }
 
+class Answer(db.Model):
+  __tablename__='answers'
+
+  id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  # question_id = db.Column(db.Integer, db.ForeignKey('questions.id', ondelete='cascade'),nullable=False)
+  choice_id = db.Column(db.Integer, db.ForeignKey('examples.id', ondelete='cascade'),nullable=False)
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      # "question_id": self.question_id,
+      "choice_id":self.choice_id,
+    }
+  
+
+  
+
+  
 

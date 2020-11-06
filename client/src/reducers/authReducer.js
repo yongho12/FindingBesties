@@ -4,6 +4,7 @@ import {
     SET_CSRF,
     REMOVE_USER,
     ERROR_MSG,
+    SET_ANSWERS,
 } from "../actions/authActions";
 
 function loadUser() {
@@ -37,6 +38,8 @@ const authReducer = ( state = initialState, action) => {
             return { csrf: state.csrf }
         case ERROR_MSG:
             return { ...state, error: action.message }
+        case SET_ANSWERS:
+            return [ ...state, ...action.answers]
         default:
             return state
     }
