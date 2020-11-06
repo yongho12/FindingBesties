@@ -37,12 +37,20 @@ with app.app_context():
   example3_3 = Example(question_id = 3, choice = "in a rural or farm location")
   example3_4 = Example(question_id = 3, choice = "in a tent or homeless shelter")
 
-  # question4 = Question(category='habbit', question='What kind of car would you like to drive')
+  question4 = Question(category='habbit', question='What kind of car would you like to drive')
 
-  # example3_1 = Example(question_id = 2, choice = "a minivan for kids")
-  # example3_2 = Example(question_id = 2, choice = "a mid-size sedan")
-  # example3_3 = Example(question_id = 2, choice = "a pickup truck")
-  # example3_4 = Example(question_id = 2, choice = "I don't drive")
+  example4_1 = Example(question_id = 4, choice = "a minivan for kids")
+  example4_2 = Example(question_id = 4, choice = "a mid-size sedan")
+  example4_3 = Example(question_id = 4, choice = "a pickup truck")
+  example4_4 = Example(question_id = 4, choice = "I don't drive")
+
+  answer1 = Answer(user_id = 1, selected =['1', '6', '12', '16'])
+  answer2 = Answer(user_id = 2, selected =['1', '6', '9', '13'])
+  answer3 = Answer(user_id = 3, selected =['2', '7', '11', '14'])
+  answer4 = Answer(user_id = 4, selected =['3', '7', '9', '15'])
+  answer5 = Answer(user_id = 5, selected =['4', '5', '10', '16'])
+  answer6 = Answer(user_id = 6, selected =['1', '6', '12', '16'])
+  
 
   db.session.add(ian)
   db.session.add(javier)
@@ -73,6 +81,19 @@ with app.app_context():
   db.session.add(example3_3)
   db.session.add(example3_4)
 
+  db.session.add(question4)
+
+  db.session.add(example4_1)
+  db.session.add(example4_2)
+  db.session.add(example4_3)
+  db.session.add(example4_4)
+
+  db.session.add(answer1)
+  db.session.add(answer2)
+  db.session.add(answer3)
+  db.session.add(answer4)
+  db.session.add(answer5)
+  db.session.add(answer6)
 
 
 

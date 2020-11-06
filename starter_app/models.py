@@ -82,16 +82,28 @@ class Answer(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  selected = db.Column(db.String(30), nullable=False)
   # question_id = db.Column(db.Integer, db.ForeignKey('questions.id', ondelete='cascade'),nullable=False)
-  choice_id = db.Column(db.Integer, db.ForeignKey('examples.id', ondelete='cascade'),nullable=False)
+  # choice_id = db.Column(db.Integer, db.ForeignKey('examples.id', ondelete='cascade'),nullable=False)
 
   def to_dict(self):
     return {
       "id": self.id,
       "user_id": self.user_id,
+      "selected": self.selected
       # "question_id": self.question_id,
-      "choice_id":self.choice_id,
+      # "choice_id":self.choice_id,
     }
+
+  def to_dict_match(self):
+    return {
+      self.user_id: self.selected
+    }
+    
+    # return {
+    #   "user_id": self.user_id,
+    #   "selected": self.selected
+    # }
   
 
   
