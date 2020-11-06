@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import or_
-from starter_app.models import db, Question, Example, Answer
+from starter_app.models import db, Question, Example, Answer, User
 from sqlalchemy.orm import joinedload
 import re
 
@@ -12,6 +12,7 @@ def questions():
   response = Question.query.all()
   return { "questions": [question.to_dict() for question in response]}
 
+
 # @login_required
 @bp.route('/answers', methods=["POST"])  
 def answers():
@@ -20,17 +21,21 @@ def answers():
   newAnswer = Answer(user_id=user_id, selected=answers)
   db.session.add(newAnswer)
   db.session.commit()
-  intimacyLogic(user_id)
-  intimacies=intimacyLogic(user_id)
-  print(intimacies) 
-  return {"similar1": intimacies[0],
-          "similar2": intimacies[1],
-          "similar3": intimacies[2],
-          "opposite1":intimacies[-1],
-          "opposite2":intimacies[-2],
-          "opposite3":intimacies[-3]
-          }, 200
+ 
+  # calling itimacy logic and received top/bottom 3
+  intimacies = intimacyLogic(user_id)
+  top_bottom_3 = intimacies[0:3]
+  bottom3 = intimacies[-3:]
+  top_bottom_3.extend(bottom3)
 
+  recommends = User.query.filter(User.id.in_(top_bottom_3))
+ 
+  print("recommends::::::::",recommends ) 
+  return {"top_bottom_3": top_bottom_3,
+          "recommends": [user.to_dict() for user in recommends]}, 200
+
+
+# intimacy Logic
 def intimacyLogic(my_id):
   response = db.session.query(Answer).all()
   all_answers=[answer.to_dict_match() for answer in response] 
