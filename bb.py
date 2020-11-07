@@ -81,7 +81,9 @@ bottom3_val = v_intimate_value[-3:]
 top_bottom_3_val.extend(bottom3_val)
 
 top_bottom_three = dict(zip(top_bottom_3, top_bottom_3_val))
-
+print('top_bottom_3_val', top_bottom_3_val)
+aaa = [int(v/7*100) for v in top_bottom_3_val ]
+print("Results", aaa)
 print("top bottom 3", top_bottom_three)
 
 
