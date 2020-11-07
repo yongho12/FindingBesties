@@ -68,6 +68,25 @@ v_intimacies = {k: v for k,
 #output(after sort) :{'5': 2, '2': 1, '11': 1}
 
 v_intimate_users = list (v_intimacies.keys() )
+v_intimate_value = list (v_intimacies.values())
+
+# keys
+top_bottom_3 = v_intimate_users[0:3]
+bottom3 = v_intimate_users[-3:]
+top_bottom_3.extend(bottom3)
+
+#values
+top_bottom_3_val = v_intimate_value[0:3]
+bottom3_val = v_intimate_value[-3:]
+top_bottom_3_val.extend(bottom3_val)
+
+top_bottom_three = dict(zip(top_bottom_3, top_bottom_3_val))
+
+print("top bottom 3", top_bottom_three)
+
+
+
+print(v_intimacies)
 print(v_intimate_users)
 v_bff = v_intimate_users[0]
 print("bff is {}".format(v_bff))

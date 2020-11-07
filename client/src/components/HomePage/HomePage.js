@@ -4,10 +4,12 @@ import Questions from './Questions'
 
 function HomePage() {
     
-    const [submitted, setSubmitted] = useState(false);
+    const [queSubmitted, setQueSubmitted] = useState(false);
+    const [findSubmitted, setFindSubmitted] = useState(false);
 
     const buttonHandler = () => {
-        setSubmitted(true);
+        setQueSubmitted(true);
+        setFindSubmitted(true);
         console.log("HOME PAGE")
     }
 
@@ -15,9 +17,9 @@ function HomePage() {
         <>
             <NavBar/>
             <div className="finding-butoon">
-                <button onClick={buttonHandler}>Finding Besties</button>
+                <button disabled ={findSubmitted} onClick={buttonHandler}>Finding Besties</button>
             </div>
-            {  submitted && 
+            {  queSubmitted && 
                <div><Questions /></div> }
         </>
     ) 
