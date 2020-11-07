@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from sqlalchemy import or_
+from sqlalchemy import or_ 
 from starter_app.models import db, Question, Example, Answer, User
 from sqlalchemy.orm import joinedload
 import re
@@ -36,17 +36,40 @@ def answers():
   top_bottom_3_val.extend(bottom3_val)
   print("top_bottom_3:::::",top_bottom_3 )
   print("top_bottom_3_val::::", top_bottom_3_val)
+  # print("AAAAAAAA", [ val/3 for val in top_bottom_3_val])
+  match_percent = [int(v/4*100) for v in top_bottom_3_val ]
   #zip them together
-  top_bottom_three = dict(zip(top_bottom_3, top_bottom_3_val))
+  top_bottom_three = dict(zip(top_bottom_3, match_percent))
   print("top_bottom_three:::::::::",top_bottom_three)
 
-  recommends = User.query.filter(User.id.in_(top_bottom_3)).order_by(User.id.in_(top_bottom_3))
+  
 
-  final_list= [user.to_dict() for user in recommends]
- 
-  print("recommends::::::::",recommends ) 
+  recommends = User.query.filter(User.id.in_(top_bottom_3))
+  # q = User.query.filter(User.id.in_(top_bottom_3))
+  # reco_map = { t.id: t for t in q}
+  # team = [reco_map[n] for n in id]
+  first = User.query.filter_by(id = top_bottom_3[0])
+  second = User.query.filter_by(id = top_bottom_3[1])
+  third = User.query.filter_by(id = top_bottom_3[2])
+  last_third = User.query.filter_by(id = top_bottom_3[3])
+  last_second = User.query.filter_by(id = top_bottom_3[4])
+  last_first = User.query.filter_by(id = top_bottom_3[5])
+  print('first::::', first)
+  # .order_by(User.id.in_(top_bottom_3))
+  print([user.to_dict() for user in recommends])
+  # final_list= [user.to_dict(), top_bottom_three for user in recommends if recommends.id == top_bottom_three.keys() ]
+
+  
+
+  print("recommends::::::::",[user.to_dict() for user in recommends] ) 
   return {"top_bottom_3": top_bottom_3,
           "top_bottom_three": top_bottom_three,
+          "first": [user.to_dict() for user in first],
+          "second": [user.to_dict() for user in second],
+          "third": [user.to_dict() for user in third],
+          "last_third": [user.to_dict() for user in last_third],
+          "last_second": [user.to_dict() for user in last_second],
+          "last_first": [user.to_dict() for user in last_first],
           "recommends": [user.to_dict() for user in recommends]}, 200
 
 
