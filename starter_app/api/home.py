@@ -23,15 +23,30 @@ def answers():
   db.session.commit()
  
   # calling itimacy logic and received top/bottom 3
-  intimacies = intimacyLogic(user_id)
+  intimate_users = intimacyLogic(user_id)
+  #key
+  intimacies = list(intimate_users.keys())
   top_bottom_3 = intimacies[0:3]
   bottom3 = intimacies[-3:]
   top_bottom_3.extend(bottom3)
+  #value
+  intimacies_val = list(intimate_users.values())
+  top_bottom_3_val = intimacies_val[0:3]
+  bottom3_val = intimacies_val[-3:]
+  top_bottom_3_val.extend(bottom3_val)
+  print("top_bottom_3:::::",top_bottom_3 )
+  print("top_bottom_3_val::::", top_bottom_3_val)
+  #zip them together
+  top_bottom_three = dict(zip(top_bottom_3, top_bottom_3_val))
+  print("top_bottom_three:::::::::",top_bottom_three)
 
-  recommends = User.query.filter(User.id.in_(top_bottom_3))
+  recommends = User.query.filter(User.id.in_(top_bottom_3)).order_by(User.id.in_(top_bottom_3))
+
+  final_list= [user.to_dict() for user in recommends]
  
   print("recommends::::::::",recommends ) 
   return {"top_bottom_3": top_bottom_3,
+          "top_bottom_three": top_bottom_three,
           "recommends": [user.to_dict() for user in recommends]}, 200
 
 
@@ -65,9 +80,12 @@ def intimacyLogic(my_id):
                             key=lambda item:item[1],
                             reverse=True)
                 }
+  print("intimacies:::::", intimacies)
   intimate_users = list(intimacies.keys())
+  # intimate_nums = list(intimacies.values())
 
-  return intimate_users
+  # return intimate_users
+  return intimacies
 
 def enrich(raw_data):
   v_answer_sheets = {}

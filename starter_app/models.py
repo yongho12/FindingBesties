@@ -30,7 +30,6 @@ class User(db.Model, UserMixin):
       "id": self.id,
       "name": self.name,
       "email": self.email,
-      "hashed_password": self.hashed_password,
       "status": self.status,
       "avatar": self.avatar
     }

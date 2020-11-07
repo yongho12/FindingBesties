@@ -3,6 +3,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import {  fetchQuestions } from "../../actions/questionActions"; 
 import {  setAnswers } from "../../actions/authActions"; 
 import Single from "./Single"
+import Match from "./Match"
 
 function Questions() {
     const dispatch = useDispatch();
@@ -12,10 +13,15 @@ function Questions() {
     
     const [index, setIndex] = useState(0);
     const [last, setLast] = useState(false);
+    const [queSubmitted, setQueSubmitted] = useState(false);
     const [response, setResponse] = useState()
     // const [questionId, setQuesitonId] = useState();
     // const [choiceId, setChoiceId] = useState();
     const [answers, setAnswers] = useState([])
+    const [recommends, setRecommends] = useState([]);
+    const [top_bottom_3, setTop_bottom_3] = useState([]);
+    let match = {};
+   
     
     
     console.log(user_id);
@@ -43,6 +49,7 @@ function Questions() {
     }
     
     async function submitHandler()  {
+        setQueSubmitted(true);
         const response = await fetchWithCSRF(`/api/home/answers`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -53,10 +60,20 @@ function Questions() {
         })
 
         if (response.ok) {
-            const data= await response.json();
-            console.log(data)
-            console.log("resp")            
+            match= await response.json();
+            // { top_bottom_3, recommends } = match
+            console.log("recommends:::",match.recommends)
+            console.log("top_bottom_3::::", match.top_bottom_3)
+            setRecommends(match.recommends);
+            setTop_bottom_3(match.top_bottom_3);
+    
 
+            console.log(match)
+            console.log("resp")
+            // console.log("top_bottom_3", AAAA)
+            // console.log("top_bottom_3",top_bottom_3);
+            // console.log("recommends::::", recommends);
+                       
         }
     }
 
@@ -65,15 +82,19 @@ function Questions() {
     if (!questions.length) return null;
     
     return (
-        <>
+        <>  
+            { !queSubmitted && 
+            <div><Single question={questions[index]} updateAnswer={updateAnswer} /></div> }
+
+            { 
             <div>
-                <h1>Questionnaire</h1>
-                <Single question={questions[index]} updateAnswer={updateAnswer} />
-            </div> 
+                <button  onClick={last?submitHandler:handleNextQuestion }>{last?'Submit':'Next'}</button>
+            </div>
+            }
+            {/* Results */}
             <div>
-                 {/* <button onClick={handleNextQuestion}>'Next'</button>  */}
-                 <button onClick={last?submitHandler:handleNextQuestion }>{last?'Submit':'Next'}</button>
-            </div>      
+                <Match recommends={recommends} top_bottom_3={top_bottom_3}  />
+            </div>
         </>
     ) 
 }
