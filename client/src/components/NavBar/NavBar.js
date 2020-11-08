@@ -26,15 +26,19 @@ const NavBar = () => {
             </div>
 
             <ul className={styles.navbarMenu} >
-                <li className={styles.navbarMenuItem}>Home</li>
                 <li className={styles.navbarMenuItem}>
-                    <NavLink to="/aboutus" activeClassName="active">
-                        About Us
+                    <NavLink to="/" activeClassName="active">
+                        Home
+                    </NavLink>
+                </li>
+                <li className={styles.navbarMenuItem}>
+                    <NavLink to="/questionnaire" activeClassName="active">
+                        Questionnaire
                     </NavLink>
                 </li>
                 <li className={styles.navbarMenuItem}>  
                     <NavLink to="/login" activeClassName="active">
-                        Log In
+                        LogIn
                     </NavLink></li>
                 <li className={styles.navbarMenuItem}>Profile</li>
             </ul>
