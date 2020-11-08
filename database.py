@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Question, Example, Answer
+from starter_app.models import User, Question, Example, Answer, Ask
 
 with app.app_context():
   db.drop_all()

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import or_ 
-from starter_app.models import db, Question, Example, Answer, User
+from starter_app.models import db, Question, Example, Answer, User, Ask
 from sqlalchemy.orm import joinedload
 import re
 
@@ -13,7 +13,20 @@ def questions():
   return { "questions": [question.to_dict() for question in response]}
 
 
-# @login_required
+@login_required
+@bp.route('/request', methods=["POST"])
+def request():
+  requestor = request.json.get("requestor", None)
+  recipient = request.json.get("recipient", None)
+  newAsk = Ask(requestor=requestor, recipient=recipient)
+  db.session.add(newAsk)
+  db.session.commit()
+  return { "ask": [ask.to_dict() for ask in newAsk]}, 200
+
+
+
+
+@login_required
 @bp.route('/answers', methods=["POST"])  
 def answers():
   answers = request.json.get("answers", None)

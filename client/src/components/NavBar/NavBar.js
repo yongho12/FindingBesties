@@ -4,16 +4,6 @@ import styles from './navbar.module.css';
 import  './navbar.module.css'
 import Login from '../LoginPannel'
 
-const LoginHandler = () => {
-    console.log("Login Handler")
-
-    return (
-        <>
-        <h1>  hahahah </h1>
-        </>
-    )
-
-}
 
 const NavBar = () => {
 
