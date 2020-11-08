@@ -4,6 +4,7 @@ import {  fetchQuestions } from "../../actions/questionActions";
 import {  setAnswers } from "../../actions/authActions"; 
 import Single from "./Single"
 import Match from "./Match"
+import NavBar from "../NavBar/NavBar"
 
 function Questions() {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function Questions() {
     const [index, setIndex] = useState(0);
     const [last, setLast] = useState(false);
     const [queSubmitted, setQueSubmitted] = useState(false);
-    const [response, setResponse] = useState()
+    const [response, setResponse] = useState(false)
     const [answers, setAnswers] = useState([])
     const [recommends, setRecommends] = useState([]);
     const [top_bottom_list, setTop_bottom_list] = useState([]);
@@ -65,6 +66,7 @@ function Questions() {
 
         if (response.ok) {
             const match= await response.json();
+            setResponse(true);
 
             setRecommends(match.recommends);
             setTop_bottom_list(match.top_bottom_3);
@@ -87,6 +89,7 @@ function Questions() {
     
     return (
         <>  
+         <NavBar/>
             { !queSubmitted && 
             <div>
                 <div><Single question={questions[index]} updateAnswer={updateAnswer} /></div> 
@@ -94,10 +97,11 @@ function Questions() {
             </div>
             }
             {/* Results */}
-    
+            { response &&
             <div>
                  <Match first={first} second={second} third={third} last_third={last_third} last_second={last_second} last_first={last_first} top_bottom_three={top_bottom_three} />
             </div>
+            }
         </>
     ) 
 }
