@@ -10,15 +10,16 @@ function HomePage() {
     const buttonHandler = () => {
         setQueSubmitted(true);
         setFindSubmitted(true);
-        console.log("HOME PAGE")
     }
 
     return (
         <>
             <NavBar/>
+            { !findSubmitted &&
             <div className="finding-butoon">
-                <button disabled ={findSubmitted} onClick={buttonHandler}>Finding Besties</button>
-            </div>
+                {/* <button disabled ={findSubmitted} onClick={buttonHandler}>Finding Besties</button> */}
+                <button onClick={buttonHandler}>Finding Besties</button>
+            </div>}
             {  queSubmitted && 
                <div><Questions /></div> }
         </>

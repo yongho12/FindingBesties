@@ -10,26 +10,29 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
 
     return (
         <>
-        <h1>Match</h1>
          <div className="matchContainer">
 
- 
+            { (first.length) &&
             <div>
                 {first.map((person, index)=> (<div key={`${person.id}-${index}`}> 
                 {person.name} <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
                 </div>))}
+                <button>connect</button>
             </div>
+            }
              
             <div>
                 {second.map((person, index)=> (<div key={`${person.id}-${index}`}> 
                 {person.name} <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
                 </div>))}
+                <button>connect</button>
             </div>
 
             <div>
                 {third.map((person, index)=> (<div key={`${person.id}-${index}`}> 
                 {person.name} <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
                 </div>))}
+                <button>connect</button>
             </div>
 
 

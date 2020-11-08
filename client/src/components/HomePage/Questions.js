@@ -15,8 +15,6 @@ function Questions() {
     const [last, setLast] = useState(false);
     const [queSubmitted, setQueSubmitted] = useState(false);
     const [response, setResponse] = useState()
-    // const [questionId, setQuesitonId] = useState();
-    // const [choiceId, setChoiceId] = useState();
     const [answers, setAnswers] = useState([])
     const [recommends, setRecommends] = useState([]);
     const [top_bottom_list, setTop_bottom_list] = useState([]);
@@ -27,8 +25,6 @@ function Questions() {
     const [last_third, setLastThird] = useState([]);
     const [last_second, setLastSecond] = useState([]);
     const [last_first, setLastFirst] = useState([]);
-
-    let match = {};
    
     
     
@@ -43,7 +39,7 @@ function Questions() {
     }
     
     const updateAnswer = (e) => {
-        const {name, value} = e.target;
+        const { value } = e.target;
         setAnswers( previousState => [...previousState, value])
     }
     
@@ -68,10 +64,8 @@ function Questions() {
         })
 
         if (response.ok) {
-            match= await response.json();
-            // { top_bottom_3, recommends } = match
-            console.log("recommends:::",match.recommends)
-            console.log("top_bottom_3::::", match.top_bottom_3)
+            const match= await response.json();
+
             setRecommends(match.recommends);
             setTop_bottom_list(match.top_bottom_3);
             setTop_bottom_three(match.top_bottom_three);
@@ -81,15 +75,8 @@ function Questions() {
             setLastThird(match.last_third)
             setLastSecond(match.last_second);
             setLastFirst(match.last_first);
-            
-            
-            
-            console.log(match)
+                
             console.log("resp")
-            console.log("!!!!!!!!!!first:::::", match.first)
-            // console.log("top_bottom_3", AAAA)
-            // console.log("top_bottom_3",top_bottom_3);
-            // console.log("recommends::::", recommends);
                        
         }
     }
@@ -101,17 +88,13 @@ function Questions() {
     return (
         <>  
             { !queSubmitted && 
-            <div><Single question={questions[index]} updateAnswer={updateAnswer} /></div> }
-
-            { 
             <div>
-                <button  onClick={last?submitHandler:handleNextQuestion }>{last?'Submit':'Next'}</button>
+                <div><Single question={questions[index]} updateAnswer={updateAnswer} /></div> 
+                <div><button  onClick={last?submitHandler:handleNextQuestion }>{last?'Submit':'Next'}</button></div>
             </div>
             }
             {/* Results */}
-            <div>
-                {/* <Match recommends={recommends} top_bottom_list={top_bottom_list} top_bottom_three={top_bottom_three} /> */}
-            </div>
+    
             <div>
                  <Match first={first} second={second} third={third} last_third={last_third} last_second={last_second} last_first={last_first} top_bottom_three={top_bottom_three} />
             </div>
