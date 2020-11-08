@@ -11,7 +11,7 @@ function Single({question, updateAnswer})
             <div>
                 { question.examples.map((ex, index) => (
                     <div key={`${ex.ex_id}-${index}`}>
-                        <input type="radio"  id={ex.ex_id} value={ex.ex_id} onClick={updateAnswer} name={question.id} />
+                        <input type="radio" required  id={ex.ex_id} value={ex.ex_id} onClick={updateAnswer} name={question.id} />
                         <label htmlFor={ex.ex_id}>{ex.choice}</label><br /> <br />
                     </div>
                 ))}
