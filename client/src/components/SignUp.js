@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { signup } from '../actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-// import styled from "styled-components";
-// import back_img from "../foodie-apps.jpg";
-import './LoginPanel.css';
 
 
 function SignUp() {
@@ -87,7 +84,6 @@ function SignUp() {
               {submitted && !password &&
                 <div className="invalid-feedback">Password is required</div>}
             </div>
-            <br />
             <div className="login-buttons">
               <button type="submit">Register</button>
               <div>
@@ -99,7 +95,9 @@ function SignUp() {
             <div id="error">{error_msg}</div>
           </fieldset>
         </form>
-  
+         <div>
+              <img className='login__image' src='/images/children.jpg' alt='sign in image'/>
+        </div>
     </div>
   )
 }

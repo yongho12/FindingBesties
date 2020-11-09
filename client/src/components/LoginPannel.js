@@ -53,14 +53,14 @@ const Login = () => {
             {/* <img className='login__image' src='https://unsplash.com/photos/tvc5imO5pXk' alt='log in image' /> */}
             {/* <LoginFormWrapper> */}
                 <div className="login">
-                    <h1>Sign in</h1>
+                    <h1>Log in to Finding Besties</h1>
                     <form onSubmit={handleLogIn}>
                         <fieldset>
                             <div className="input-fields">
                                 <label htmlFor="email">Email address</label>
                                 <input type="email"
                                     id="email"
-                                    placeholder="you@yours.com"
+                                    placeholder="Please enter Email"
                                     onChange={handleChange} />
                                     {submitted && !email &&
                                      <div className="invalid-feedback">Email is required</div>}
@@ -69,6 +69,7 @@ const Login = () => {
                                 <label htmlFor="password">Password</label>
                                 <input type="password"
                                     id="password"
+                                    placeholder="Please enter password"
                                     onChange={handleChange} />
                                  {submitted && !password &&
                                   <div className="invalid-feedback">Password is required</div>}    

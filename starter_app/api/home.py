@@ -23,6 +23,11 @@ def requestFriend():
   db.session.commit()
   return { "ask": "successful"}, 200
 
+# @bp.route('/askfriend')
+# def askfriend():
+#   user_id = request.json("user_id", None)
+#   response = db.session.query(Ask)\
+#               .options(joinedload())
 
 
 

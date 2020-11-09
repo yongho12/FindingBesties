@@ -104,13 +104,23 @@ p {
   margin: 4px 0;
 }
 
-/* 
+
 button {
-  background-color: transparent;
+  /* background-color: transparent; */
   cursor: pointer;
   border: none;
+  text-align: center;
   outline: none;
-} */
+  border-radius: 10px;
+  background-color: var(--color-yellow);
+  font: var(--font-regular);
+  color:var(--color-dark-grey);
+  font-weight: var(--weight-semi-bold);
+  display: inline-block;
+  height: 40px;
+  width: 100px;
+  margin-top: 20px;
+}
 
 /* button {
     border: 0;
@@ -269,6 +279,12 @@ button:active {
   margin: 20px;
 }
 
+.loginandsignup span{
+  color: var(--color-yellow);
+  font-weight: var(--weight-semi-bold);
+  font-size: var(--font-regular);
+}
+
 .login-buttons {
   display: flex;
   justify-content: space-between;
@@ -277,6 +293,7 @@ button:active {
 .login__image {
   height: 300px;
   width: 650px;
+  border-radius: 10px;
 }
 
 #error {
