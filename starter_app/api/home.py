@@ -15,26 +15,31 @@ def questions():
 
 @login_required
 @bp.route('/request', methods=["POST"])
-def request():
+def requestFriend():
   requestor = request.json.get("requestor", None)
   recipient = request.json.get("recipient", None)
   newAsk = Ask(requestor=requestor, recipient=recipient)
   db.session.add(newAsk)
   db.session.commit()
-  return { "ask": [ask.to_dict() for ask in newAsk]}, 200
+  return { "ask": "successful"}, 200
 
 
 
 
 @login_required
-@bp.route('/answers', methods=["POST"])  
+@bp.route('/answers', methods=["POST", "DELETE"])  
 def answers():
   answers = request.json.get("answers", None)
   user_id = request.json.get("user_id", None)
+  #delete user's answer in past. 
+  oldAnswer = Answer.query.filter_by(user_id=user_id).first()
+  if oldAnswer:
+    db.session.delete(oldAnswer)
+    db.session.commit()
   newAnswer = Answer(user_id=user_id, selected=answers)
   db.session.add(newAnswer)
   db.session.commit()
- 
+
   # calling itimacy logic and received top/bottom 3
   intimate_users = intimacyLogic(user_id)
   #key

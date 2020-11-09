@@ -80,7 +80,7 @@ class Answer(db.Model):
   __tablename__='answers'
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'),nullable=False)
   selected = db.Column(db.String(30), nullable=False)
   # question_id = db.Column(db.Integer, db.ForeignKey('questions.id', ondelete='cascade'),nullable=False)
   # choice_id = db.Column(db.Integer, db.ForeignKey('examples.id', ondelete='cascade'),nullable=False)

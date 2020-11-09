@@ -13,10 +13,10 @@ def login():
     user_email = request.json.get("email", None)
     user_password = request.json.get("password", None)
     if not user_email or not user_password:
-        return {"errors": ["Missing required credentials"]}, 400
+        return {"errors": ["Please check your credentials"]}, 400
     user = User.query.filter(User.email == user_email).first()
     if not user or not user.check_password(user_password):
-        return {"errors": ["Invalid user credentials"]}, 401
+        return {"errors": ["Please check your credentials"]}, 401
     login_user(user)
     return {"user": current_user.to_dict()}
 
@@ -40,11 +40,7 @@ def signup():
                        ), 400
     name = request.json.get("name", None)
     password = request.json.get("password", None)
-    city = request.json.get("city", None)
-    state = request.json.get("state", None)
-    points = request.json.get("points", None)
-    newUser = User(name=name, email=email, password=password,
-                   city=city, state=state, points=points)
+    newUser = User(name=name, email=email, password=password)
     db.session.add(newUser)
     db.session.commit()
     login_user(newUser)

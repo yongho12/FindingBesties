@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useSelector } from 'react-redux'
 function Match({first, second, third, last_third, last_second, last_first,top_bottom_three })
 {   
@@ -18,6 +18,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
 
     const connectHandler = async (e) => {
         console.log("e.target.value",e.target.value)
+        
         const recipient = e.target.value
         const response = await fetchWithCSRF(`/api/home/request`, {
         method: "POST",
@@ -28,6 +29,9 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
             }),
         })
 
+        if (response.ok) {
+            console.log("connect working")
+        }
 
         
     }
@@ -47,7 +51,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                 </h2>
                
                 <div>
-                    <img className = "match__photo" src="/images/friends.png" alt="friendshipt photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo_1" />
                     {first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
                     <button value={person.id} onClick={connectHandler}>be Bestie!</button>
@@ -55,19 +59,19 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                 </div>
 
                  <div>
-                    <img className = "match__photo" src="/images/friends.png" alt="friendshipt photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {second.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
+                     <button value={person.id} onClick={connectHandler}>be Bestie!</button>
                     </div>))}
-                    <button>be Bestie!</button>
                 </div>
 
                  <div>
-                    <img className = "match__photo" src="/images/friends.png" alt="friendshipt photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {third.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
+                    <button value={person.id} onClick={connectHandler}>be Bestie!</button>
                     </div>))}
-                    <button>be Bestie!</button>
                 </div>
                 
             </div>
@@ -78,32 +82,30 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
             { opposite &&
              <div className="match__opposite">
                 <div>
-                    <img className = "match__photo" src="/images/friends.png" alt="friendshipt photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
+                    <button value={person.id} onClick={connectHandler}>be Bestie!</button>
                     </div>))}
-                    <button>be Bestie!</button>
                 </div>
 
                  <div>
-                    <img className = "match__photo" src="/images/friends.png" alt="friendshipt photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_second.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
+                    <button value={person.id} onClick={connectHandler}>be Bestie!</button>
                     </div>))}
-                    <button>be Bestie!</button>
                 </div>
 
                  <div>
-                    <img className = "match__photo" src="/images/friends.png" alt="friendshipt photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_third.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
+                    <button value={person.id} onClick={connectHandler}>be Bestie!</button>
                     </div>))}
-                    <button>be Bestie!</button>
                 </div>
             </div>
-
             }
-
         </div>
         </>
     )

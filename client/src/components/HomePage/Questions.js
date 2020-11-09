@@ -4,7 +4,7 @@ import {  fetchQuestions } from "../../actions/questionActions";
 import {  setAnswers } from "../../actions/authActions"; 
 import Single from "./Single"
 import Match from "./Match"
-import NavBar from "../NavBar/NavBar"
+
 
 function Questions() {
     const dispatch = useDispatch();
@@ -89,7 +89,6 @@ function Questions() {
     
     return (
         <>  
-         <NavBar/>
             { !queSubmitted && 
             <div>
                 <div><Single question={questions[index]} updateAnswer={updateAnswer} /></div> 
