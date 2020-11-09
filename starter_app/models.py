@@ -80,7 +80,7 @@ class Answer(db.Model):
   __tablename__='answers'
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'),nullable=False)
   selected = db.Column(db.String(30), nullable=False)
   # question_id = db.Column(db.Integer, db.ForeignKey('questions.id', ondelete='cascade'),nullable=False)
   # choice_id = db.Column(db.Integer, db.ForeignKey('examples.id', ondelete='cascade'),nullable=False)
@@ -98,13 +98,38 @@ class Answer(db.Model):
     return {
       self.user_id: self.selected
     }
-    
-    # return {
-    #   "user_id": self.user_id,
-    #   "selected": self.selected
-    # }
-  
 
+
+class Ask(db.Model):
+  __tablename__='asks'
+
+  id = db.Column(db.Integer, primary_key=True)
+  requestor = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  recipient = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "requestor": self.requestor,
+      "recipient": self.recipient
+    }
+
+
+class Relation(db.Model):
+  __tablename__='relations'
+
+  id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  besties = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  status = db.Column(db.String(10), nullable=False)
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "besties": self.besties,
+      "status": self.status
+    }
   
 
   

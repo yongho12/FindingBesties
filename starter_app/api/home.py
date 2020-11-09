@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import or_ 
-from starter_app.models import db, Question, Example, Answer, User
+from starter_app.models import db, Question, Example, Answer, User, Ask
 from sqlalchemy.orm import joinedload
 import re
 
@@ -13,15 +13,38 @@ def questions():
   return { "questions": [question.to_dict() for question in response]}
 
 
-# @login_required
-@bp.route('/answers', methods=["POST"])  
+@login_required
+@bp.route('/request', methods=["POST"])
+def requestFriend():
+  requestor = request.json.get("requestor", None)
+  recipient = request.json.get("recipient", None)
+  newAsk = Ask(requestor=requestor, recipient=recipient)
+  db.session.add(newAsk)
+  db.session.commit()
+  return { "ask": "successful"}, 200
+
+# @bp.route('/askfriend')
+# def askfriend():
+#   user_id = request.json("user_id", None)
+#   response = db.session.query(Ask)\
+#               .options(joinedload())
+
+
+
+@login_required
+@bp.route('/answers', methods=["POST", "DELETE"])  
 def answers():
   answers = request.json.get("answers", None)
   user_id = request.json.get("user_id", None)
+  #delete user's answer in past. 
+  oldAnswer = Answer.query.filter_by(user_id=user_id).first()
+  if oldAnswer:
+    db.session.delete(oldAnswer)
+    db.session.commit()
   newAnswer = Answer(user_id=user_id, selected=answers)
   db.session.add(newAnswer)
   db.session.commit()
- 
+
   # calling itimacy logic and received top/bottom 3
   intimate_users = intimacyLogic(user_id)
   #key

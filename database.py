@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Question, Example, Answer
+from starter_app.models import User, Question, Example, Answer, Ask
 
 with app.app_context():
   db.drop_all()
@@ -88,15 +88,14 @@ with app.app_context():
   db.session.add(example4_3)
   db.session.add(example4_4)
 
+  db.session.commit()
+
   db.session.add(answer1)
   db.session.add(answer2)
   db.session.add(answer3)
   db.session.add(answer4)
   db.session.add(answer5)
   db.session.add(answer6)
-
-
-
 
 
   db.session.commit()

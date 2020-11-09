@@ -8,8 +8,10 @@ def index():
   response = User.query.all()
   return { "users": [user.to_dict() for user in response]}
 
+  
 
-@user_routes.route('/questions')
-def questions():
-  response = Question.query.all()
-  return { "questions": [question.to_dict() for question in response]}
+
+# @user_routes.route('/questions')
+# def questions():
+#   response = Question.query.all()
+#   return { "questions": [question.to_dict() for question in response]}

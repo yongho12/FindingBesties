@@ -45,6 +45,12 @@ export const login = (email, password) => {
             credentials: 'include',
             body: JSON.stringify({ email, password })
         })
+
+        if (res.status === 400 || res.status === 401 ) {
+            const { errors } = await res.json();
+            dispatch(error(errors))
+        }
+    
         if (res.ok) {
             const { user } = await res.json();
             dispatch(setUser(user));
@@ -60,16 +66,16 @@ export const error = (message) => {
 }
 
 
-export const signup = (name, email, password, city, state, points) => {
+export const signup = (name, email, password) => {
     return async (dispatch, getState) => {
         const fetchWithCSRF = getState().authReducer.csrf;
         const res = await fetchWithCSRF('/api/session/signup', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, password, city, state, points })
+            body: JSON.stringify({ name, email, password })
         })
 
-        if (res.status === 400) {
+        if (res.status === 400  ) {
             const { errors } = await res.json();
             dispatch(error(errors))
         }

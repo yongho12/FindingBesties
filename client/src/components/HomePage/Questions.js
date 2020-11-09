@@ -4,7 +4,7 @@ import {  fetchQuestions } from "../../actions/questionActions";
 import {  setAnswers } from "../../actions/authActions"; 
 import Single from "./Single"
 import Match from "./Match"
-import NavBar from "../NavBar/NavBar"
+
 
 function Questions() {
     const dispatch = useDispatch();
@@ -26,6 +26,7 @@ function Questions() {
     const [last_third, setLastThird] = useState([]);
     const [last_second, setLastSecond] = useState([]);
     const [last_first, setLastFirst] = useState([]);
+    // const [submitted, setSubmitted] = useState(false);
    
     
     
@@ -41,10 +42,15 @@ function Questions() {
     
     const updateAnswer = (e) => {
         const { value } = e.target;
+        // setQueSubmitted(true);
+        // if(!value) {
+            
+        // }
         setAnswers( previousState => [...previousState, value])
     }
     
     const handleNextQuestion = () => {
+
         if (index < questions.length-1) {
             handleIndex(index+1);
         }  
@@ -89,7 +95,6 @@ function Questions() {
     
     return (
         <>  
-         <NavBar/>
             { !queSubmitted && 
             <div>
                 <div><Single question={questions[index]} updateAnswer={updateAnswer} /></div> 

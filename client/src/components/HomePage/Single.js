@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 
 function Single({question, updateAnswer}) 
@@ -11,8 +11,8 @@ function Single({question, updateAnswer})
             <div>
                 { question.examples.map((ex, index) => (
                     <div key={`${ex.ex_id}-${index}`}>
-                        <input type="radio" required  id={ex.ex_id} value={ex.ex_id} onClick={updateAnswer} name={question.id} />
-                        <label htmlFor={ex.ex_id}>{ex.choice}</label><br /> <br />
+                        <input type="radio" required  id={ex.ex_id} value={ex.ex_id} defaultChecked onClick={updateAnswer} name={question.id} />
+                        <label  htmlFor={ex.ex_id}>{ex.choice}</label><br /> <br />
                     </div>
                 ))}
             </div>
