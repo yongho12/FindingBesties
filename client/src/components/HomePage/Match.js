@@ -20,12 +20,14 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
         console.log("e.target.value",e.target.value)
         
         const recipient = e.target.value
+        const status = "asking"
         const response = await fetchWithCSRF(`/api/home/request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             requestor,
-            recipient
+            recipient,
+            status
             }),
         })
 

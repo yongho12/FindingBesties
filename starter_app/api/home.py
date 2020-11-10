@@ -18,16 +18,29 @@ def questions():
 def requestFriend():
   requestor = request.json.get("requestor", None)
   recipient = request.json.get("recipient", None)
-  newAsk = Ask(requestor=requestor, recipient=recipient)
+  status = request.json.get("status", None)
+  newAsk = Ask(requestor=requestor, recipient=recipient, status=status)
   db.session.add(newAsk)
   db.session.commit()
   return { "ask": "successful"}, 200
 
-# @bp.route('/askfriend')
-# def askfriend():
-#   user_id = request.json("user_id", None)
-#   response = db.session.query(Ask)\
-#               .options(joinedload())
+#being Asked
+@bp.route('/beingasked/<int:user_id>')
+def askbeingfriend(user_id):
+  response = db.session.query(Ask) \
+              .options(joinedload(Ask.user)) \
+              .filter(Ask.recipient == user_id)
+  return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
+
+#asking
+# @bp.route('/asked/<int:user_id>')
+# def askfriend(user_id):
+#   # user_id = request.json.get("user_id", None)
+#   response = db.session.query(Ask) \
+#               .options(joinedload(Ask.user)) \
+#               .filter(Ask.recipient == user_id)
+#   return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
+
 
 
 
