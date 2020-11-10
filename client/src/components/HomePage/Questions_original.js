@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import {  fetchQuestions } from "../../actions/questionActions"; 
+import {  setAnswers } from "../../actions/authActions"; 
+import Single from "./Single"
 import Match from "./Match"
 
 
@@ -15,6 +17,8 @@ function Questions() {
     const [queSubmitted, setQueSubmitted] = useState(false);
     const [response, setResponse] = useState(false)
     const [answers, setAnswers] = useState([])
+    const [recommends, setRecommends] = useState([]);
+    const [top_bottom_list, setTop_bottom_list] = useState([]);
     const [top_bottom_three, setTop_bottom_three] = useState({});
     const [first, setFirst] = useState([]);
     const [second, setSecond] = useState([]);
@@ -22,11 +26,11 @@ function Questions() {
     const [last_third, setLastThird] = useState([]);
     const [last_second, setLastSecond] = useState([]);
     const [last_first, setLastFirst] = useState([]);
-    const [checked, setChecked] = useState(false);
-    const [item, setItem] = useState();
+    // const [submitted, setSubmitted] = useState(false);
    
     
-
+    
+    console.log(user_id);
     
     useEffect(() => {
         dispatch(fetchQuestions());
@@ -37,26 +41,27 @@ function Questions() {
     }
     
     const updateAnswer = (e) => {
-        setItem(e.target.value)
-        setChecked(true);
-      
+        const { value } = e.target;
+        console.log('e.target::::', e.target.value)
+        console.log('e.target.name::::', e.target.name)
+        // setQueSubmitted(true);
+        // if(!value) {
+            
+        // }
+        setAnswers( previousState => [...previousState, value])
     }
     
     const handleNextQuestion = () => {
-        if (checked) {
-            if (index < questions.length-1) {
-                handleIndex(index+1);
-            }  
-            else {
-                setLast(true);
-            }
-            setAnswers( previousState => [...previousState, item])
-            setChecked(false);
+
+        if (index < questions.length-1) {
+            handleIndex(index+1);
+        }  
+        else {
+            setLast(true);
         }
     }
     
     async function submitHandler()  {
-        console.log("answers;;;;;;;",answers )
         setQueSubmitted(true);
         const response = await fetchWithCSRF(`/api/home/answers`, {
             method: "POST",
@@ -70,6 +75,9 @@ function Questions() {
         if (response.ok) {
             const match= await response.json();
             setResponse(true);
+
+            setRecommends(match.recommends);
+            setTop_bottom_list(match.top_bottom_3);
             setTop_bottom_three(match.top_bottom_three);
             setFirst(match.first);
             setSecond(match.second);
@@ -91,21 +99,7 @@ function Questions() {
         <>  
             { !queSubmitted && 
             <div>
-                 <div>
-                    <fieldset>
-                        <legend><h2>{questions[index].question}</h2></legend>
-                        <br />
-                        <div>
-                            { questions[index].examples.map((ex, index) => (
-                                <div key={`${ex.ex_id}-${index}`}>
-                                    <input type="radio" id={ex.ex_id} value={ex.ex_id}  onClick={updateAnswer} name='radio' /> 
-                                    <label  htmlFor={ex.ex_id}>{ex.choice}</label><br /> <br />
-                                </div>
-                            ))}
-                        </div>
-                        
-                    </fieldset>
-                </div>
+                <div><Single question={questions[index]} updateAnswer={updateAnswer} /></div> 
                 <div><button  onClick={last?submitHandler:handleNextQuestion }>{last?'Submit':'Next'}</button></div>
             </div>
             }

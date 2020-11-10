@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, Switch, Route, Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useLocation, Switch, Route } from 'react-router-dom';
 import HomePage from './components/HomePage/HomePage';
 import Questions from './components/HomePage/Questions';
 import LoginPanel from './components/LoginPannel';
 import SignUp from './components/SignUp';
-import UserList from './components/UsersList';
 import NavBar from './components/NavBar/NavBar';
 import Profile from './components/Profile/Profile';
 import { setCsrfFunc } from './actions/authActions';

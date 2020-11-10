@@ -96,7 +96,7 @@ function SignUp() {
           </fieldset>
         </form>
          <div>
-              <img className='login__image' src='/images/children.jpg' alt='sign in image'/>
+              <img className='login__image' src='/images/children.jpg' alt='signin_image'/>
         </div>
     </div>
   )

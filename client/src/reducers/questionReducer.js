@@ -1,7 +1,6 @@
 
 import {
-        RECEIVE_QUESTIONS,
-        SET_ANSWERS,
+        RECEIVE_QUESTIONS
 } from "../actions/questionActions";
 
 const initialState = {
@@ -14,8 +13,6 @@ const questionReducer = ( state = initialState, action) => {
         case RECEIVE_QUESTIONS:
             // return {...state, questions: action.questions}
             return action.questions
-        // case SET_ANSWERS:
-        //     return {...state, answers: action.answers }
         default:
             return state
     }
