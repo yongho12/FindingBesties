@@ -92,7 +92,7 @@ const Login = () => {
                     </form>
                 </div>
             <div>
-              <img className='login__image' src='/images/6friends.jpg' alt='log in image'/>
+              <img className='login__image' src='/images/6friends.jpg' alt='login_image'/>
             </div>
             {/* </LoginFormWrapper> */}
 
