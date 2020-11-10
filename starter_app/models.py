@@ -120,7 +120,7 @@ class Ask(db.Model):
       "id": self.id,
       "requestor": self.requestor,
       "recipient": self.recipient,
-      "requestor_name": self.requestor_user.name,
+      "requestor_name": self.user.name,
       "status":self.status
     }
 

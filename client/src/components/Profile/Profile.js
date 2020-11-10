@@ -12,7 +12,7 @@ function Profile() {
             const response = await fetch(`/api/home/beingasked/${user_id}`)
             const data = await response.json();
             setBeingAsked(data.beingAsked)
-            console.log("data")
+            console.log("data", data.beingAsked)
         }
         asked(); 
     }, [user_id]);
