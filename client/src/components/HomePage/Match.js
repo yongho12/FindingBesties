@@ -37,7 +37,12 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
 
         
     }
+// https://www.w3schools.com/howto/howto_js_alert.asp
+    function alertSucess(e) {
+        console.log(e.target.parentElement)
 
+        
+    }
 
     return (
         <>
@@ -57,6 +62,10 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     {first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {`${top_bottom_three[`${person.id}`]}`}% Match</div>
                     <button value={person.id} onClick={connectHandler}>be Bestie!</button>
+                    <div class="alert success">
+                        <span class="closebtn" onclick={alertSucess}>&times;</span>  
+                        <strong>Success!</strong> Indicates a successful or positive action.
+                    </div>
                     </div>))}
                 </div>
 
