@@ -124,6 +124,11 @@ class Ask(db.Model):
       "status":self.status
     }
 
+  def to_dict_recipient(self):
+    return {
+      "recipient": self.recipient,
+    }
+
 #  This is working without double join
  
 # class Ask(db.Model):

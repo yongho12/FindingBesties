@@ -7,6 +7,8 @@ function Profile() {
     const user_id = useSelector(state => state.authReducer.id);
     const fetchWithCSRF = useSelector(state => state.authReducer.csrf);
     const [beingAsked, setBeingAsked] = useState([])
+    const [askId, setAskId] = useState(0)
+    let status_msg = "";
   
 
     useEffect(() => {
@@ -17,22 +19,35 @@ function Profile() {
             console.log("data", data.beingAsked)
         }
         asked(); 
-    }, [user_id]);
+    }, [askId]);
+        // }, [user_id]);
 
-    async function acceptHandle() {
-        const response = await fetchWithCSRF(`/api/home/answers`, {
-            method: "POST",
+    async function respondAsk(id, status_msg) {
+    
+        const response = await fetchWithCSRF(`/api/home/respondask/${id}`, {
+            method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-            //    answers,
-            //    user_id
+                status_msg,
+                user_id
             }),
         })
-
+        
+        if(response.ok) {
+            setAskId(id)
+        }
     }
 
-    async function rejectHandle() {
-        console.log("reject Handle")
+    function acceptHandle(e) {
+        const id = e.target.value;
+        status_msg = "bestie"
+        respondAsk(id, status_msg)
+    }
+
+    function rejectHandle(e) {
+        const id = e.target.value;
+        status_msg = "reject"
+        respondAsk(id, status_msg)
     }
 
 
@@ -41,12 +56,12 @@ function Profile() {
         <h1>Profile</h1>
         <div>
             {beingAsked.map((asked, index)=>(<>
-            <h3 key={`${asked.id}-${index}`}>
+            <h3 key={`${asked.id}-${index}`} >
                 {asked.requestor_name} wants to be your bestie. 
-                <br /> Do you accept it?</h3> 
+                <br /> Do you want to accept it?</h3> 
                 <div>
-                    <button onClick={acceptHandle}>Accept</button>
-                    <button onClick={rejectHandle}>Reject</button>
+                    <button value={asked.id} onClick={acceptHandle}>Accept</button>
+                    <button value={asked.id} onClick={rejectHandle}>Reject</button>
                 </div>
                </> ))}
         </div>           

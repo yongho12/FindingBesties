@@ -24,22 +24,36 @@ def requestFriend():
   db.session.commit()
   return { "ask": "successful"}, 200
 
-#being Asked
+#being Asked status
 @bp.route('/beingasked/<int:user_id>')
 def askbeingfriend(user_id):
   response = db.session.query(Ask) \
               .options(joinedload(Ask.user)) \
-              .filter(Ask.recipient == user_id)
+              .filter(Ask.recipient == user_id) \
+              .filter(Ask.status == "asking")
   return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
 
-#asking
-# @bp.route('/asked/<int:user_id>')
-# def askfriend(user_id):
-#   # user_id = request.json.get("user_id", None)
-#   response = db.session.query(Ask) \
-#               .options(joinedload(Ask.user)) \
-#               .filter(Ask.recipient == user_id)
-#   return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
+#respond ask
+@bp.route('/respondask/<int:id>', methods=["PATCH"])
+def acceptask(id):
+  ask = Ask.query.filter(Ask.id == id).first()
+  status = request.json.get("status_msg", None)
+  user_id = request.json.get("user_id", None)
+  if ask:
+    ask.status = status
+    db.session.commit()
+    return {"ask": [id]}, 200
+  return {"errors": ["id not found"]}, 404 
+
+
+#asking status
+@bp.route('/askedstatus/<int:user_id>')
+def askedfriend(user_id):
+  # user_id = request.json.get("user_id", None)
+  response = db.session.query(Ask) \
+              .filter(Ask.requestor == user_id)
+
+  # return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
 
 
 
