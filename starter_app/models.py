@@ -14,6 +14,9 @@ class User(db.Model, UserMixin):
   avatar = db.Column(db.String(40), nullable=True)
   status = db.Column(db.String(20), nullable=True)
 
+  asks = db.relationship('Ask', backref='user', lazy=True)
+  # asks = db.relationship('Ask', back_populates='user', lazy=True)
+
   @property
   def password(self):
     return self.hashed_password
@@ -80,7 +83,7 @@ class Answer(db.Model):
   __tablename__='answers'
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'),nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
   selected = db.Column(db.String(30), nullable=False)
   # question_id = db.Column(db.Integer, db.ForeignKey('questions.id', ondelete='cascade'),nullable=False)
   # choice_id = db.Column(db.Integer, db.ForeignKey('examples.id', ondelete='cascade'),nullable=False)
@@ -99,37 +102,66 @@ class Answer(db.Model):
       self.user_id: self.selected
     }
 
-
 class Ask(db.Model):
   __tablename__='asks'
 
   id = db.Column(db.Integer, primary_key=True)
-  requestor = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
-  recipient = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  # requestor = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  requestor = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+  recipient = db.Column(db.Integer, nullable=True)
+  status = db.Column(db.String(10), nullable=False)
+
+  # requestor_user = db.relationship('User', foreign_keys=[requestor])
+  # recipient_user = db.relationship('User', foreign_keys=[recipient])
+
 
   def to_dict(self):
     return {
       "id": self.id,
       "requestor": self.requestor,
-      "recipient": self.recipient
+      "recipient": self.recipient,
+      "requestor_name": self.requestor_user.name,
+      "status":self.status
     }
 
+#  This is working without double join
+ 
+# class Ask(db.Model):
+#   __tablename__='asks'
+# id = db.Column(db.Integer, primary_key=True)
+# requestor = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'), nullable=False)
+# recipient = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'), nullable=False)
+# status = db.Column(db.String(10), nullable=False)
 
-class Relation(db.Model):
-  __tablename__='relations'
+# user = db.relationship("User", back_populates="asks")
 
-  id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
-  besties = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
-  status = db.Column(db.String(10), nullable=False)
 
-  def to_dict(self):
-    return {
-      "id": self.id,
-      "user_id": self.user_id,
-      "besties": self.besties,
-      "status": self.status
-    }
+# def to_dict(self):
+#   return {
+#     "id": self.id,
+#     "requestor": self.requestor,
+#     "recipient": self.recipient,
+#     "requestor_name": self.user.name,
+#     "status":self.status
+#   }   
+    
+
+
+# class Relation(db.Model):
+#   __tablename__='relations'
+
+#   id = db.Column(db.Integer, primary_key=True)
+#   user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+#   besties = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+#   status = db.Column(db.String(10), nullable=False)
+
+#   def to_dict(self):
+#     return {
+#       "id": self.id,
+#       "user_id": self.user_id,
+#       "besties": self.besties,
+#       "status": self.status
+#     }
   
 
   

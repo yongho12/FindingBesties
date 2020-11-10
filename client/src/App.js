@@ -10,19 +10,17 @@ import NavBar from './components/NavBar/NavBar';
 import Profile from './components/Profile/Profile';
 import { setCsrfFunc } from './actions/authActions';
 
-const PrivateRoute = ({ component: Component, ...rest }) => { 
-  let needLogin = useSelector(state => !state.authReducer.id);
-  return (
-        <Route {...rest} render={(props) => (
-            needLogin
-                ? <Redirect to='/login' />
-                : <Component {...props} />
-        )} />
-    )
+// const PrivateRoute = ({ component: Component, ...rest }) => { 
+//   let needLogin = useSelector(state => !state.authReducer.id);
+//   return (
+//         <Route {...rest} render={(props) => (
+//             needLogin
+//                 ? <Redirect to='/login' />
+//                 : <Component {...props} />
+//         )} />
+//     )
 
-}
-
-
+// }
 
 function App() {
   let location = useLocation();
