@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import or_ 
-from starter_app.models import db, Question, Example, Answer, User, Ask
+from starter_app.models import db, Question, Example, Answer, User, Ask, Friend
 from sqlalchemy.orm import joinedload
 import re
 
@@ -33,9 +33,27 @@ def askbeingfriend(user_id):
               .filter(Ask.status == "asking")
   return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
 
-#respond ask
-@bp.route('/respondask/<int:id>', methods=["PATCH"])
-def acceptask(id):
+
+@bp.route('/yesforask/<int:id>', methods=["PATCH"])
+def yesforask(id):
+  ask = Ask.query.filter(Ask.id == id).first()
+  status = request.json.get("status_msg", None)
+  user_id = request.json.get("user_id", None)
+  if ask:
+    ask.status = status
+    print("ASSSSSSSK::::::::::", ask.requestor)
+    friendOne=ask.requestor
+    newFriendOne = Friend(user_id=user_id, friend_id=friendOne, status="Bestie")
+    newFriendTwo = Friend(user_id=friendOne, friend_id=user_id, status="Bestie")
+    db.session.add(newFriendOne)
+    db.session.add(newFriendTwo)
+    db.session.commit()
+    return {"ask": [id]}, 200
+  return {"errors": ["id not found"]}, 404 
+
+
+@bp.route('/noforask/<int:id>', methods=["PATCH"])
+def noforask(id):
   ask = Ask.query.filter(Ask.id == id).first()
   status = request.json.get("status_msg", None)
   user_id = request.json.get("user_id", None)
