@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
   status = db.Column(db.String(20), nullable=True)
 
   asks = db.relationship('Ask', backref='user', lazy=True)
+  friends = db.relationship('Friend', backref='user', lazy=True)
   # asks = db.relationship('Ask', back_populates='user', lazy=True)
 
   @property
@@ -152,21 +153,23 @@ class Ask(db.Model):
     
 
 
-# class Relation(db.Model):
-#   __tablename__='relations'
+class Friend(db.Model):
+  __tablename__='friends'
 
-#   id = db.Column(db.Integer, primary_key=True)
-#   user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
-#   besties = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
-#   status = db.Column(db.String(10), nullable=False)
+  id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, nullable=False)
+  friend_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  status = db.Column(db.String(10), nullable=False)
 
-#   def to_dict(self):
-#     return {
-#       "id": self.id,
-#       "user_id": self.user_id,
-#       "besties": self.besties,
-#       "status": self.status
-#     }
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "friend_id": self.friend_id,
+      "friend_name": self.user.name,
+      "friend_email": self.user.email,
+      "status": self.status
+    }
   
 
   

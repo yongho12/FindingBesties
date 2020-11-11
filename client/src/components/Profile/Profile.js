@@ -20,34 +20,42 @@ function Profile() {
         }
         asked(); 
     }, [askId]);
-        // }, [user_id]);
 
-    async function respondAsk(id, status_msg) {
     
-        const response = await fetchWithCSRF(`/api/home/respondask/${id}`, {
+    async function acceptHandle(e) {
+        const id = e.target.value;
+        status_msg = "bestie"
+        const response = await fetchWithCSRF(`/api/home/yesforask/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 status_msg,
-                user_id
+                user_id,
             }),
         })
-        
-        if(response.ok) {
+
+         if(response.ok) {
             setAskId(id)
         }
+       
     }
 
-    function acceptHandle(e) {
-        const id = e.target.value;
-        status_msg = "bestie"
-        respondAsk(id, status_msg)
-    }
-
-    function rejectHandle(e) {
+    async function rejectHandle(e) {
         const id = e.target.value;
         status_msg = "reject"
-        respondAsk(id, status_msg)
+        const response = await fetchWithCSRF(`/api/home/noforask/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                status_msg,
+                user_id,
+            }),
+        })
+
+         if(response.ok) {
+            setAskId(id)
+        }
+       
     }
 
 

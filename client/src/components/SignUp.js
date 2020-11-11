@@ -40,9 +40,9 @@ function SignUp() {
         }
     }
 
-  if (currentUserId) {
-    return <Redirect to="/" />;
-  }
+    if (currentUserId) {
+      return <Redirect to="/" />;
+    }
 
   
 
