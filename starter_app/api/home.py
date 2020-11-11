@@ -34,6 +34,7 @@ def askbeingfriend(user_id):
   return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
 
 
+# respond yes for asking
 @bp.route('/yesforask/<int:id>', methods=["PATCH"])
 def yesforask(id):
   ask = Ask.query.filter(Ask.id == id).first()
@@ -43,8 +44,8 @@ def yesforask(id):
     ask.status = status
     print("ASSSSSSSK::::::::::", ask.requestor)
     friendOne=ask.requestor
-    newFriendOne = Friend(user_id=user_id, friend_id=friendOne, status="Bestie")
-    newFriendTwo = Friend(user_id=friendOne, friend_id=user_id, status="Bestie")
+    newFriendOne = Friend(user_id=user_id, friend_id=friendOne, status="friend")
+    newFriendTwo = Friend(user_id=friendOne, friend_id=user_id, status="friend")
     db.session.add(newFriendOne)
     db.session.add(newFriendTwo)
     db.session.commit()
@@ -52,6 +53,7 @@ def yesforask(id):
   return {"errors": ["id not found"]}, 404 
 
 
+# respond no for asking
 @bp.route('/noforask/<int:id>', methods=["PATCH"])
 def noforask(id):
   ask = Ask.query.filter(Ask.id == id).first()
@@ -72,6 +74,16 @@ def askedfriend(user_id):
               .filter(Ask.requestor == user_id)
 
   # return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
+
+# friend list - working fine
+@bp.route('/friendslist/<int:user_id>')
+def friendlist(user_id):
+  response = db.session.query(Friend) \
+              .options(joinedload(Friend.user)) \
+              .filter(Friend.user_id == user_id) \
+              .filter(Friend.status == "friend")
+  return {'friends':[ friend.to_dict() for friend in response ]},200 
+
 
 
 
@@ -177,6 +189,48 @@ def intimacyLogic(my_id):
 
   # return intimate_users
   return intimacies
+
+# intimacy Logic - intimacyLogic2
+def intimacyLogic2(my_id):
+  response = db.session.query(Answer).all()
+  all_answers=[answer.to_dict_match() for answer in response] 
+  answer_sheets=enrich(all_answers)
+
+  all_users = list(answer_sheets.keys())
+  all_users.remove(my_id)
+  #deleting the current friends
+
+
+
+  my_answer = answer_sheets[my_id]
+
+  intimacies = {}
+
+  for x in range(0, len(all_users)):
+    user_id = all_users[x]
+    user_answer = answer_sheets[user_id]
+
+    #compare
+    intimacy = 0
+    for i in range(0, len(my_answer)):
+
+      if user_answer[i] == my_answer[i]:
+        intimacy += 1
+
+    intimacies[user_id] = intimacy
+
+  intimacies = {k: v for k, 
+                v in sorted(intimacies.items(),
+                            key=lambda item:item[1],
+                            reverse=True)
+                }
+  print("intimacies:::::", intimacies)
+  intimate_users = list(intimacies.keys())
+  # intimate_nums = list(intimacies.values())
+
+  # return intimate_users
+  return intimacies
+
 
 def enrich(raw_data):
   v_answer_sheets = {}

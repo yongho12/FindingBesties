@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation, Switch, Route } from 'react-router-dom';
 import HomePage from './components/HomePage/HomePage';
 import Questions from './components/HomePage/Questions';
+import Friends from './components/HomePage/Friends';
 import LoginPanel from './components/LoginPannel';
 import SignUp from './components/SignUp';
 import NavBar from './components/NavBar/NavBar';
@@ -67,6 +68,7 @@ function App() {
         <Route path="/questionnaire" exact={true} component={Questions} />
         <Route path="/profile" exact={true} component={Profile}/>
         <Route path="/signup" exact={true} component={SignUp}/>
+        <Route path="/friends" exact={true} component={Friends}/>
         <Route path="/" exact={true} component={HomePage}/>
     </Switch>
     </div>

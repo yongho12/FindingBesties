@@ -39,6 +39,11 @@ const NavBar = () => {
                         Questionnaire
                     </NavLink>
                 </li>
+                 <li className={styles.navbarMenuItem}>
+                    <NavLink to="/friends" activeClassName="active">
+                        MyBesties
+                    </NavLink>
+                </li>
                 <li className={styles.navbarMenuItem}>  
                     <NavLink to="/login" activeClassName="active">
                         LogIn
