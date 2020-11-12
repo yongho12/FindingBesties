@@ -103,7 +103,12 @@ def answers():
   db.session.commit()
 
   # calling itimacy logic and received top/bottom 3
+  # intimacyLogic is including current friends
   intimate_users = intimacyLogic(user_id)
+
+  # intimacyLogic2 is excluding current friends
+  # intimate_users = intimacyLogic2(user_id)
+  
   #key
   intimacies = list(intimate_users.keys())
   top_bottom_3 = intimacies[0:3]
@@ -114,35 +119,26 @@ def answers():
   top_bottom_3_val = intimacies_val[0:3]
   bottom3_val = intimacies_val[-3:]
   top_bottom_3_val.extend(bottom3_val)
-  print("top_bottom_3:::::",top_bottom_3 )
-  print("top_bottom_3_val::::", top_bottom_3_val)
-  # print("AAAAAAAA", [ val/3 for val in top_bottom_3_val])
+
   match_percent = [int(v/4*100) for v in top_bottom_3_val ]
   #zip them together
   top_bottom_three = dict(zip(top_bottom_3, match_percent))
   print("top_bottom_three:::::::::",top_bottom_three)
-
   
-
-  recommends = User.query.filter(User.id.in_(top_bottom_3))
-  # q = User.query.filter(User.id.in_(top_bottom_3))
-  # reco_map = { t.id: t for t in q}
-  # team = [reco_map[n] for n in id]
   first = User.query.filter_by(id = top_bottom_3[0])
   second = User.query.filter_by(id = top_bottom_3[1])
   third = User.query.filter_by(id = top_bottom_3[2])
   last_third = User.query.filter_by(id = top_bottom_3[3])
   last_second = User.query.filter_by(id = top_bottom_3[4])
   last_first = User.query.filter_by(id = top_bottom_3[5])
-  print('first::::', first)
-  # .order_by(User.id.in_(top_bottom_3))
-  print([user.to_dict() for user in recommends])
-  # final_list= [user.to_dict(), top_bottom_three for user in recommends if recommends.id == top_bottom_three.keys() ]
+ 
+  #finding usr's friend list
+  friends_query = Friend.query.filter(Friend.user_id == user_id).all()
+  all_friends=[friend.to_dict_match() for friend in friends_query] 
+  friends_list = [ list(f.keys())[0] for f in all_friends]
+  friends = dict(zip(friends_list, friends_list))
 
-  
-
-  print("recommends::::::::",[user.to_dict() for user in recommends] ) 
-  return {"top_bottom_3": top_bottom_3,
+  return {
           "top_bottom_three": top_bottom_three,
           "first": [user.to_dict() for user in first],
           "second": [user.to_dict() for user in second],
@@ -150,8 +146,7 @@ def answers():
           "last_third": [user.to_dict() for user in last_third],
           "last_second": [user.to_dict() for user in last_second],
           "last_first": [user.to_dict() for user in last_first],
-          "recommends": [user.to_dict() for user in recommends]}, 200
-
+          "friends": friends }, 200
 
 # intimacy Logic
 def intimacyLogic(my_id):
@@ -194,13 +189,27 @@ def intimacyLogic(my_id):
 def intimacyLogic2(my_id):
   response = db.session.query(Answer).all()
   all_answers=[answer.to_dict_match() for answer in response] 
+  # self.user_id: self.selected
   answer_sheets=enrich(all_answers)
+
 
   all_users = list(answer_sheets.keys())
   all_users.remove(my_id)
+  
   #deleting the current friends
+  friends_query = Friend.query.filter(Friend.user_id == my_id).all()
+  all_friends = [ friend.to_dict_matchlogic() for friend in friends_query]
+  print("all_friends:::::::::::::::::::::::::", all_friends)
+  # [{'id': 1}, {'id': 2}, {'id': 3}, {'id': 4}, {'id': 1}]
+  # trying to get those id's values into friends list
+  # below isn't working.. BF, please kinldy get those values into list.
+  raw_friends = [{'id': 1}, {'id': 2}, {'id': 3}, {'id': 4}, {'id': 1}]
+  friends = [list(id.values())[0] for id in raw_friends]
+  # friends = [all_friends.values()]
+  
 
-
+  for x in range(0, len(friends)):
+    all_user.remove(friends[x])  
 
   my_answer = answer_sheets[my_id]
 

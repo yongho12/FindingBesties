@@ -96,4 +96,27 @@ for i in range(0, len(raw_data)):
 # print(v_answer_sheets)
 #output {7: ['3', '8', '11', '15'], 5: ['3', '8', '11', '15'], 3: ['3', '8', '11', '15'], 4: ['3', '8', '11', '15']}
 
+print('++++++++++++++++++++++++++++++++++++++++')
+original_data = [{1: 1}, {1: 1}, {1: 1}, {1: 1}, {3: 3}, {1: 1}, {1: 1}, {1: 1}]
+# top_bottom_three::::::::: {4: 75, 1: 75, 3: 50, 2: 0, 5: 0, 6: 0}
+first=[ list(x.keys())[0] for x in original_data]
+print(first)
+first_dict= dict(zip(first, first))
+print(first_dict)
 
+print('++++++++++++++++++++++++++++++++++++++++')
+raw_friends = [{'id': 1}, {'id': 2}, {'id': 3}, {'id': 4}, {'id': 1}]
+
+friends1 = [id.values() for id in raw_friends]
+print(friends1)
+#[dict_values([1]), dict_values([2]), dict_values([3]), dict_values([4]), dict_values([1])]
+
+
+friends1 = [list(id.values()) for id in raw_friends]
+print(friends1)
+#[[1], [2], [3], [4], [1]]
+
+
+friends1 = [list(id.values())[0] for id in raw_friends]
+print(friends1)
+#[1, 2, 3, 4, 1]

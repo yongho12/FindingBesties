@@ -170,6 +170,16 @@ class Friend(db.Model):
       "friend_email": self.user.email,
       "status": self.status
     }
+
+  def to_dict_matchlogic(self):
+    return {
+      "id": self.friend_id
+    }
+  
+  def to_dict_match(self):
+    return {
+      self.friend_id: self.friend_id
+  }
   
 
   

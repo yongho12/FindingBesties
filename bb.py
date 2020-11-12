@@ -87,6 +87,7 @@ print("Results", aaa)
 print("top bottom 3", top_bottom_three)
 
 
+[{'id': 1}, {'id': 2}, {'id': 3}, {'id': 4}, {'id': 1}]
 
 print(v_intimacies)
 print(v_intimate_users)
