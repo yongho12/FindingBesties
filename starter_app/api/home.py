@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import or_ 
-from starter_app.models import db, Question, Example, Answer, User, Ask, Friend
+from starter_app.models import db, Question, Example, Answer, User, Ask, Friend, Message
 from sqlalchemy.orm import joinedload
 import re
 
@@ -42,7 +42,6 @@ def yesforask(id):
   user_id = request.json.get("user_id", None)
   if ask:
     ask.status = status
-    print("ASSSSSSSK::::::::::", ask.requestor)
     friendOne=ask.requestor
     newFriendOne = Friend(user_id=user_id, friend_id=friendOne, status="friend")
     newFriendTwo = Friend(user_id=friendOne, friend_id=user_id, status="friend")
@@ -75,7 +74,7 @@ def askedfriend(user_id):
 
   # return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
 
-# friend list - working fine
+# friend list 
 @bp.route('/friendslist/<int:user_id>')
 def friendlist(user_id):
   response = db.session.query(Friend) \
@@ -83,6 +82,25 @@ def friendlist(user_id):
               .filter(Friend.user_id == user_id) \
               .filter(Friend.status == "friend")
   return {'friends':[ friend.to_dict() for friend in response ]},200 
+
+# messaging to friend
+@bp.route('/friendsmessage/<int:user_id>', methods=['POST'])
+def message(user_id):
+  if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+  from_user = user_id
+  to_user = request.json.get("to_user", None)
+  message = request.json.get("message", None)
+  status = "sent"
+  newMessage = Message(from_user=from_user, to_user=to_user, message=message, status=status)
+  db.session.add(newMessage)
+  db.session.commit()
+  return { "msg":"message saved successfully" }, 200
+  
+  
+
+
+
 
 
 
@@ -102,7 +120,8 @@ def answers():
   db.session.add(newAnswer)
   db.session.commit()
 
-  # calling itimacy logic and received top/bottom 3
+  #!!!!!!!!!!!!!!!Switch for Logic one or two!!!!!!
+
   # intimacyLogic is including current friends
   intimate_users = intimacyLogic(user_id)
 
@@ -178,20 +197,17 @@ def intimacyLogic(my_id):
                             key=lambda item:item[1],
                             reverse=True)
                 }
-  print("intimacies:::::", intimacies)
-  intimate_users = list(intimacies.keys())
-  # intimate_nums = list(intimacies.values())
 
-  # return intimate_users
+  intimate_users = list(intimacies.keys())
+
   return intimacies
 
 # intimacy Logic - intimacyLogic2
 def intimacyLogic2(my_id):
   response = db.session.query(Answer).all()
   all_answers=[answer.to_dict_match() for answer in response] 
-  # self.user_id: self.selected
-  answer_sheets=enrich(all_answers)
 
+  answer_sheets=enrich(all_answers)
 
   all_users = list(answer_sheets.keys())
   all_users.remove(my_id)
@@ -199,17 +215,11 @@ def intimacyLogic2(my_id):
   #deleting the current friends
   friends_query = Friend.query.filter(Friend.user_id == my_id).all()
   all_friends = [ friend.to_dict_matchlogic() for friend in friends_query]
-  print("all_friends:::::::::::::::::::::::::", all_friends)
-  # [{'id': 1}, {'id': 2}, {'id': 3}, {'id': 4}, {'id': 1}]
-  # trying to get those id's values into friends list
-  # below isn't working.. BF, please kinldy get those values into list.
-  raw_friends = [{'id': 1}, {'id': 2}, {'id': 3}, {'id': 4}, {'id': 1}]
-  friends = [list(id.values())[0] for id in raw_friends]
-  # friends = [all_friends.values()]
-  
+  friends = [list(id.values())[0] for id in all_friends]
 
   for x in range(0, len(friends)):
-    all_user.remove(friends[x])  
+    if friends[x] in all_users:
+      all_users.remove(friends[x])  
 
   my_answer = answer_sheets[my_id]
 
@@ -235,7 +245,6 @@ def intimacyLogic2(my_id):
                 }
   print("intimacies:::::", intimacies)
   intimate_users = list(intimacies.keys())
-  # intimate_nums = list(intimacies.values())
 
   # return intimate_users
   return intimacies
@@ -246,24 +255,14 @@ def enrich(raw_data):
   #converting raw data to simple dictionary format
   for i in range(0, len(raw_data)):
       user_data = raw_data[i]
-      #print (user_data)
-      #output {7: '{3,8,11,15}'}
 
       user_id = list(user_data.keys())[0]
       user_answers = list(user_data.values())[0]
-      #print(user_answers)
-      #output before conversion : {3,8,11,15}  -->string
 
-      #converting string to list (remove {} from the string and split by comma)
       user_answers = (re.sub('[{}]', '', user_answers)).split(",")
-      #print(user_answers)
-      #output after conversion : ['3', '8', '11', '15'] -->list
-
-      # v_answer_sheets[user_id]= user_value
+  
       v_answer_sheets[user_id] = user_answers
 
-  #print(v_answer_sheets)
-  #output {7: ['3', '8', '11', '15'], 5: ['3', '8', '11', '15'], 3: ['3', '8', '11', '15'], 4: ['3', '8', '11', '15']}
   return v_answer_sheets
 
 
