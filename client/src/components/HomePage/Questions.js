@@ -22,6 +22,7 @@ function Questions() {
     const [last_third, setLastThird] = useState([]);
     const [last_second, setLastSecond] = useState([]);
     const [last_first, setLastFirst] = useState([]);
+    const [friends, setFriends] = useState({});
     const [checked, setChecked] = useState(false);
     const [item, setItem] = useState();
    
@@ -77,7 +78,12 @@ function Questions() {
             setLastThird(match.last_third)
             setLastSecond(match.last_second);
             setLastFirst(match.last_first);
-                
+            setFriends(match.friends);
+            
+            console.log("all friends::::", match.friends)
+            console.log("top bottom 3 ::::", match.top_bottom_three)
+            console.log("all friends after set;;;;;", friends)
+            console.log("top_bottom_three;;;;;", top_bottom_three)
             console.log("resp")
                        
         }
@@ -112,7 +118,8 @@ function Questions() {
             {/* Results */}
             { response &&
             <div>
-                 <Match first={first} second={second} third={third} last_third={last_third} last_second={last_second} last_first={last_first} top_bottom_three={top_bottom_three} />
+                 <Match first={first} second={second} third={third} last_third={last_third} last_second={last_second} 
+                 last_first={last_first} top_bottom_three={top_bottom_three} friends={friends}/>
             </div>
             }
         </>
