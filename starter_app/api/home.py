@@ -102,12 +102,13 @@ def answers():
   db.session.add(newAnswer)
   db.session.commit()
 
-  # calling itimacy logic and received top/bottom 3
+  #!!!!!!!!!!!!!!!Switch for Logic one or two!!!!!!
+
   # intimacyLogic is including current friends
-  intimate_users = intimacyLogic(user_id)
+  # intimate_users = intimacyLogic(user_id)
 
   # intimacyLogic2 is excluding current friends
-  # intimate_users = intimacyLogic2(user_id)
+  intimate_users = intimacyLogic2(user_id)
   
   #key
   intimacies = list(intimate_users.keys())
@@ -178,20 +179,17 @@ def intimacyLogic(my_id):
                             key=lambda item:item[1],
                             reverse=True)
                 }
-  print("intimacies:::::", intimacies)
-  intimate_users = list(intimacies.keys())
-  # intimate_nums = list(intimacies.values())
 
-  # return intimate_users
+  intimate_users = list(intimacies.keys())
+
   return intimacies
 
 # intimacy Logic - intimacyLogic2
 def intimacyLogic2(my_id):
   response = db.session.query(Answer).all()
   all_answers=[answer.to_dict_match() for answer in response] 
-  # self.user_id: self.selected
-  answer_sheets=enrich(all_answers)
 
+  answer_sheets=enrich(all_answers)
 
   all_users = list(answer_sheets.keys())
   all_users.remove(my_id)
@@ -199,17 +197,11 @@ def intimacyLogic2(my_id):
   #deleting the current friends
   friends_query = Friend.query.filter(Friend.user_id == my_id).all()
   all_friends = [ friend.to_dict_matchlogic() for friend in friends_query]
-  print("all_friends:::::::::::::::::::::::::", all_friends)
-  # [{'id': 1}, {'id': 2}, {'id': 3}, {'id': 4}, {'id': 1}]
-  # trying to get those id's values into friends list
-  # below isn't working.. BF, please kinldy get those values into list.
-  raw_friends = [{'id': 1}, {'id': 2}, {'id': 3}, {'id': 4}, {'id': 1}]
-  friends = [list(id.values())[0] for id in raw_friends]
-  # friends = [all_friends.values()]
-  
+  friends = [list(id.values())[0] for id in all_friends]
 
   for x in range(0, len(friends)):
-    all_user.remove(friends[x])  
+    if friends[x] in all_users:
+      all_users.remove(friends[x])  
 
   my_answer = answer_sheets[my_id]
 
@@ -235,7 +227,6 @@ def intimacyLogic2(my_id):
                 }
   print("intimacies:::::", intimacies)
   intimate_users = list(intimacies.keys())
-  # intimate_nums = list(intimacies.values())
 
   # return intimate_users
   return intimacies
@@ -246,24 +237,14 @@ def enrich(raw_data):
   #converting raw data to simple dictionary format
   for i in range(0, len(raw_data)):
       user_data = raw_data[i]
-      #print (user_data)
-      #output {7: '{3,8,11,15}'}
 
       user_id = list(user_data.keys())[0]
       user_answers = list(user_data.values())[0]
-      #print(user_answers)
-      #output before conversion : {3,8,11,15}  -->string
 
-      #converting string to list (remove {} from the string and split by comma)
       user_answers = (re.sub('[{}]', '', user_answers)).split(",")
-      #print(user_answers)
-      #output after conversion : ['3', '8', '11', '15'] -->list
-
-      # v_answer_sheets[user_id]= user_value
+  
       v_answer_sheets[user_id] = user_answers
 
-  #print(v_answer_sheets)
-  #output {7: ['3', '8', '11', '15'], 5: ['3', '8', '11', '15'], 3: ['3', '8', '11', '15'], 4: ['3', '8', '11', '15']}
   return v_answer_sheets
 
 
