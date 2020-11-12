@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
 
   asks = db.relationship('Ask', backref='user', lazy=True)
   friends = db.relationship('Friend', backref='user', lazy=True)
+  messages = db.relationship('Message', backref='user', lazy=True)
   # asks = db.relationship('Ask', back_populates='user', lazy=True)
 
   @property
@@ -168,6 +169,7 @@ class Friend(db.Model):
       "friend_id": self.friend_id,
       "friend_name": self.user.name,
       "friend_email": self.user.email,
+      "friend_avatar": self.user.avatar,
       "status": self.status
     }
 
@@ -181,6 +183,25 @@ class Friend(db.Model):
       self.friend_id: self.friend_id
   }
   
+class Message(db.Model):
+  __tablename__='messages'
+
+  id = db.Column(db.Integer, primary_key=True)
+  from_user = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  to_user = db.Column(db.Integer, nullable=False)
+  message = db.Column(db.String(300), nullable=True)
+  status = db.Column(db.String(10), nullable=False)
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "from_user": self.from_user,
+      "to_user": self.to_user,
+      "from_user_name": self.user.name,
+      "message": self.message,
+      "status": self.status
+    }
+
 
   
 

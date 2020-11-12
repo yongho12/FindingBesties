@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import or_ 
-from starter_app.models import db, Question, Example, Answer, User, Ask, Friend
+from starter_app.models import db, Question, Example, Answer, User, Ask, Friend, Message
 from sqlalchemy.orm import joinedload
 import re
 
@@ -42,7 +42,6 @@ def yesforask(id):
   user_id = request.json.get("user_id", None)
   if ask:
     ask.status = status
-    print("ASSSSSSSK::::::::::", ask.requestor)
     friendOne=ask.requestor
     newFriendOne = Friend(user_id=user_id, friend_id=friendOne, status="friend")
     newFriendTwo = Friend(user_id=friendOne, friend_id=user_id, status="friend")
@@ -75,7 +74,7 @@ def askedfriend(user_id):
 
   # return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
 
-# friend list - working fine
+# friend list 
 @bp.route('/friendslist/<int:user_id>')
 def friendlist(user_id):
   response = db.session.query(Friend) \
@@ -83,6 +82,25 @@ def friendlist(user_id):
               .filter(Friend.user_id == user_id) \
               .filter(Friend.status == "friend")
   return {'friends':[ friend.to_dict() for friend in response ]},200 
+
+# messaging to friend
+@bp.route('/friendsmessage/<int:user_id>', methods=['POST'])
+def message(user_id):
+  if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+  from_user = user_id
+  to_user = request.json.get("to_user", None)
+  message = request.json.get("message", None)
+  status = "sent"
+  newMessage = Message(from_user=from_user, to_user=to_user, message=message, status=status)
+  db.session.add(newMessage)
+  db.session.commit()
+  return { "msg":"message saved successfully" }, 200
+  
+  
+
+
+
 
 
 
@@ -105,10 +123,10 @@ def answers():
   #!!!!!!!!!!!!!!!Switch for Logic one or two!!!!!!
 
   # intimacyLogic is including current friends
-  # intimate_users = intimacyLogic(user_id)
+  intimate_users = intimacyLogic(user_id)
 
   # intimacyLogic2 is excluding current friends
-  intimate_users = intimacyLogic2(user_id)
+  # intimate_users = intimacyLogic2(user_id)
   
   #key
   intimacies = list(intimate_users.keys())
