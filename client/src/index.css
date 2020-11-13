@@ -328,7 +328,7 @@ button:active {
   margin-bottom: 15px;
 }
 
-.alert.success {background-color: #4CAF50;}
+.alert.success {background-color: var(--color-blue);}
 .alert.info {background-color: #2196F3;}
 .alert.warning {background-color: #ff9800;}
 
