@@ -8,13 +8,13 @@ with app.app_context():
   db.drop_all()
   db.create_all()
 
-  ian = User(name='Ian', email='ian@aa.io',  password='password')
-  javier = User(name='Javier', email='javier@aa.io', password='password')
-  dean = User(name='Dean', email='dean@aa.io', password='password')
-  angela = User(name='Angela', email='angela@aa.io',  password='password')
-  soonmi = User(name='Soon-Mi', email='soonmi@aa.io',  password='password')
-  alissa = User(name='Alissa', email='alissa@aa.io',  password='password')
-  demo = User(name='demo', email='demo@example.com',  password='password')
+  ian = User(name='Ian', email='ian@aa.io',  password='password', avatar='/images/friends.png')
+  javier = User(name='Javier', email='javier@aa.io', password='password', avatar='/images/friends.png')
+  dean = User(name='Dean', email='dean@aa.io', password='password', avatar='/images/friends.png')
+  angela = User(name='Angela', email='angela@aa.io',  password='password', avatar='/images/friends.png')
+  soonmi = User(name='Soon-Mi', email='soonmi@aa.io',  password='password', avatar='/images/friends.png')
+  alissa = User(name='Alissa', email='alissa@aa.io',  password='password', avatar='/images/friends.png')
+  demo = User(name='demo', email='demo@example.com',  password='password', avatar='/images/friends.png')
 
   question1 = Question(category='hobby', question='When you have spare time, what do you mostly do?')
 
