@@ -2,14 +2,16 @@ import React, { useState} from 'react';
 import { useSelector } from 'react-redux'
 function Match({first, second, third, last_third, last_second, last_first,top_bottom_three, friends })
 {   
-    const [opposite, setOpposite] = useState(false)
+    const [opposite, setOpposite] = useState(false);
+    const [connect, setConnect] = useState(false);
+    const [recipient, setRecipient] = useState();
     const requestor = useSelector(state => state.authReducer.id);
     const fetchWithCSRF = useSelector(state => state.authReducer.csrf);
   
    
 
     // console.log('[]::::::',recommends[top_bottom_list[0]].name);
-    console.log("top_bottom_three in Match::::",top_bottom_three )
+    // console.log("top_bottom_three in Match::::",top_bottom_three )
 
     function oppositeHandler() {
         console.log('opposite::', opposite)
@@ -17,32 +19,62 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
     }
 
     const connectHandler = async (e) => {
+
+        // trying to hide the button
         console.log("e.target.value",e.target.value)
+        console.log("e.target.id", e.target.id)
+        let bestiebutton = document.getElementById(e.target.id);
+        console.log("bestiebutton:::", bestiebutton)
+        // bestiebutton.disabled = true
+        // bestiebutton.color="#fe918d"
+        // bestID.style.disply="block"
+        // bestiebutton.style.disply="none"
+        
+        
         
         const recipient = e.target.value
         const status = "asking"
         const response = await fetchWithCSRF(`/api/home/request`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            requestor,
-            recipient,
-            status
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                requestor,
+                recipient,
+                status
             }),
         })
-
+        
         if (response.ok) {
+            // setConnect(true);
+            setRecipient(recipient);
+            console.log("recipient", recipient)
             console.log("connect working")
+            bestiebutton.innerHTML="Just Asked!"
+            bestiebutton.disabled = true
         }
 
         
     }
 // https://www.w3schools.com/howto/howto_js_alert.asp
     function alertSucess(e) {
+        console.log("alert sucess")
         console.log(e.target.parentElement)
+        // e.target.parentElement.style.display='none';
+        let div = e.target.parentElement
+        setTimeout(function(){ div.style.display = "none"; }, 600);
+        setConnect(false);
+        let bestieButton = document.getElementsByClassName("bestieButton");
+        let bestID = document.getElementById("bestieButton_A");
+        // console.log('bestID::::', bestID)
+        // bestID.style.disply="none"
+        // console.log("after none:::")
+        // bestID.style.disply="hidden"
+        // console.log('bestieButton', bestieButton)
+        // bestieButton.style.display='none';
 
         
     }
+
 
     return (
         <>
@@ -62,11 +94,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     {first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>  
-                    {/* <div class="alert success">
-                        <span class="closebtn" onclick={alertSucess}>&times;</span>  
-                        <strong>Success!</strong> Indicates a successful or positive action.
-                    </div> */}
+                        <button id="bestieButton_1" value={person.id}  onClick={connectHandler}>be Bestie!</button> }</div> 
                     </div>))}
                 </div>
 
@@ -75,7 +103,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     {second.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button value={person.id} onClick={connectHandler}>be Bestie!</button> }</div> 
+                        <button id="bestieButton_2" value={person.id}  onClick={connectHandler}>be Bestie!</button> }</div> 
                     </div>))}
                 </div>
 
@@ -84,13 +112,11 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     {third.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button value={person.id} onClick={connectHandler}>be Bestie!</button> }</div> 
+                        <button id="bestieButton_3" value={person.id} onClick={connectHandler}>be Bestie!</button> }</div> 
                     </div>))}
                 </div>
                 
             </div>
-            // {/* <h1> However you might attract friends opposite you.</h1>
-            //     <button>Click here </button> */}
             }
 
             { opposite &&
@@ -100,7 +126,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     {last_first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
+                        <button id="bestieButton_4" value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
                     </div>))}
                 </div>
 
@@ -109,7 +135,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     {last_second.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                    <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
+                        <button id="bestieButton_5" value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
                     </div>))}
                 </div>
 
@@ -118,7 +144,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     {last_third.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                    <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
+                        <button id="bestieButton_6" value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
                     </div>))}
                 </div>
             </div>

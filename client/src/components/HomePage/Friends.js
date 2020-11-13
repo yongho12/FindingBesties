@@ -67,6 +67,8 @@ function Friends()
              <img className = "friends__photo" src={f.friend_avatar} alt="friend photo" />   
              <div>{f.friend_email}</div>
              <div>{f.status}</div> 
+             <input value={message}  type="text" placeholder="leave a message.." onChange={messageChange}></input>
+             <a className="message--sent" onClick={messageSendHandle}>send</a>
             <div>
                 <button value={f.id} onClick={messageHandle}>Message</button>
             </div>
@@ -74,12 +76,12 @@ function Friends()
 
   
         </div>
-        <div>    
+        {/* <div>    
             {msgButton && <>
                  <input value={message}  type="text" placeholder="leave a message.." onChange={messageChange}></input>
                  <a className="message--sent" onClick={messageSendHandle}>send</a>
             </>}
-        </div>
+        </div> */}
     </>
     )
 }
