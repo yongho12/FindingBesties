@@ -12,14 +12,18 @@ def questions():
   response = Question.query.all()
   return { "questions": [question.to_dict() for question in response]}
 
-
+# ask to be a bestie
 @login_required
 @bp.route('/request', methods=["POST"])
 def requestFriend():
   requestor = request.json.get("requestor", None)
   recipient = request.json.get("recipient", None)
+  match_rate = request.json.get("match_rate", None)
   status = request.json.get("status", None)
-  newAsk = Ask(requestor=requestor, recipient=recipient, status=status)
+  old_ask = Ask.query.filter_by(requestor = requestor).filter_by(recipient = recipient).first()
+  if old_ask:
+    return {"ask": "asked bestie before"}, 201
+  newAsk = Ask(requestor=requestor, recipient=recipient, match_rate=match_rate, status=status)
   db.session.add(newAsk)
   db.session.commit()
   return { "ask": "successful"}, 200
@@ -40,11 +44,13 @@ def yesforask(id):
   ask = Ask.query.filter(Ask.id == id).first()
   status = request.json.get("status_msg", None)
   user_id = request.json.get("user_id", None)
+
   if ask:
     ask.status = status
-    friendOne=ask.requestor
-    newFriendOne = Friend(user_id=user_id, friend_id=friendOne, status="friend")
-    newFriendTwo = Friend(user_id=friendOne, friend_id=user_id, status="friend")
+    friendOne = ask.requestor
+    match_rate = ask.match_rate
+    newFriendOne = Friend(user_id=user_id, friend_id=friendOne, status=status, match_rate=match_rate )
+    newFriendTwo = Friend(user_id=friendOne, friend_id=user_id, status=status, match_rate=match_rate )
     db.session.add(newFriendOne)
     db.session.add(newFriendTwo)
     db.session.commit()
@@ -91,21 +97,25 @@ def message(user_id):
   from_user = user_id
   to_user = request.json.get("to_user", None)
   message = request.json.get("message", None)
-  status = "sent"
+  status = "open"
   newMessage = Message(from_user=from_user, to_user=to_user, message=message, status=status)
   db.session.add(newMessage)
   db.session.commit()
   return { "msg":"message saved successfully" }, 200
   
-  
+
+# received message
+@bp.route('/messagereceived/<int:user_id>')
+def messagereceived(user_id):
+  response = db.session.query(Message) \
+              .options(joinedload(Message.user)) \
+              .filter(Message.to_user == user_id) \
+              .filter(Message.status == "sent")
+  return {'msgreceived':[ asked.to_dict() for asked in response ]},200 
 
 
 
-
-
-
-
-
+# MatchingLogic
 @login_required
 @bp.route('/answers', methods=["POST", "DELETE"])  
 def answers():

@@ -64,7 +64,7 @@ function App() {
                 <NavBar />
                 : null}
     <Switch>
-        <Route path="/login" component={LoginPanel} />
+        <Route path="/login" exact={true} component={LoginPanel} />
         <Route path="/questionnaire" exact={true} component={Questions} />
         <Route path="/profile" exact={true} component={Profile}/>
         <Route path="/signup" exact={true} component={SignUp}/>

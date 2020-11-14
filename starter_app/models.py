@@ -111,6 +111,7 @@ class Ask(db.Model):
   # requestor = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
   requestor = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
   recipient = db.Column(db.Integer, nullable=True)
+  match_rate = db.Column(db.Integer, nullable=True)
   status = db.Column(db.String(10), nullable=False)
 
   # requestor_user = db.relationship('User', foreign_keys=[requestor])
@@ -123,6 +124,7 @@ class Ask(db.Model):
       "requestor": self.requestor,
       "recipient": self.recipient,
       "requestor_name": self.user.name,
+      "match_rate" : self.match_rate,
       "status":self.status
     }
 
@@ -160,6 +162,7 @@ class Friend(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, nullable=False)
   friend_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
+  match_rate = db.Column(db.Integer, nullable=True)
   status = db.Column(db.String(10), nullable=False)
 
   def to_dict(self):
@@ -170,6 +173,7 @@ class Friend(db.Model):
       "friend_name": self.user.name,
       "friend_email": self.user.email,
       "friend_avatar": self.user.avatar,
+      "match_rate": self.match_rate,
       "status": self.status
     }
 

@@ -24,7 +24,7 @@ function Profile() {
     
     async function acceptHandle(e) {
         const id = e.target.value;
-        status_msg = "bestie"
+        status_msg = "friend"
         const response = await fetchWithCSRF(`/api/home/yesforask/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },

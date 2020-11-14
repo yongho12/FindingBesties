@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux'
 function Match({first, second, third, last_third, last_second, last_first,top_bottom_three, friends })
 {   
     const [opposite, setOpposite] = useState(false);
-    const [connect, setConnect] = useState(false);
-    const [recipient, setRecipient] = useState();
     const requestor = useSelector(state => state.authReducer.id);
     const fetchWithCSRF = useSelector(state => state.authReducer.csrf);
   
@@ -34,44 +32,27 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
         
         const recipient = e.target.value
         const status = "asking"
+        const match_rate = top_bottom_three[recipient]
+        console.log(match_rate)
+        
         const response = await fetchWithCSRF(`/api/home/request`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 requestor,
                 recipient,
+                match_rate, 
                 status
             }),
         })
         
         if (response.ok) {
             // setConnect(true);
-            setRecipient(recipient);
             console.log("recipient", recipient)
             console.log("connect working")
             bestiebutton.innerHTML="Just Asked!"
             bestiebutton.disabled = true
         }
-
-        
-    }
-// https://www.w3schools.com/howto/howto_js_alert.asp
-    function alertSucess(e) {
-        console.log("alert sucess")
-        console.log(e.target.parentElement)
-        // e.target.parentElement.style.display='none';
-        let div = e.target.parentElement
-        setTimeout(function(){ div.style.display = "none"; }, 600);
-        setConnect(false);
-        let bestieButton = document.getElementsByClassName("bestieButton");
-        let bestID = document.getElementById("bestieButton_A");
-        // console.log('bestID::::', bestID)
-        // bestID.style.disply="none"
-        // console.log("after none:::")
-        // bestID.style.disply="hidden"
-        // console.log('bestieButton', bestieButton)
-        // bestieButton.style.display='none';
-
         
     }
 

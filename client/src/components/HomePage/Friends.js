@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDom, { render } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
+// import Email from "https://smtpjs.com/v3/smtp.js"
 
 
 function Friends() 
@@ -10,8 +11,10 @@ function Friends()
     const fetchWithCSRF = useSelector(state => state.authReducer.csrf);
     const [ friends, setFriends ] = useState([]);
     const [ msgButton, setMsgButton ] = useState(false);
-    const [ to_user, setTo_user ] = useState(0)
-    const [ message, setMessage ] = useState('')
+    const [ to_user, setTo_user ] = useState();
+    const [ to_name, setTo_name ] = useState('');
+    const [ message, setMessage ] = useState('');
+    const [ receivedMsg, setReceivedMsg] = useState([])
 
     useEffect(() => {
         async function friendslist() {
@@ -23,11 +26,24 @@ function Friends()
         friendslist(); 
     },[]);
 
+    useEffect(() => {
+        async function messagelist() {
+            const response = await fetch(`/api/home/messagereceived/${user_id}`)
+            const data = await response.json();
+            setReceivedMsg(data.msgreceived)
+            console.log("received mssage", data.msgreceived)
+        }
+        messagelist(); 
+    },[]);
+
+
     const messageHandle = (e) => { 
         setMsgButton(true);
         setTo_user(e.target.value);
+        setTo_name(e.target.name);
+        console.log('e.target.id :::', e.target.id)
         console.log("e.target.value:::::::", e.target.value)
-
+        console.log("e.target.name:::::::", e.target.name)
     }
 
     
@@ -35,9 +51,11 @@ function Friends()
         setMessage(e.target.value)
         
     }
+
     
     const messageSendHandle = async (e) => {
         e.preventDefault();
+        if (!to_user) return ;
         console.log("message send e target value::::", e.target.value)
         // const message = 'this is the message'
         console.log("message", message)
@@ -60,28 +78,42 @@ function Friends()
 
     return (
     <>
-    <h1>My Besties List</h1>
-        <div className = 'friends__container'>
-            {friends.map((f, index)=>(<div>
-             <div key={`${f.id}-${index}`} >{f.friend_name} </div>
-             <img className = "friends__photo" src={f.friend_avatar} alt="friend photo" />   
-             <div>{f.friend_email}</div>
-             <div>{f.status}</div> 
-             <input value={message}  type="text" placeholder="leave a message.." onChange={messageChange}></input>
-             <a className="message--sent" onClick={messageSendHandle}>send</a>
-            <div>
-                <button value={f.id} onClick={messageHandle}>Message</button>
+    <div className="friends__container">
+        <div className="friend__left__container">
+            <h1>My Besties</h1>
+            <div className = 'friends__list__container'>
+                {friends.map((f, index)=>(<div>
+                <div key={`${f.id}-${index}`} >{f.friend_name} </div>
+                <img className = "friends__photo" src={f.friend_avatar} alt="friend photo" />   
+                <div>{f.friend_email}</div>
+                <div>{f.match_rate}% Match</div>
+                <div>{f.status}</div> 
+                    <button value={f.friend_id} name={f.friend_name} onClick={messageHandle}>Message</button>
+                </div> ))}
             </div>
-               </div> ))}
+        </div> 
+        <div className="friends__right__container">
+            <div className="friends__right__top">
+                <h1>Messaging to Bestie</h1>
+                <div>
+                    <h2>sending message to {to_name}</h2>
+                </div>
+                <input value={message}  type="text" placeholder="leave a message.." onChange={messageChange}></input>
+                <a className="message--sent" onClick={messageSendHandle}>send</a>
+            </div>
+            <div className="friends__right__bottom">
+                <h1>Received Message</h1>
+                <div>
+                    {receivedMsg.map((m, index)=>(<div>
+                    <div key={`${m.id}-${index}`} >{m.from_user_name} </div>   
+                    <div>{m.message}</div>
+                    </div> ))}
+                        
+                </div>
+            </div>
 
-  
-        </div>
-        {/* <div>    
-            {msgButton && <>
-                 <input value={message}  type="text" placeholder="leave a message.." onChange={messageChange}></input>
-                 <a className="message--sent" onClick={messageSendHandle}>send</a>
-            </>}
-        </div> */}
+        </div>   
+    </div>
     </>
     )
 }
