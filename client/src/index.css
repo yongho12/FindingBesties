@@ -236,6 +236,13 @@ button:disabled {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+
+}
+
+.friends__list__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .friends__photo {
