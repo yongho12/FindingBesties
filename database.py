@@ -44,6 +44,38 @@ with app.app_context():
   example4_3 = Example(question_id = 4, choice = "a pickup truck")
   example4_4 = Example(question_id = 4, choice = "I don't drive")
 
+  question5 = Question(category='habbit', question='Prince Charming comes to rescue Snow White, who is sleeping after eating a poisoned apple, However, Suddenly he turned around left? Why do you think he turned around and left the scene?')
+
+  example5_1 = Example(question_id = 4, choice = "He forgot his sword")
+  example5_2 = Example(question_id = 4, choice = "He was scared")
+  example5_3 = Example(question_id = 4, choice = "He was having a tummy aches")
+  example5_4 = Example(question_id = 4, choice = "He thought Snow White doesn't deserve him")
+
+  question6 = Question(category='habbit', question='In the middle of having a meeting with team members, one of them gets up suddenly and left without words. What is on your mind')
+
+  example6_1 = Example(question_id = 4, choice = "She/He might be mad at something, but not at me")
+  example6_2 = Example(question_id = 4, choice = "She/He might be mad at me. So, I am thinking what I did to her/him earlier")
+  example6_3 = Example(question_id = 4, choice = "She/He was having a emergency tummy aches.")
+  example6_4 = Example(question_id = 4, choice = "I don't care.")
+
+  question7 = Question(category='habbit', question='')
+
+  example7_1 = Example(question_id = 4, choice = "She/He might be mad at something, but not at me")
+  example7_2 = Example(question_id = 4, choice = "She/He might be mad at me. So, I am thinking what I did to her/him earlier")
+  example7_3 = Example(question_id = 4, choice = "She/He was having a emergency tummy aches.")
+  example7_4 = Example(question_id = 4, choice = "I do not care.")
+
+  
+  What's on your mind?
+
+
+
+  
+
+  
+
+
+
   answer1 = Answer(user_id = 1, selected =['1', '6', '12', '16'])
   answer2 = Answer(user_id = 2, selected =['1', '6', '9', '13'])
   answer3 = Answer(user_id = 3, selected =['2', '7', '11', '14'])
