@@ -89,6 +89,36 @@ with app.app_context():
   example4_3 = Example(question_id = 4, choice = "a pickup truck")
   example4_4 = Example(question_id = 4, choice = "I don't drive")
 
+  question5 = Question(category='habbit', question='Prince Charming comes to rescue Snow White, who is sleeping after eating a poisoned apple.  However, suddenly he turned around and left! Why do you think he left the scene?')
+
+  example5_1 = Example(question_id = 5, choice = "He forgot his sword")
+  example5_2 = Example(question_id = 5, choice = "He was scared of commitment")
+  example5_3 = Example(question_id = 5, choice = "He was having a tummy ache")
+  example5_4 = Example(question_id = 5, choice = "He thought Snow White doesn't deserve him")
+
+  question6 = Question(category='habbit', question='In the middle of a meeting with team members, one of them gets up suddenly and leaves without a word. What is on your mind?')
+
+  example6_1 = Example(question_id = 6, choice = "She/he might be mad at something, but not at me")
+  example6_2 = Example(question_id = 6, choice = "She/he might be mad at me. So, I am thinking what I did to her/him earlier")
+  example6_3 = Example(question_id = 6, choice = "She/he had an urgent issue to deal with")
+  example6_4 = Example(question_id = 6, choice = "I don't care.")
+
+  question7 = Question(category='habbit', question='You are at a party and someone comes in an looks at you. What is  your response?')
+
+  example7_1 = Example(question_id = 7, choice = "I wonder who is that?")
+  example7_2 = Example(question_id = 7, choice = "She/he is really into me")
+  example7_3 = Example(question_id = 7, choice = "My Uber driver just walked in")
+  example7_4 = Example(question_id = 7, choice = "Am I wearing something funny?")
+
+  question8 = Question(category='habbit', question='At a July 4th BBQ, you mainly;')
+
+  example8_1 = Example(question_id = 8, choice = "Do all the grilling")
+  example8_2 = Example(question_id = 8, choice = "Do all the talking")
+  example8_3 = Example(question_id = 8, choice = "Do all the drinking")
+  example8_4 = Example(question_id = 8, choice = "Sit inside and watch TV")
+
+
+
   answer1 = Answer(user_id = 1, selected =['1', '6', '12', '16'])
   answer2 = Answer(user_id = 2, selected =['1', '6', '9', '13'])
   answer3 = Answer(user_id = 3, selected =['2', '7', '11', '14'])
@@ -223,13 +253,6 @@ with app.app_context():
   db.session.add(avartar4)
   db.session.add(avartar5)
 
-  
-
-  
-  
-  
-
-
 
   db.session.add(question1)
 
@@ -258,6 +281,36 @@ with app.app_context():
   db.session.add(example4_2)
   db.session.add(example4_3)
   db.session.add(example4_4)
+
+  db.session.add(question5)
+
+  db.session.add(example5_1)
+  db.session.add(example5_2)
+  db.session.add(example5_3)
+  db.session.add(example5_4)
+
+  db.session.add(question6)
+
+  db.session.add(example6_1)
+  db.session.add(example6_2)
+  db.session.add(example6_3)
+  db.session.add(example6_4)
+
+
+  db.session.add(question7)
+
+  db.session.add(example7_1)
+  db.session.add(example7_2)
+  db.session.add(example7_3)
+  db.session.add(example7_4)
+
+  db.session.add(question8)
+
+  db.session.add(example8_1)
+  db.session.add(example8_2)
+  db.session.add(example8_3)
+  db.session.add(example8_4)
+
 
   db.session.commit()
 
