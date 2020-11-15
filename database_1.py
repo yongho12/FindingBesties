@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Question, Example, Answer, Friend, Message
+from starter_app.models import User, Question, Example, Answer, Friend, Message, Ask
 
 with app.app_context():
   db.drop_all()
@@ -115,13 +115,29 @@ with app.app_context():
   friend2 = Friend(user_id = 4, friend_id = 1, match_rate = 85, status = 'friend')
   friend3 = Friend(user_id = 1, friend_id = 24, match_rate = 54, status = 'friend')
   friend4 = Friend(user_id = 24, friend_id = 1, match_rate = 54, status = 'friend')
-  friend5 = Friend(user_id = 1, friend_id = 19, match_rate = 65, status = 'friend')
-  friend6 = Friend(user_id = 19, friend_id = 1, match_rate = 65, status = 'friend')
+  friend5 = Friend(user_id = 1, friend_id = 22, match_rate = 65, status = 'friend')
+  friend6 = Friend(user_id = 22, friend_id = 1, match_rate = 65, status = 'friend')
   friend7 = Friend(user_id = 1, friend_id = 41, match_rate = 75, status = 'friend')
   friend8 = Friend(user_id = 41, friend_id = 1, match_rate = 75, status = 'friend')
+  friend9 = Friend(user_id = 1, friend_id = 35, match_rate = 25, status = 'friend')
+  friend10 = Friend(user_id = 35, friend_id = 1, match_rate = 25, status = 'friend')
+  friend11 = Friend(user_id = 1, friend_id = 42, match_rate = 75, status = 'friend')
+  friend12 = Friend(user_id = 42, friend_id = 1, match_rate = 75, status = 'friend')
 
-  
-     
+  message1 = Message(from_user = 42, to_user=1, message = 'Hi Demo, so happy to connect with you!', status='open')
+  message2 = Message(from_user = 41, to_user=1, message = 'Happy Birthday!', status='open')
+  message3 = Message(from_user = 24, to_user=1, message = 'I watched this TV show. I think you will love this!', status='open')
+  message4 = Message(from_user = 4, to_user=1, message = 'Thanks for the tip, Have a great day! :)', status='open')
+
+  ask1 = Ask(requestor = 1, recipient = 19, match_rate = 65, status = 'asking')
+  ask2 = Ask(requestor = 1, recipient = 10, match_rate = 82, status = 'asking')
+  ask3 = Ask(requestor = 1, recipient = 43, match_rate = 27, status = 'asking')
+  ask4 = Ask(requestor = 36, recipient = 1, match_rate = 65, status = 'asking')
+  ask5 = Ask(requestor = 37, recipient = 1, match_rate = 82, status = 'asking')
+  ask6 = Ask(requestor = 38, recipient = 1, match_rate = 27, status = 'asking')
+
+
+
 
   
 
@@ -183,6 +199,24 @@ with app.app_context():
   db.session.add(friend6)
   db.session.add(friend7)
   db.session.add(friend8)
+  db.session.add(friend9)
+  db.session.add(friend10)
+  db.session.add(friend11)
+  db.session.add(friend12)
+
+  db.session.add(message1)
+  db.session.add(message2)
+  db.session.add(message3)
+  db.session.add(message4)
+
+  db.session.add(ask1)
+  db.session.add(ask2)
+  db.session.add(ask3)
+  db.session.add(ask4)
+  db.session.add(ask5)
+  db.session.add(ask6)
+
+  
   
   
 
