@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import ReactDom, { render } from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import Email from "https://smtpjs.com/v3/smtp.js"
 
 
@@ -54,9 +53,7 @@ function Friends()
     const messageSendHandle = async (e) => {
         e.preventDefault();
         if (!to_user) return ;
-        console.log("message send e target value::::", e.target.value)
-        // const message = 'this is the message'
-        console.log("message", message)
+  
         const response = await fetchWithCSRF(`/api/home/friendsmessage/${user_id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -82,7 +79,7 @@ function Friends()
             <div className = 'friends__list__container'>
                 {friends.map((f, index)=>(<div>
                 <h2 key={`${f.id}-${index}`} >{f.friend_name} </h2>
-                <img className = "friends__photo" src={f.friend_avatar} alt="friend photo" />   
+                <img className = "friends__photo" src={f.friend_avatar} alt={`${f.friend_avatar}-${index}`}/>   
                 <div>{f.friend_email}</div>
                 <div>{f.match_rate}% Match</div>
                 <div>{f.status}</div> 
@@ -121,18 +118,7 @@ function Friends()
     </>
     )
 }
-{/* <form onSubmit={messageSendHandle}>
-    <label>
-        Message:
-        <textarea onChange={messageChange}/>
-    </label>
-    <button type="submit">send</button>
-</form> */}
 
-
-
-{/* <textarea>Leave a message here</textarea>
-<button onClick={messageSendHandle}>send!</button>  */}      
 
 
 export default Friends;

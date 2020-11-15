@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Question, Example, Answer, Friend, Message, Ask
+from starter_app.models import User, Question, Example, Answer, Friend, Message, Ask, Avartarsample
 
 with app.app_context():
   db.drop_all()
@@ -13,7 +13,7 @@ with app.app_context():
   user1 =  User(name='demo', email='demo@example.com',  password='password', avatar='/images/friends.png')
   user2 = User(name='Alec', email='alec@aa.io', password='password', avatar='/images/friends.png')
   user3 = User(name='Ammar', email='ammar@aa.io', password='password', avatar='/images/friends.png')
-  user4 = User(name='Andrea', email='andrea@aa.io',  password='password', avatar='/images/friends.png')
+  user4 = User(name='Andrea', email='andrea@aa.io',  password='password', avatar='/images/sunflower.jpg')
   user5 = User(name='Andrew', email='andrew@aa.io',  password='password', avatar='/images/friends.png')
   user6 = User(name='Ben', email='ben@aa.io',  password='password', avatar='/images/friends.png')
   user7 = User(name='Dan B', email='danb@example.com',  password='password', avatar='/images/friends.png')
@@ -35,7 +35,7 @@ with app.app_context():
   user21 = User(name='Kasey', email='kasey@aa.io',  password='password', avatar='/images/friends.png')
   user22 = User(name='Krisna', email='krisna@aa.io', password='password', avatar='/images/friends.png')
   user23 = User(name='Matt R', email='mattr@aa.io', password='password', avatar='/images/friends.png')
-  user24 = User(name='Matt Z', email='mattz@aa.io',  password='password', avatar='/images/friends.png')
+  user24 = User(name='Matt Z', email='mattz@aa.io',  password='password', avatar='/images/lotus.jpg')
   user25 = User(name='Miah', email='miah@aa.io',  password='password', avatar='/images/friends.png')
   user26 = User(name='Michael', email='michael@aa.io',  password='password', avatar='/images/friends.png')
   user27 = User(name='Peter', email='peter@example.com',  password='password', avatar='/images/friends.png')
@@ -136,10 +136,11 @@ with app.app_context():
   ask5 = Ask(requestor = 37, recipient = 1, match_rate = 82, status = 'asking')
   ask6 = Ask(requestor = 38, recipient = 1, match_rate = 27, status = 'asking')
 
-
-
-
-  
+  avartar1 = Avartarsample(avartar_file="/images/flower1.jpg")
+  avartar2 = Avartarsample(avartar_file="/images/lotus.jpg")
+  avartar3 = Avartarsample(avartar_file="/images/rose.jpg")
+  avartar4 = Avartarsample(avartar_file="/images/sunflower.jpg")
+  avartar5 = Avartarsample(avartar_file="/images/daisy.jpg")
 
 
   db.session.add(user1)
@@ -215,6 +216,14 @@ with app.app_context():
   db.session.add(ask4)
   db.session.add(ask5)
   db.session.add(ask6)
+
+  db.session.add(avartar1)
+  db.session.add(avartar2)
+  db.session.add(avartar3)
+  db.session.add(avartar4)
+  db.session.add(avartar5)
+
+  
 
   
   
