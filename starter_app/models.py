@@ -102,8 +102,6 @@ class Answer(db.Model):
       "id": self.id,
       "user_id": self.user_id,
       "selected": self.selected
-      # "question_id": self.question_id,
-      # "choice_id":self.choice_id,
     }
 
   def to_dict_match(self):
@@ -141,29 +139,6 @@ class Ask(db.Model):
     return {
       "recipient": self.recipient,
     }
-
-#  This is working without double join
- 
-# class Ask(db.Model):
-#   __tablename__='asks'
-# id = db.Column(db.Integer, primary_key=True)
-# requestor = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'), nullable=False)
-# recipient = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'), nullable=False)
-# status = db.Column(db.String(10), nullable=False)
-
-# user = db.relationship("User", back_populates="asks")
-
-
-# def to_dict(self):
-#   return {
-#     "id": self.id,
-#     "requestor": self.requestor,
-#     "recipient": self.recipient,
-#     "requestor_name": self.user.name,
-#     "status":self.status
-#   }   
-    
-
 
 class Friend(db.Model):
   __tablename__='friends'
