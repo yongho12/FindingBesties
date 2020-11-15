@@ -6,8 +6,10 @@ function Profile() {
 
     const user_id = useSelector(state => state.authReducer.id);
     const fetchWithCSRF = useSelector(state => state.authReducer.csrf);
-    const [beingAsked, setBeingAsked] = useState([])
-    const [askId, setAskId] = useState(0)
+    const [ beingAsked, setBeingAsked ] = useState([]);
+    const [ askId, setAskId ] = useState(0);
+    const [ askingStatus, setAskingStatus ] = useState([]);
+    const [ askingList, setAskingList ] = useState([])
     let status_msg = "";
   
 
@@ -15,11 +17,24 @@ function Profile() {
         async function asked() {
             const response = await fetch(`/api/home/beingasked/${user_id}`)
             const data = await response.json();
-            setBeingAsked(data.beingAsked)
-            console.log("data", data.beingAsked)
+            setBeingAsked(data.beingAsked);
         }
         asked(); 
     }, [askId]);
+
+    useEffect(() => {
+        async function askingStatus() {
+            const response = await fetch(`/api/home/askingstatus/${user_id}`)
+            const data = await response.json();
+            setAskingStatus(data.askingStatus);
+            setAskingList(data.askingList);
+            console.log("askingStatus", data.askingStatus);
+            console.log("askingList", data.askingList)
+        }
+        askingStatus(); 
+    }, []);
+
+    
 
     
     async function acceptHandle(e) {
@@ -57,12 +72,23 @@ function Profile() {
         }
        
     }
-
+// {1: 0, 2: 0, 3: 50, 4: 25, 5: 25, 6: 25}
+// [{…}, {…}, {…}, {…}, {…}]
 
     return (
     <>
-        <h1>Profile</h1>
-        <div>
+        <h1>My Page</h1>
+        <div className="profile__container--left">
+            <h2>You've asked</h2>
+             {askingStatus.map((asking, index)=>(<>
+                <div key={`${asking.id}-${index}`} >
+                <div>{askingList[asking.recipient]}</div>
+                <div>{asking.status}</div> 
+                </div> 
+               </> ))}
+        </div>
+        <div className="profile__container--right">
+            <h2>Besties request</h2>
             {beingAsked.map((asked, index)=>(<>
             <h3 key={`${asked.id}-${index}`} >
                 {asked.requestor_name} wants to be your bestie. 

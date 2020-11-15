@@ -28,7 +28,7 @@ def requestFriend():
   db.session.commit()
   return { "ask": "successful"}, 200
 
-#being Asked status
+#being asked status
 @bp.route('/beingasked/<int:user_id>')
 def askbeingfriend(user_id):
   response = db.session.query(Ask) \
@@ -72,13 +72,36 @@ def noforask(id):
 
 
 #asking status
-@bp.route('/askedstatus/<int:user_id>')
+@bp.route('/askingstatus/<int:user_id>')
 def askedfriend(user_id):
   # user_id = request.json.get("user_id", None)
   response = db.session.query(Ask) \
-              .filter(Ask.requestor == user_id)
+              .filter(Ask.requestor == user_id) \
+              .filter(Ask.status == "asking") 
+  friends1 = [ asked.to_dict_recipient() for asked in response ]
+  print('friendlist::::::::::::::', friendlist)
+  # [{'recipient': 1}, {'recipient': 6}, {'recipient': 4}, {'recipient': 2}, {'recipient': 5}]
+  friends = [ list(id.values())[0] for id in friends1]
+  print("friends::::::::::::::",friends)
+  # [1, 6, 4, 2, 5]
+  friends2 = db.session.query(User) \
+              .filter(User.id.in_(friends)).all()
+  print("friends2::::::::::", friends2)
+  friends3 = [ user.to_dict_id_name() for user in friends2 ]
+  print("friends3-------", friends3)
+  f_id = [ list(f.keys())[0] for f in friends3]
+  f_name = [ list(f.values())[0] for f in friends3]
+  print("f_id ::::::::" , f_id)
+  print("f_name ::::::::" , f_name)
+  f_id_name = dict(zip(f_id, f_name))
+  print('f_id_name==========',f_id_name)
+  # top_bottom_three = dict(zip(top_bottom_3, match_percent))
+  # print("top_bottom_three:::::::::",top_bottom_three)
 
-  # return {'beingAsked':[ asked.to_dict() for asked in response ]},200 
+  print('friends::::::::::', friends)
+  return {'askingStatus':[ user.to_dict() for user in response ],
+          'askingList': f_id_name,
+          },200 
 
 # friend list 
 @bp.route('/friendslist/<int:user_id>')
