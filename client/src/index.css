@@ -246,11 +246,18 @@ button:disabled {
 
 }
 
+.friends__left__container {
+ margin-left :50px;
+ width: 40%;
+}
+
 .friends__list__container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap: wrap;
   /* border: 3px solid var(--color-yellow); */
+  /* margin-top : 20px; */
 }
 
 .friends__photo {
@@ -264,6 +271,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-right :50px;
 }
 
 .friends__right--message {
@@ -277,7 +285,7 @@ button:disabled {
   height: 100px;
   border: 3px solid var(--color-yellow);
   border-radius: 20px;
-  /* background-color: var(--color-dark-white) */
+  /* background-color: var(--color-dark-white)  */
 }
 
 .friends__message--card {

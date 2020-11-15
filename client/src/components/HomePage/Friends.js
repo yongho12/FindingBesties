@@ -77,17 +77,18 @@ function Friends()
     return (
     <>
     <div className="friends__container">
-        <div className="friend__left__container">
+        <div className="friends__left__container">
             <h2>My Besties</h2>
             <div className = 'friends__list__container'>
                 {friends.map((f, index)=>(<div>
-                <div key={`${f.id}-${index}`} >{f.friend_name} </div>
+                <h2 key={`${f.id}-${index}`} >{f.friend_name} </h2>
                 <img className = "friends__photo" src={f.friend_avatar} alt="friend photo" />   
                 <div>{f.friend_email}</div>
                 <div>{f.match_rate}% Match</div>
                 <div>{f.status}</div> 
+                <div>since {new Date(f.created_at).toLocaleDateString('en-US')} </div>
                     <button value={f.friend_id} name={f.friend_name} onClick={messageHandle}>Message</button>
-                </div> ))}
+                </div> ))}    
             </div>
         </div> 
         <div className="friends__right__container">
