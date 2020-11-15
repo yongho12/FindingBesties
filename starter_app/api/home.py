@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import or_ 
-from starter_app.models import db, Question, Example, Answer, User, Ask, Friend, Message
+from starter_app.models import db, Question, Example, Answer, User, Ask, Friend, Message, Avartarsample
 from sqlalchemy.orm import joinedload
 import re
 
@@ -122,6 +122,30 @@ def messagereceived(user_id):
               .filter(Message.to_user == user_id) \
               .filter(Message.status == "open")
   return {'msgreceived':[ asked.to_dict() for asked in response ]},200 
+
+
+# # about me
+# @bp.route('/aboutme/<int:user_id>')
+# def aboutme(user_id):
+#   response = db.session.query(User) \
+#               .filter(User.id == user_id) 
+#   return {'aboutme':[ user.to_dict() for user in response ]},200 
+
+@bp.route('/aboutme/<int:user_id>')
+def aboutme(user_id):
+  response = db.session.query(User) \
+              .filter(User.id == user_id) 
+  avartars = db.session.query(Avartarsample).all()
+  return {'aboutme':[ user.to_dict() for user in response ],
+          'avartars':[ sample.to_dict() for sample in avartars ]}, 200   
+
+#about me - profile change
+@bp.route('/avartarsample')
+def avartarsample():
+  response = db.session.query(Avartarsample).all()
+  return {'avartar':[ sample.to_dict() for sample in response ]},200 
+
+
 
 
 

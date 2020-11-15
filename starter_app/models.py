@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(100), nullable=False)
   avatar = db.Column(db.String(40), nullable=True)
   status = db.Column(db.String(20), nullable=True)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
 
   asks = db.relationship('Ask', backref='user', lazy=True)
   friends = db.relationship('Friend', backref='user', lazy=True)
@@ -38,7 +39,8 @@ class User(db.Model, UserMixin):
       "name": self.name,
       "email": self.email,
       "status": self.status,
-      "avatar": self.avatar
+      "avatar": self.avatar,
+      "created_at": self.created_at
     }
 
   def to_dict_id_name(self):
@@ -193,6 +195,22 @@ class Message(db.Model):
       "status": self.status,
       "created_at": self.created_at 
     }
+  
+class Avartarsample(db.Model):
+  __tablename__='avartarsamples'
+
+  id = db.Column(db.Integer, primary_key=True)
+  avartar_file = db.Column(db.String(40), nullable=False)
+  status = db.Column(db.String(10), nullable=True)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "avartar_file": self.avartar_file,
+    }
+
+
 
 
   
