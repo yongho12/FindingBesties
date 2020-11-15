@@ -50,6 +50,8 @@ with app.app_context():
   answer4 = Answer(user_id = 4, selected =['3', '7', '9', '15'])
   answer5 = Answer(user_id = 5, selected =['4', '5', '10', '16'])
   answer6 = Answer(user_id = 6, selected =['1', '6', '12', '16'])
+
+
   
 
   db.session.add(ian)

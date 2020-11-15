@@ -32,6 +32,7 @@ function Friends()
             const data = await response.json();
             setReceivedMsg(data.msgreceived)
             console.log("received mssage", data.msgreceived)
+          
         }
         messagelist(); 
     },[]);
@@ -41,9 +42,6 @@ function Friends()
         setMsgButton(true);
         setTo_user(e.target.value);
         setTo_name(e.target.name);
-        console.log('e.target.id :::', e.target.id)
-        console.log("e.target.value:::::::", e.target.value)
-        console.log("e.target.name:::::::", e.target.name)
     }
 
     
@@ -80,7 +78,7 @@ function Friends()
     <>
     <div className="friends__container">
         <div className="friend__left__container">
-            <h1>My Besties</h1>
+            <h2>My Besties</h2>
             <div className = 'friends__list__container'>
                 {friends.map((f, index)=>(<div>
                 <div key={`${f.id}-${index}`} >{f.friend_name} </div>
@@ -93,20 +91,25 @@ function Friends()
             </div>
         </div> 
         <div className="friends__right__container">
+            { msgButton &&
             <div className="friends__right__top">
-                <h1>Messaging to Bestie</h1>
-                <div>
-                    <h2>sending message to {to_name}</h2>
+                {/* <h1>Messaging to Bestie</h1> */}
+                
+                <h2>Sending a message to {to_name}</h2>
+                <div className="friends__right--message">
+                    <input className="friends__message" value={message}  type="text" placeholder="leave a message.." onChange={messageChange}></input>
+                    <button className="message--sent" onClick={messageSendHandle}>send</button>
                 </div>
-                <input value={message}  type="text" placeholder="leave a message.." onChange={messageChange}></input>
-                <a className="message--sent" onClick={messageSendHandle}>send</a>
             </div>
+            }
             <div className="friends__right__bottom">
-                <h1>Received Message</h1>
+                <h2>Received Messages</h2>
                 <div>
-                    {receivedMsg.map((m, index)=>(<div>
-                    <div key={`${m.id}-${index}`} >{m.from_user_name} </div>   
-                    <div>{m.message}</div>
+                    {receivedMsg.map((m, index)=>(
+                    <div className='friends__message--card'>
+                        <h3 key={`${m.id}-${index}`} >{m.message}</h3>   
+                        <br />
+                        <h3>from: {m.from_user_name}  {new Date(m.created_at).toLocaleString()} </h3>
                     </div> ))}
                         
                 </div>

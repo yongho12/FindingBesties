@@ -97,16 +97,17 @@ function Questions() {
         <>  
             { !queSubmitted && 
             <div>
-                 <div>
+                 <div className="questions__container">
                     <fieldset>
-                        <legend><h2>{questions[index].question}</h2></legend>
+                        {/* <legend><h2>{questions[index].question}</h2></legend> */}
+                        <h2>{questions[index].question}</h2>
                         <br />
                         <div>
                             { questions[index].examples.map((ex, index) => (
-                                <div key={`${ex.ex_id}-${index}`}>
+                                <h3 key={`${ex.ex_id}-${index}`}>
                                     <input type="radio" id={ex.ex_id} value={ex.ex_id}  onClick={updateAnswer} name='radio' /> 
                                     <label  htmlFor={ex.ex_id}>{ex.choice}</label><br /> <br />
-                                </div>
+                                </h3>
                             ))}
                         </div>
                         
