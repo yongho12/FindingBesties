@@ -81,7 +81,7 @@ function Questions() {
             setFriends(match.friends);
             
             // console.log("all friends::::", match.friends)
-            // console.log("top bottom 3 ::::", match.top_bottom_three)
+            console.log("top bottom 3 ::::", match.top_bottom_three)
             // console.log("all friends after set;;;;;", friends)
             // console.log("top_bottom_three;;;;;", top_bottom_three)
             // console.log("resp")

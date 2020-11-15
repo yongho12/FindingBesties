@@ -41,6 +41,11 @@ class User(db.Model, UserMixin):
       "avatar": self.avatar
     }
 
+  def to_dict_id_name(self):
+    return {
+      self.id : self.name
+    }
+
 class Question(db.Model):
   __tablename__='questions'
 
