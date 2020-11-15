@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+import datetime
+
 
 db = SQLAlchemy()
 
@@ -113,6 +115,7 @@ class Ask(db.Model):
   recipient = db.Column(db.Integer, nullable=True)
   match_rate = db.Column(db.Integer, nullable=True)
   status = db.Column(db.String(10), nullable=False)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
 
   # requestor_user = db.relationship('User', foreign_keys=[requestor])
   # recipient_user = db.relationship('User', foreign_keys=[recipient])
@@ -125,7 +128,8 @@ class Ask(db.Model):
       "recipient": self.recipient,
       "requestor_name": self.user.name,
       "match_rate" : self.match_rate,
-      "status":self.status
+      "status": self.status,
+      "created_at": self.created_at 
     }
 
   def to_dict_recipient(self):
@@ -164,6 +168,7 @@ class Friend(db.Model):
   friend_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
   match_rate = db.Column(db.Integer, nullable=True)
   status = db.Column(db.String(10), nullable=False)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
 
   def to_dict(self):
     return {
@@ -174,7 +179,8 @@ class Friend(db.Model):
       "friend_email": self.user.email,
       "friend_avatar": self.user.avatar,
       "match_rate": self.match_rate,
-      "status": self.status
+      "status": self.status,
+      "created_at": self.created_at 
     }
 
   def to_dict_matchlogic(self):
@@ -195,6 +201,7 @@ class Message(db.Model):
   to_user = db.Column(db.Integer, nullable=False)
   message = db.Column(db.String(300), nullable=True)
   status = db.Column(db.String(10), nullable=False)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
 
   def to_dict(self):
     return {
@@ -203,7 +210,8 @@ class Message(db.Model):
       "to_user": self.to_user,
       "from_user_name": self.user.name,
       "message": self.message,
-      "status": self.status
+      "status": self.status,
+      "created_at": self.created_at 
     }
 
 

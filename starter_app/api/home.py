@@ -110,7 +110,7 @@ def messagereceived(user_id):
   response = db.session.query(Message) \
               .options(joinedload(Message.user)) \
               .filter(Message.to_user == user_id) \
-              .filter(Message.status == "sent")
+              .filter(Message.status == "open")
   return {'msgreceived':[ asked.to_dict() for asked in response ]},200 
 
 
