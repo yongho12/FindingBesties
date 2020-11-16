@@ -2,19 +2,67 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Question, Example, Answer, Friend, Message
+from starter_app.models import User, Question, Example, Answer, Friend, Message, Ask, Avartarsample
 
 with app.app_context():
   db.drop_all()
   db.create_all()
 
-  ian = User(name='Ian', email='ian@aa.io',  password='password', avatar='/images/friends.png')
-  javier = User(name='Javier', email='javier@aa.io', password='password', avatar='/images/friends.png')
-  dean = User(name='Dean', email='dean@aa.io', password='password', avatar='/images/friends.png')
-  angela = User(name='Angela', email='angela@aa.io',  password='password', avatar='/images/friends.png')
-  soonmi = User(name='Soon-Mi', email='soonmi@aa.io',  password='password', avatar='/images/friends.png')
-  alissa = User(name='Alissa', email='alissa@aa.io',  password='password', avatar='/images/friends.png')
-  demo = User(name='demo', email='demo@example.com',  password='password', avatar='/images/friends.png')
+# flower1
+# lotus
+
+
+  
+  user1 =  User(name='demo', email='demo@example.com',  password='password', avatar='/images/friends.png')
+  user2 = User(name='Krisna', email='krisna@aa.io', password='password', avatar='/images/lotus.jpg')
+  user3 = User(name='Matt R', email='mattr@aa.io', password='password', avatar='/images/flower1.jpg')
+  user4 = User(name='Andrea', email='andrea@aa.io',  password='password', avatar='/images/friends.png')
+  user5 = User(name='Andrew', email='andrew@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user6 = User(name='Ben', email='ben@aa.io',  password='password', avatar='/images/rose.jpg')
+  user7 = User(name='Dan B', email='danb@example.com',  password='password', avatar='/images/flower1.jpg')
+  user8 = User(name='Jony', email='jony@aa.io',  password='password', avatar='/images/sunflower.jpg')
+  user9 = User(name='Julie', email='julie@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user10 = User(name='Erin', email='erin@example.com',  password='password', avatar='/images/flower1.jpg')
+
+  user11 = User(name='Isaac', email='isaac@aa.io',  password='password', avatar='/images/sunflower.jpg')
+  user12 = User(name='Ivan', email='ivan@aa.io', password='password', avatar='/images/sunflower.jpg')
+  user13 = User(name='James', email='james@aa.io', password='password', avatar='/images/lotus.jpg')
+  user14 = User(name='Jaron', email='jaron@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user15 = User(name='Jeff', email='jeff@aa.io',  password='password', avatar='/images/friends.png')
+  user16 = User(name='Michael', email='michael@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user17 = User(name='John M', email='johnm@example.com',  password='password', avatar='/images/lotus.jpg')
+  user18 = User(name='Daniel', email='daniel@aa.io',  password='password', avatar='/images/sunflower.jpg')
+  user19 = User(name='Dillon', email='dillon@aa.io',  password='password', avatar='/images/flower1.jpg')
+  user20 = User(name='Juliet', email='juliet@example.com',  password='password', avatar='/images/flower1.jpg')
+
+  user21 = User(name='Kasey', email='kasey@aa.io',  password='password', avatar='/images/sunflower.jpg')
+  user22 = User(name='Alec', email='alec@aa.io', password='password', avatar='/images/friends.png')
+  user23 = User(name='Ammar', email='ammar@aa.io', password='password', avatar='/images/friends.png')
+  user24 = User(name='Matt Z', email='mattz@aa.io',  password='password', avatar='/images/friends.png')
+  user25 = User(name='Miah', email='miah@aa.io',  password='password', avatar='/images/friends.png')
+  user26 = User(name='John A', email='johna@aa.io',  password='password', avatar='/images/daisy.jpg')
+  user27 = User(name='Peter', email='peter@example.com',  password='password', avatar='/images/daisy.jpg')
+  user28 = User(name='Quincy', email='quincy@aa.io',  password='password', avatar='/images/friends.png')
+  user29 = User(name='Javier', email='javier@aa.io', password='password', avatar='/images/flower1.jpg')
+  user30 = User(name='Sam', email='sam@example.com',  password='password', avatar='/images/rose.jpg')
+
+  user31 = User(name='Sophie', email='sophie@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user32 = User(name='Tyna', email='tyna@aa.io', password='password', avatar='/images/flower1.jpg')
+  user33 = User(name='Tom', email='tom@aa.io', password='password', avatar='/images/rose.jpg')
+  user34 = User(name='Corina', email='corina@aa.io',  password='password', avatar='/images/flower1.jpg')
+  user35 = User(name='Joanna', email='joanna@aa.io',  password='password', avatar='/images/rose.jpg')
+  user36 = User(name='Mylo', email='mylo@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user37 = User(name='Geoffery', email='geoffery@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user38 = User(name='Ian', email='ian@aa.io',  password='password', avatar='/images/rose.jpg')
+  user39 = User(name='Quynn', email='quynn@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user40 = User(name='Dean', email='dean@aa.io', password='password', avatar='/images/daisy.jpg')
+
+  user41 = User(name='Angela', email='angela@aa.io',  password='password', avatar='/images/daisy.jpg')
+  user42 = User(name='Soon-Mi', email='soonmi@aa.io',  password='password', avatar='/images/lotus.jpg')
+  user43 = User(name='Alissa', email='alissa@aa.io',  password='password', avatar='/images/daisy.jpg')
+  user44 = User(name='Aaron', email='aaron@aa.io',  password='password', avatar='/images/lotus.jpg')
+
+  
 
   question1 = Question(category='hobby', question='When you have spare time, what do you mostly do?')
 
@@ -44,55 +92,202 @@ with app.app_context():
   example4_3 = Example(question_id = 4, choice = "a pickup truck")
   example4_4 = Example(question_id = 4, choice = "I don't drive")
 
-  question5 = Question(category='habbit', question='Prince Charming comes to rescue Snow White, who is sleeping after eating a poisoned apple, However, Suddenly he turned around left? Why do you think he turned around and left the scene?')
+  question5 = Question(category='habbit', question='Prince Charming comes to rescue Snow White, who is sleeping after eating a poisoned apple.  However, suddenly he turned around and left! Why do you think he left the scene?')
 
-  example5_1 = Example(question_id = 4, choice = "He forgot his sword")
-  example5_2 = Example(question_id = 4, choice = "He was scared")
-  example5_3 = Example(question_id = 4, choice = "He was having a tummy aches")
-  example5_4 = Example(question_id = 4, choice = "He thought Snow White doesn't deserve him")
+  example5_1 = Example(question_id = 5, choice = "He forgot his sword")
+  example5_2 = Example(question_id = 5, choice = "He was scared of commitment")
+  example5_3 = Example(question_id = 5, choice = "He was having a tummy ache")
+  example5_4 = Example(question_id = 5, choice = "He thought Snow White doesn't deserve him")
 
-  question6 = Question(category='habbit', question='In the middle of having a meeting with team members, one of them gets up suddenly and left without words. What is on your mind')
+  question6 = Question(category='habbit', question='In the middle of a meeting with team members, one of them gets up suddenly and leaves without a word. What is on your mind?')
 
-  example6_1 = Example(question_id = 4, choice = "She/He might be mad at something, but not at me")
-  example6_2 = Example(question_id = 4, choice = "She/He might be mad at me. So, I am thinking what I did to her/him earlier")
-  example6_3 = Example(question_id = 4, choice = "She/He was having a emergency tummy aches.")
-  example6_4 = Example(question_id = 4, choice = "I don't care.")
+  example6_1 = Example(question_id = 6, choice = "She/he might be mad at something, but not at me")
+  example6_2 = Example(question_id = 6, choice = "She/he might be mad at me. So, I am thinking what I did to her/him earlier")
+  example6_3 = Example(question_id = 6, choice = "She/he had an urgent issue to deal with")
+  example6_4 = Example(question_id = 6, choice = "I don't care.")
 
-  question7 = Question(category='habbit', question='')
+  question7 = Question(category='habbit', question='You are at a party and someone comes in an looks at you. What is  your response?')
 
-  example7_1 = Example(question_id = 4, choice = "She/He might be mad at something, but not at me")
-  example7_2 = Example(question_id = 4, choice = "She/He might be mad at me. So, I am thinking what I did to her/him earlier")
-  example7_3 = Example(question_id = 4, choice = "She/He was having a emergency tummy aches.")
-  example7_4 = Example(question_id = 4, choice = "I do not care.")
+  example7_1 = Example(question_id = 7, choice = "I wonder who is that?")
+  example7_2 = Example(question_id = 7, choice = "She/he is really into me")
+  example7_3 = Example(question_id = 7, choice = "My Uber driver just walked in")
+  example7_4 = Example(question_id = 7, choice = "Am I wearing something funny?")
+
+  question8 = Question(category='habbit', question='At a July 4th BBQ, you mainly;')
+
+  example8_1 = Example(question_id = 8, choice = "Do all the grilling")
+  example8_2 = Example(question_id = 8, choice = "Do all the talking")
+  example8_3 = Example(question_id = 8, choice = "Do all the drinking")
+  example8_4 = Example(question_id = 8, choice = "Sit inside and watch TV")
+
+
+  answer1 = Answer(user_id = 1,   selected =['1', '6', '12', '16', '17', '21','25', '29'])
+  answer2 = Answer(user_id = 2,   selected =['2', '6', '9', '13' , '18', '22','28', '30'])
+  answer3 = Answer(user_id = 3,   selected =['1', '8', '11', '14', '19', '23','27', '31'])
+  answer4 = Answer(user_id = 4,   selected =['3', '7', '9', '15' , '20', '21','26', '32'])
+  answer5 = Answer(user_id = 5,   selected =['4', '5', '10', '16', '20', '22','28', '32'])
+  answer6 = Answer(user_id = 6,   selected =['1', '6', '12', '16', '17', '24','25', '30'])
+  answer7 = Answer(user_id = 7,   selected =['1', '6', '12', '16', '17', '24','26', '30'])
+  answer8 = Answer(user_id = 8,   selected =['3', '5', '9',  '13', '18', '22','27', '31'])
+  answer9 = Answer(user_id = 9,   selected =['3', '8', '11', '14', '18', '21','28', '29'])
+  answer10 = Answer(user_id =10,  selected =['3', '7', '9',  '15', '19', '21','25', '29'])
+
+  answer11 = Answer(user_id = 11, selected =['2', '6', '12', '16',  '18','24','25','30'])
+  answer12 = Answer(user_id = 12, selected =['3', '6', '9',  '13',  '17','24','26','29'])
+  answer13 = Answer(user_id = 13, selected =['1', '7', '11', '14',  '18','21','27','29'])
+  answer14 = Answer(user_id = 14, selected =['3', '5', '9',  '15',  '17','22','28','30'])
+  answer15 = Answer(user_id = 15, selected =['1', '5', '10', '16',  '20','21','25','30'])
+  answer16 = Answer(user_id = 16, selected =['3', '6', '12', '16',  '19','20','25','31'])
+  answer17 = Answer(user_id = 17, selected =['4', '8', '12', '16',  '17','21','25','30'])
+  answer18 = Answer(user_id = 18, selected =['1', '8', '9',  '13',  '19','21','28','31'])
+  answer19 = Answer(user_id = 19, selected =['1', '7', '11', '14',  '20','22','25','32'])
+  answer20 = Answer(user_id = 20, selected =['4', '7', '9',  '15',  '17','21','25','32'])
+
+  #  1-4 5-8 9-12 13-16 17-20 21-24 25-28  29-32  
 
   
-  What's on your mind?
+  answer21 = Answer(user_id = 21, selected =['1', '6', '11', '16',  '18','24','25','29'])
+  answer22 = Answer(user_id = 22, selected =['2', '4', '9',  '13',  '17','24','26','29'])
+  answer23 = Answer(user_id = 23, selected =['1', '7', '11', '14',  '18','23','27','29'])
+  answer24 = Answer(user_id = 24, selected =['3', '5', '10', '16',  '17','22','28','31'])
+  answer25 = Answer(user_id = 25, selected =['1', '4', '10', '16',  '20','21','25','30'])
+  answer26 = Answer(user_id = 26, selected =['2', '6', '11', '13',  '19','21','25','31'])
+  answer27 = Answer(user_id = 27, selected =['1', '8', '12', '16',  '17','22','25','30'])
+  answer28 = Answer(user_id = 28, selected =['2', '7', '9',  '13',  '19','23','28','31'])
+  answer29 = Answer(user_id = 29, selected =['4', '6', '11', '14',  '20','22','25','32'])
+  answer30 = Answer(user_id = 20, selected =['4', '4', '9',  '15',  '17','21','25','32'])
+
+  answer31 = Answer(user_id = 31, selected =['1', '6', '11', '16',  '19','24','25','29'])
+  answer32 = Answer(user_id = 32, selected =['2', '4', '9',  '13',  '17','24','26','30'])
+  answer33 = Answer(user_id = 33, selected =['3', '5', '11', '14',  '17','23','27','31'])
+  answer34 = Answer(user_id = 34, selected =['3', '5', '9', '16',   '18','22','28','31'])
+  answer35 = Answer(user_id = 35, selected =['4', '4', '11', '16',  '20','22','26','30'])
+  answer36 = Answer(user_id = 36, selected =['2', '7', '11', '13',  '19','21','25','31'])
+  answer37 = Answer(user_id = 37, selected =['3', '8', '12', '16',  '17','22','25','30'])
+  answer38 = Answer(user_id = 38, selected =['2', '7', '9',  '13',  '20','23','27','31'])
+  answer39 = Answer(user_id = 39, selected =['4', '5', '11', '14',  '19','21','26','31'])
+  answer40 = Answer(user_id = 40, selected =['4', '4', '9',  '15',  '17','21','25','30'])
 
 
+  answer41 = Answer(user_id = 41, selected =['2', '6', '11', '16',  '20','23','25','29'])
+  answer42 = Answer(user_id = 42, selected =['4', '5', '12',  '13',  '17','22','26','30'])
+  answer43 = Answer(user_id = 43, selected =['1', '6', '10', '14',  '17','24','28','30'])
+  answer44 = Answer(user_id = 44, selected =['4', '8', '9', '13',   '18','22','27','31'])
 
-  
+  friend1 = Friend(user_id = 1, friend_id = 4, match_rate = 85, status = 'friend')
+  friend2 = Friend(user_id = 4, friend_id = 1, match_rate = 85, status = 'friend')
+  friend3 = Friend(user_id = 1, friend_id = 24, match_rate = 54, status = 'friend')
+  friend4 = Friend(user_id = 24, friend_id = 1, match_rate = 54, status = 'friend')
+  friend5 = Friend(user_id = 1, friend_id = 22, match_rate = 65, status = 'friend')
+  friend6 = Friend(user_id = 22, friend_id = 1, match_rate = 65, status = 'friend')
+  friend7 = Friend(user_id = 1, friend_id = 41, match_rate = 75, status = 'friend')
+  friend8 = Friend(user_id = 41, friend_id = 1, match_rate = 75, status = 'friend')
+  friend9 = Friend(user_id = 1, friend_id = 35, match_rate = 25, status = 'friend')
+  friend10 = Friend(user_id = 35, friend_id = 1, match_rate = 25, status = 'friend')
+  friend11 = Friend(user_id = 1, friend_id = 42, match_rate = 75, status = 'friend')
+  friend12 = Friend(user_id = 42, friend_id = 1, match_rate = 75, status = 'friend')
 
-  
+  message1 = Message(from_user = 42, to_user=1, message = 'Hi Demo, so happy to connect with you!', status='open')
+  message2 = Message(from_user = 41, to_user=1, message = 'Happy Birthday!', status='open')
+  message3 = Message(from_user = 24, to_user=1, message = 'I watched this TV show. I think you will love this!', status='open')
+  message4 = Message(from_user = 4, to_user=1, message = 'Thanks for the tip, Have a great day! :)', status='open')
+
+  ask1 = Ask(requestor = 1, recipient = 19, match_rate = 65, status = 'asking')
+  ask2 = Ask(requestor = 1, recipient = 10, match_rate = 82, status = 'asking')
+  ask3 = Ask(requestor = 1, recipient = 43, match_rate = 27, status = 'asking')
+  ask4 = Ask(requestor = 36, recipient = 1, match_rate = 65, status = 'asking')
+  ask5 = Ask(requestor = 37, recipient = 1, match_rate = 82, status = 'asking')
+  ask6 = Ask(requestor = 38, recipient = 1, match_rate = 27, status = 'asking')
+
+  avartar1 = Avartarsample(avartar_file="/images/flower1.jpg")
+  avartar2 = Avartarsample(avartar_file="/images/lotus.jpg")
+  avartar3 = Avartarsample(avartar_file="/images/rose.jpg")
+  avartar4 = Avartarsample(avartar_file="/images/sunflower.jpg")
+  avartar5 = Avartarsample(avartar_file="/images/daisy.jpg")
+  avartar6 = Avartarsample(avartar_file="/images/friends.png")
 
 
+  db.session.add(user1)
+  db.session.add(user2)
+  db.session.add(user3)
+  db.session.add(user4)
+  db.session.add(user5)
+  db.session.add(user6)
+  db.session.add(user7)
+  db.session.add(user8)
+  db.session.add(user9)
+  db.session.add(user10)
 
-  answer1 = Answer(user_id = 1, selected =['1', '6', '12', '16'])
-  answer2 = Answer(user_id = 2, selected =['1', '6', '9', '13'])
-  answer3 = Answer(user_id = 3, selected =['2', '7', '11', '14'])
-  answer4 = Answer(user_id = 4, selected =['3', '7', '9', '15'])
-  answer5 = Answer(user_id = 5, selected =['4', '5', '10', '16'])
-  answer6 = Answer(user_id = 6, selected =['1', '6', '12', '16'])
+  db.session.add(user11)
+  db.session.add(user12)
+  db.session.add(user13)
+  db.session.add(user14)
+  db.session.add(user15)
+  db.session.add(user16)
+  db.session.add(user17)
+  db.session.add(user18)
+  db.session.add(user19)
+  db.session.add(user20)
 
+  db.session.add(user21)
+  db.session.add(user22)
+  db.session.add(user23)
+  db.session.add(user24)
+  db.session.add(user25)
+  db.session.add(user26)
+  db.session.add(user27)
+  db.session.add(user28)
+  db.session.add(user29)
+  db.session.add(user30)
 
-  
+  db.session.add(user31)
+  db.session.add(user32)
+  db.session.add(user33)
+  db.session.add(user34)
+  db.session.add(user35)
+  db.session.add(user36)
+  db.session.add(user37)
+  db.session.add(user38)
+  db.session.add(user39)
+  db.session.add(user40)
 
-  db.session.add(ian)
-  db.session.add(javier)
-  db.session.add(dean)
-  db.session.add(angela)
-  db.session.add(soonmi)
-  db.session.add(alissa)
-  db.session.add(demo)
+  db.session.add(user41)
+  db.session.add(user42)
+  db.session.add(user43)
+  db.session.add(user44)
+
+  db.session.add(friend1)
+  db.session.add(friend2)
+  db.session.add(friend3)
+  db.session.add(friend4)
+  db.session.add(friend5)
+  db.session.add(friend6)
+  db.session.add(friend7)
+  db.session.add(friend8)
+  db.session.add(friend9)
+  db.session.add(friend10)
+  db.session.add(friend11)
+  db.session.add(friend12)
+
+  db.session.add(message1)
+  db.session.add(message2)
+  db.session.add(message3)
+  db.session.add(message4)
+
+  db.session.add(ask1)
+  db.session.add(ask2)
+  db.session.add(ask3)
+  db.session.add(ask4)
+  db.session.add(ask5)
+  db.session.add(ask6)
+
+  db.session.add(avartar1)
+  db.session.add(avartar2)
+  db.session.add(avartar3)
+  db.session.add(avartar4)
+  db.session.add(avartar5)
+  db.session.add(avartar6)
+
 
   db.session.add(question1)
 
@@ -122,6 +317,36 @@ with app.app_context():
   db.session.add(example4_3)
   db.session.add(example4_4)
 
+  db.session.add(question5)
+
+  db.session.add(example5_1)
+  db.session.add(example5_2)
+  db.session.add(example5_3)
+  db.session.add(example5_4)
+
+  db.session.add(question6)
+
+  db.session.add(example6_1)
+  db.session.add(example6_2)
+  db.session.add(example6_3)
+  db.session.add(example6_4)
+
+
+  db.session.add(question7)
+
+  db.session.add(example7_1)
+  db.session.add(example7_2)
+  db.session.add(example7_3)
+  db.session.add(example7_4)
+
+  db.session.add(question8)
+
+  db.session.add(example8_1)
+  db.session.add(example8_2)
+  db.session.add(example8_3)
+  db.session.add(example8_4)
+
+
   db.session.commit()
 
   db.session.add(answer1)
@@ -130,6 +355,47 @@ with app.app_context():
   db.session.add(answer4)
   db.session.add(answer5)
   db.session.add(answer6)
+  db.session.add(answer7)
+  db.session.add(answer8)
+  db.session.add(answer9)
+  db.session.add(answer10)
 
+  db.session.add(answer11)
+  db.session.add(answer12)
+  db.session.add(answer13)
+  db.session.add(answer14)
+  db.session.add(answer15)
+  db.session.add(answer16)
+  db.session.add(answer17)
+  db.session.add(answer18)
+  db.session.add(answer19)
+  db.session.add(answer20)
+
+  db.session.add(answer21)
+  db.session.add(answer22)
+  db.session.add(answer23)
+  db.session.add(answer24)
+  db.session.add(answer25)
+  db.session.add(answer26)
+  db.session.add(answer27)
+  db.session.add(answer28)
+  db.session.add(answer29)
+  db.session.add(answer30)
+
+  db.session.add(answer31)
+  db.session.add(answer32)
+  db.session.add(answer33)
+  db.session.add(answer34)
+  db.session.add(answer35)
+  db.session.add(answer36)
+  db.session.add(answer37)
+  db.session.add(answer38)
+  db.session.add(answer39)
+  db.session.add(answer40)
+
+  db.session.add(answer41)
+  db.session.add(answer42)
+  db.session.add(answer43)
+  db.session.add(answer44)
 
   db.session.commit()

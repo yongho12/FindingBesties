@@ -182,8 +182,8 @@ def answers():
   top_bottom_3_val = intimacies_val[0:3]
   bottom3_val = intimacies_val[-3:]
   top_bottom_3_val.extend(bottom3_val)
-
-  match_percent = [int(v/4*100) for v in top_bottom_3_val ]
+ 
+  match_percent = [int(v/8*100) for v in top_bottom_3_val ]
   #zip them together
   top_bottom_three = dict(zip(top_bottom_3, match_percent))
   

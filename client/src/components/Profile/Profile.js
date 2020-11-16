@@ -56,6 +56,10 @@ function Profile() {
     const photoChange = async (e) => {
         console.log("photo Change")
         setChangeBtn(true);
+        let chgButton = document.getElementById(e.target.id);
+        chgButton.innerHTML=""
+        chgButton.disabled = true;
+
    
         
     }
@@ -107,49 +111,45 @@ function Profile() {
                  <div key={`${me.id}-${index}-profile`} >
                        <div> {me.name}</div>
                        <img className = "profile__photo" src={me.avatar} alt={`${me.avartar}-${index}`} />  
-                       <div> {me.email}</div>
-                       <div> Finding Besties member since {new Date(me.created_at).toLocaleDateString('en-US')}</div>
+                       <h3> {me.email}</h3>
+                       <h3> Finding Besties member since {new Date(me.created_at).toLocaleDateString('en-US')}</h3>
                  </div>
                  ))}
-                 <button onClick={photoChange} >Photo Change</button> 
+                 <button id="photoChange" onClick={photoChange} >Photo Change</button> 
                </div>
                <div className="profile__left__bottom--photochange"> 
                 { changeBtn &&
                    photos.map((sa, index)=>(
-                   <div key={`${sa.id}-${index}-change`}> 
-                        <div>{sa.id}</div>
+                   <div className="profile__left__bottom--photo" key={`${sa.id}-${index}-change`}> 
+                        {/* <div>{sa.id}</div> */}
                         <img className="profile__photo--sample" src={sa.avartar_file} alt={`${sa.avartar}-${index}-sample`}/>
                    </div>
                     ))}
                    
-
                </div>
-            
-
-
-
             
         </div>
         <div className="profile__container--right">
-            <div>
-                <h2>You've asked</h2>
-                {askingStatus.map((asking, index)=>(<>
-                    <div key={`${asking.id}-${index}-ask`} >
-                    <div>{askingList[asking.recipient]}</div>
-                    <div>{asking.status}</div> 
-                    </div> 
-                </> ))}
-            </div>
-            <div>
-                <h2>Besties request</h2>
-                {beingAsked.map((asked, index)=>(<>
+            <div className="profile__right__top">
+                <h2>Besties requests</h2>
+                {beingAsked.map((asked, index)=>(
+                <div className='profile__right--accept'>
                 <h3 key={`${asked.id}-${index}`} >
                     {asked.requestor_name} wants to be your bestie. 
                     <br /> Do you want to accept it?</h3> 
-                    <div>
+                    <div className="profile__right__button" >
                         <button value={asked.id} onClick={acceptHandle}>Accept</button>
                         <button value={asked.id} onClick={rejectHandle}>Reject</button>
                     </div>
+                </div> ))}
+            </div>
+            <div className="profile__right__bottom">
+                <h3>You've asked to be a Bestie to persons below</h3>
+                {askingStatus.map((asking, index)=>(<>
+                    <div className='profile__asking--card' key={`${asking.id}-${index}-ask`} >
+                    <h3>{askingList[asking.recipient]}</h3>
+                    <h3>status: waiting for acceptance</h3>
+                    </div> 
                 </> ))}
             </div>
         </div>           

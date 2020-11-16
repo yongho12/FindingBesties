@@ -66,8 +66,8 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                 <h2> The friends are recommended based on your answers to the questionnaire.
                      <br />You guys have in the commons. 
                      <br />
-                     However, people attractive to opposite. <br />click below if you want to find out. 
-                     <button onClick={oppositeHandler}>opposite</button>
+                     However, people attractive to opposite. <br />click below if you want to find out. <br />
+                     <button onClick={oppositeHandler}>Different</button>
                 </h2>
                
                 <div>
