@@ -36,6 +36,7 @@ function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitted(true);
+        console.log("AAAA")
         if (password && email && name) {
           dispatch(signup(name, email, password));
         }
