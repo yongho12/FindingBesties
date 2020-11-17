@@ -63,11 +63,11 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
 
             { (first.length) &&
             <div className="match__similar">
-                <h2> The friends are recommended based on your answers to the questionnaire.
-                     <br />You guys have in the commons. 
+                <h2> Besties are recommended based on your answers to the questionnaire.
+                     <br />You guys have stuff in common. 
                      <br />
-                     However, people attractive to opposite. <br />click below if you want to find out. <br />
-                     <button onClick={oppositeHandler}>Different</button>
+                     However, opposites also attract! <br />click below if you want to find out. <br />
+                     <button onClick={oppositeHandler}>Opposite</button>
                 </h2>
                
                 <div>
