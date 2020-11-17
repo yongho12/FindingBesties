@@ -122,7 +122,7 @@ function Profile() {
                    photos.map((sa, index)=>(
                    <div className="profile__left__bottom--photo" key={`${sa.id}-${index}-change`}> 
                         {/* <div>{sa.id}</div> */}
-                        <img className="profile__photo--sample" src={sa.avartar_file} alt={`${sa.avartar}-${index}-sample`}/>
+                        <img className="profile__photo--sample" src={`../../${sa.avartar_file}`} alt={`${sa.avartar}-${index}-sample`}/>
                    </div>
                     ))}
                    

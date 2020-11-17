@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../actions/authActions';
 
 
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -92,7 +93,7 @@ const Login = () => {
                     </form>
                 </div>
             <div>
-              <img className='login__image' src='/images/6friends.jpg' alt='login_image'/>
+              <img className='login__image' src='/static/images/6friends.jpg' alt='login_image'/>
             </div>
             {/* </LoginFormWrapper> */}
 

@@ -2,13 +2,14 @@ import React from 'react';
 import {  NavLink } from 'react-router-dom';
 
 
+
 function HomePage() {
  
     return (
         <>
             <section id="about" className="section section_container">
                 <h1>About Finding Besties</h1>
-                <img className = "home__photo" src="/images/friends.png" alt="home_photo" />
+                <img className = "home__photo" src="/static/images/friends.png" alt="home_photo" />
                 <h3 className = "home__description">
                     Having friends fullfils your life. 
                     When you meet people at work, school, or online, even before you talk to them, you might get judged on appearance, sex, age, ethnicity, or lifestyle behavior. 
