@@ -71,7 +71,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                 </h2>
                
                 <div>
-                    <img className = "match__photo" src="/static/images/friends.png" alt="match_photo_1" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo_1" />
                     {first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
@@ -80,7 +80,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                 </div>
 
                  <div>
-                    <img className = "match__photo" src="/static/images/friends.png" alt="match_photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {second.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
@@ -89,7 +89,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                 </div>
 
                  <div>
-                    <img className = "match__photo" src="/static/images/friends.png" alt="match_photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {third.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
@@ -103,7 +103,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
             { opposite &&
              <div className="match__opposite">
                 <div>
-                    <img className = "match__photo" src="/static/images/friends.png" alt="match_photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
@@ -112,7 +112,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                 </div>
 
                  <div>
-                    <img className = "match__photo" src="/static/images/friends.png" alt="match_photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_second.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                    <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
@@ -121,7 +121,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                 </div>
 
                  <div>
-                    <img className = "match__photo" src="/static/images/friends.png" alt="match_photo" />
+                    <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_third.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                    <div> {top_bottom_three[person.id]}% Match</div>
                     <div>{ friends[person.id] ? "We are already Bestie!" : 
