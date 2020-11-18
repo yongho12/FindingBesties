@@ -124,13 +124,7 @@ def messagereceived(user_id):
   return {'msgreceived':[ asked.to_dict() for asked in response ]},200 
 
 
-# # about me
-# @bp.route('/aboutme/<int:user_id>')
-# def aboutme(user_id):
-#   response = db.session.query(User) \
-#               .filter(User.id == user_id) 
-#   return {'aboutme':[ user.to_dict() for user in response ]},200 
-
+# about me
 @bp.route('/aboutme/<int:user_id>')
 def aboutme(user_id):
   response = db.session.query(User) \
@@ -144,6 +138,18 @@ def aboutme(user_id):
 def avartarsample():
   response = db.session.query(Avartarsample).all()
   return {'avartar':[ sample.to_dict() for sample in response ]},200 
+
+#change the photo in profile
+@bp.route('/selectphoto/<int:user_id>', methods=["PATCH"])
+def selectphoto(user_id):
+  my_user = User.query.filter(User.id == user_id).first()
+  avatar_file = request.json.get("avatar_file", None)
+  if my_user:
+    my_user.avatar = avatar_file
+    db.session.commit()
+    return {"my_user": [user_id]}, 200
+  return {"errors": ["user_id not found"]}, 404 
+
 
 
 
