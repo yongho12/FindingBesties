@@ -17,7 +17,7 @@ RUN ["npm", "run", "build", "--prefix", "client"]
 # our host machine.
 RUN ["cp", "-r", "client/build", "starter_app/static"]
 RUN ["cp", "-r", "starter_app/static/static/js", "starter_app/static"]
-RUN ["cp", "-r", "starter_app/static//css", "starter_app/static"]
+RUN ["cp", "-r", "starter_app/static/static/css", "starter_app/static"]
 
 
 # Setup Flask environment
