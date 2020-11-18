@@ -36,6 +36,7 @@ function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitted(true);
+        console.log("AAAA")
         if (password && email && name) {
           dispatch(signup(name, email, password));
         }
@@ -97,7 +98,7 @@ function SignUp() {
           </fieldset>
         </form>
          <div>
-              <img className='login__image' src="/static/images/children.jpg" alt='signin_image'/>
+              <img className='login__image' src="/images/children.jpg" alt='signin_image'/>
         </div>
     </div>
   )

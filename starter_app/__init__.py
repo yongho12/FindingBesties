@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, Blueprint
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 
@@ -16,6 +16,10 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(session.bp, url_prefix='/api/session')
 app.register_blueprint(home.bp, url_prefix='/api/home')
+# add routes for static images
+image_blueprint = Blueprint('images', __name__, static_url_path='/images', static_folder='static/images')
+app.register_blueprint(image_blueprint)
+
 db.init_app(app)
 
 ## Application Security

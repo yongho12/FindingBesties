@@ -24,7 +24,7 @@ const NavBar = () => {
         <>
         <nav className={styles.navbar} >
             <div className={styles.logo}>
-                <img className={styles.image} src="/static/images/favicon.png" alt="logo"></img>
+                <img className={styles.image} src="/images/favicon.png" alt="logo"></img>
                 <h1 className={styles.title}>Finding Besties</h1>
             </div>
 
