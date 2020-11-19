@@ -123,6 +123,17 @@ def messagereceived(user_id):
               .filter(Message.status == "open")
   return {'msgreceived':[ asked.to_dict() for asked in response ]},200 
 
+@bp.route('/messageread/<int:message_id>', methods=["PATCH"])
+def messageread(message_id):
+  my_msg = Message.query.filter(Message.id == message_id).first()
+  if my_msg:
+    my_msg.status = 'read'
+    db.session.commit()
+    return {"my_msg": [message_id]}, 200
+  return {"errors": ["message_id not found"]}, 404 
+
+
+
 
 # about me
 @bp.route('/aboutme/<int:user_id>')

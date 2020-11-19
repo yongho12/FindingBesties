@@ -9,8 +9,6 @@ import {
 
 function loadUser() {
     const authToken = Cookies.get("session");
-    console.log(Cookies.get("session"))
-    console.log('authToken::::',authToken )
     if (authToken) {
         try {
             const payload = authToken.split(".")[1];

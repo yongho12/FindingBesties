@@ -18,7 +18,7 @@ function HomePage() {
                 </h3>
                 <div>
                 <h2> Do you want to find out your potential best friends?</h2>
-                    <NavLink to="/questionnaire" activeClassName="active">
+                    <NavLink to="/questionnaire" activeClassName="active" className="home__questionnaire">
                         Questionnaire
                     </NavLink>
                </div>

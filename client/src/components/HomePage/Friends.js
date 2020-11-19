@@ -14,13 +14,13 @@ function Friends()
     const [ to_name, setTo_name ] = useState('');
     const [ message, setMessage ] = useState('');
     const [ receivedMsg, setReceivedMsg] = useState([])
+    const [ readMsg, setReadMsg ] = useState(0);
 
     useEffect(() => {
         async function friendslist() {
             const response = await fetch(`/api/home/friendslist/${user_id}`)
             const data = await response.json();
             setFriends(data.friends)
-            console.log("data", data.friends)
         }
         friendslist(); 
     },[]);
@@ -30,11 +30,10 @@ function Friends()
             const response = await fetch(`/api/home/messagereceived/${user_id}`)
             const data = await response.json();
             setReceivedMsg(data.msgreceived)
-            console.log("received mssage", data.msgreceived)
           
         }
         messagelist(); 
-    },[]);
+    },[readMsg]);
 
 
     const messageHandle = (e) => { 
@@ -66,6 +65,21 @@ function Friends()
             window.alert("Message has sent successfully.")
             setMessage('')
         }
+    }
+
+    const readHandler = async(e) => {
+        const message_id = e.target.value;
+
+         const response = await fetchWithCSRF(`/api/home/messageread/${message_id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                message_id,
+            }),
+        })
+        if (response.ok) {
+            setReadMsg(message_id)
+        }
 
     }
 
@@ -78,11 +92,13 @@ function Friends()
             <h2>My Besties</h2>
             <div className = 'friends__list__container'>
                 {friends.map((f, index)=>(<div>
-                <h2 key={`${f.id}-${index}`} >{f.friend_name} </h2>
+                <h2 key={`${f.id}-${index}-list`} >{f.friend_name} </h2>
                 <img className = "friends__photo" src={f.friend_avatar} alt={`${f.friend_avatar}-${index}`}/>   
                 <div>{f.friend_email}</div>
                 <div>{f.match_rate}% Match</div>
-                <div>{f.status}</div> 
+                <div className="friends__match--bar">
+                    <div className="friends__match--value" style={{width:f.match_rate.toString()+'%'}}/> 
+                </div>
                 <div>since {new Date(f.created_at).toLocaleDateString('en-US')} </div>
                     <button value={f.friend_id} name={f.friend_name} onClick={messageHandle}>Message</button>
                 </div> ))}    
@@ -90,9 +106,7 @@ function Friends()
         </div> 
         <div className="friends__right__container">
             { msgButton &&
-            <div className="friends__right__top">
-                {/* <h1>Messaging to Bestie</h1> */}
-                
+            <div className="friends__right__top">         
                 <h2>Sending a message to {to_name}</h2>
                 <div className="friends__right--message">
                     <input className="friends__message" value={message}  type="text" placeholder="leave a message.." onChange={messageChange}></input>
@@ -101,15 +115,16 @@ function Friends()
             </div>
             }
             <div className="friends__right__bottom">
-                <h2>Received Messages</h2>
                 <div>
-                    {receivedMsg.map((m, index)=>(
+                    {/* <h2>Received Messages</h2> */}
+                    {}
+                    {receivedMsg.map((m, index)=>(    
                     <div className='friends__message--card'>
-                        <h3 key={`${m.id}-${index}`} >{m.message}</h3>   
-                        <br />
-                        <h3>from: {m.from_user_name}  {new Date(m.created_at).toLocaleString()} </h3>
-                    </div> ))}
-                        
+                        <h3 key={`${m.id}-${index}-message`} >{m.message}</h3>   
+                        <p>from: {m.from_user_name}  {new Date(m.created_at).toLocaleString()} </p>
+                        <button className="button smallButton" value={m.id} onClick={readHandler}>read</button>
+                    </div>
+                     ))}     
                 </div>
             </div>
 
