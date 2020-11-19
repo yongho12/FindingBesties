@@ -91,8 +91,8 @@ function Friends()
         <div className="friends__left__container">
             <h2>My Besties</h2>
             <div className = 'friends__list__container'>
-                {friends.map((f, index)=>(<div>
-                <h2 key={`${f.id}-${index}-list`} >{f.friend_name} </h2>
+                {friends.map((f, index)=>(<div key={`${index}-${f.id}-list`}>
+                <h2 >{f.friend_name} </h2>
                 <img className = "friends__photo" src={f.friend_avatar} alt={`${f.friend_avatar}-${index}`}/>   
                 <div>{f.friend_email}</div>
                 <div>{f.match_rate}% Match</div>
@@ -119,8 +119,8 @@ function Friends()
                     {/* <h2>Received Messages</h2> */}
                     {}
                     {receivedMsg.map((m, index)=>(    
-                    <div className='friends__message--card'>
-                        <h3 key={`${m.id}-${index}-message`} >{m.message}</h3>   
+                    <div key={`${m.id}-${index}-message`} className='friends__message--card'>
+                        <h3>{m.message}</h3>   
                         <p>from: {m.from_user_name}  {new Date(m.created_at).toLocaleString()} </p>
                         <button className="button smallButton" value={m.id} onClick={readHandler}>read</button>
                     </div>

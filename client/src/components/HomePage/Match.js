@@ -58,8 +58,11 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     <img className = "match__photo" src="/images/friends.png" alt="match_photo_1" />
                     {first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
-                    <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button id="bestieButton_1" value={person.id}  onClick={connectHandler}>be Bestie!</button> }</div> 
+                    <div className="match__match--bar">
+                        <div className="match__match--value" style={{width:top_bottom_three[person.id].toString()+'%'}}/> 
+                    </div>
+                    <h3>{ friends[person.id] ? "We are already Bestie!": 
+                        <button id="bestieButton_1" value={person.id}  onClick={connectHandler}>be Bestie!</button> }</h3> 
                     </div>))}
                 </div>
 
@@ -67,8 +70,11 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {second.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
-                    <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button id="bestieButton_2" value={person.id}  onClick={connectHandler}>be Bestie!</button> }</div> 
+                    <div className="match__match--bar">
+                        <div className="match__match--value" style={{width:top_bottom_three[person.id].toString()+'%'}}/> 
+                    </div>
+                    <h3>{ friends[person.id] ?"We are already Bestie!": 
+                        <button id="bestieButton_2" value={person.id}  onClick={connectHandler}>be Bestie!</button> }</h3> 
                     </div>))}
                 </div>
 
@@ -76,8 +82,11 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {third.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
-                    <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button id="bestieButton_3" value={person.id} onClick={connectHandler}>be Bestie!</button> }</div> 
+                    <div className="match__match--bar">
+                        <div className="match__match--value" style={{width:top_bottom_three[person.id].toString()+'%'}}/> 
+                    </div>
+                    <h3>{ friends[person.id] ?"We are already Bestie!" : 
+                        <button id="bestieButton_3" value={person.id} onClick={connectHandler}>be Bestie!</button> }</h3> 
                     </div>))}
                 </div>
                 
@@ -90,8 +99,11 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                     <div> {top_bottom_three[person.id]}% Match</div>
-                    <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button id="bestieButton_4" value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
+                    <div className="match__match--bar">
+                        <div className="match__match--value" style={{width:top_bottom_three[person.id].toString()+'%'}}/> 
+                    </div>
+                    <h3>{ friends[person.id] ? "We are already Bestie!" : 
+                        <button id="bestieButton_4" value={person.id} onClick={connectHandler}>be Bestie!</button> }</h3>
                     </div>))}
                 </div>
 
@@ -99,8 +111,11 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_second.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                    <div> {top_bottom_three[person.id]}% Match</div>
-                    <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button id="bestieButton_5" value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
+                   <div className="match__match--bar">
+                        <div className="match__match--value" style={{width:top_bottom_three[person.id].toString()+'%'}}/> 
+                    </div>
+                    <h3>{ friends[person.id] ? "We are already Bestie!" : 
+                        <button id="bestieButton_5" value={person.id} onClick={connectHandler}>be Bestie!</button> }</h3>
                     </div>))}
                 </div>
 
@@ -108,8 +123,11 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
                     <img className = "match__photo" src="/images/friends.png" alt="match_photo" />
                     {last_third.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
                    <div> {top_bottom_three[person.id]}% Match</div>
-                    <div>{ friends[person.id] ? "We are already Bestie!" : 
-                        <button id="bestieButton_6" value={person.id} onClick={connectHandler}>be Bestie!</button> }</div>
+                   <div className="match__match--bar">
+                        <div className="match__match--value" style={{width:top_bottom_three[person.id].toString()+'%'}}/> 
+                    </div>
+                    <h3>{ friends[person.id] ? "We are already Bestie!" : 
+                        <button id="bestieButton_6" value={person.id} onClick={connectHandler}>be Bestie!</button> }</h3>
                     </div>))}
                 </div>
             </div>
