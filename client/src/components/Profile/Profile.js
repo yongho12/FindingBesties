@@ -32,8 +32,7 @@ function Profile() {
             const data = await response.json();
             setAskingStatus(data.askingStatus);
             setAskingList(data.askingList);
-            console.log("askingStatus", data.askingStatus);
-            console.log("askingList", data.askingList)
+       
         }
         askingStatus(); 
     }, []);
@@ -44,9 +43,6 @@ function Profile() {
             const data = await response.json();
             setAboutMe(data.aboutme);
             setPhotos(data.avartars);
-            console.log('data.avartars', data.avartars)
-            console.log("aboutMe", data.aboutme);
-            console.log("avartar:::", photos)
          
         }
         aboutMe(); 
@@ -71,11 +67,8 @@ function Profile() {
             return;
         }
 
-        console.log(e.target.value)
         const id = e.target.id;
         const avatar_file = e.target.value
-        console.log("avartar_file:::", avatar_file)
-        console.log("user_id", user_id)
         const response = await fetchWithCSRF(`/api/home/selectphoto/${user_id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },

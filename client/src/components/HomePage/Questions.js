@@ -43,12 +43,15 @@ function Questions() {
       
     }
     
+    // let progress;
     const handleNextQuestion = () => {
         if (checked) {
             if (index < questions.length-1) {
                 handleIndex(index+1);
+                // progress = (((index)/questions.length)*100).toString()+'%'
             }  
             else {
+                // progress = '100%'
                 setLast(true);
             }
             setAnswers( previousState => [...previousState, item])
@@ -57,7 +60,6 @@ function Questions() {
     }
     
     async function submitHandler()  {
-        console.log("answers;;;;;;;",answers )
         setQueSubmitted(true);
         const response = await fetchWithCSRF(`/api/home/answers`, {
             method: "POST",
@@ -80,15 +82,14 @@ function Questions() {
             setLastFirst(match.last_first);
             setFriends(match.friends);
             
-            // console.log("all friends::::", match.friends)
-            console.log("top bottom 3 ::::", match.top_bottom_three)
-            // console.log("all friends after set;;;;;", friends)
-            // console.log("top_bottom_three;;;;;", top_bottom_three)
-            // console.log("resp")
                        
         }
     }
-
+  
+    let progress = (((index)/questions.length)*100).toString()+'%'
+    const divStyle = {
+        width: progress
+    };
 
   
     if (!questions.length) return null;
@@ -99,7 +100,6 @@ function Questions() {
             <div>
                  <div className="questions__container">
                     <fieldset>
-                        {/* <legend><h2>{questions[index].question}</h2></legend> */}
                         <h2>{questions[index].question}</h2>
                         <br />
                         <div>
@@ -109,9 +109,13 @@ function Questions() {
                                     <label  htmlFor={ex.ex_id}>{ex.choice}</label><br /> <br />
                                 </h3>
                             ))}
-                        </div>
-                        
+                        </div> 
                     </fieldset>
+                    <div className="status_bar">
+                        { last?<div className="status_value" style={{width:'100%'}}></div>:
+                            <div className="status_value" style={divStyle}></div>
+                         }
+                    </div>
                 </div>
                 <div><button  onClick={last?submitHandler:handleNextQuestion }>{last?'Submit':'Next'}</button></div>
             </div>

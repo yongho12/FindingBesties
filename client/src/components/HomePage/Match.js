@@ -8,32 +8,18 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
   
    
 
-    // console.log('[]::::::',recommends[top_bottom_list[0]].name);
-    // console.log("top_bottom_three in Match::::",top_bottom_three )
-
+    
     function oppositeHandler() {
-        console.log('opposite::', opposite)
+
         setOpposite(true);
     }
 
     const connectHandler = async (e) => {
 
-        // trying to hide the button
-        console.log("e.target.value",e.target.value)
-        console.log("e.target.id", e.target.id)
         let bestiebutton = document.getElementById(e.target.id);
-        console.log("bestiebutton:::", bestiebutton)
-        // bestiebutton.disabled = true
-        // bestiebutton.color="#fe918d"
-        // bestID.style.disply="block"
-        // bestiebutton.style.disply="none"
-        
-        
-        
         const recipient = e.target.value
         const status = "asking"
         const match_rate = top_bottom_three[recipient]
-        console.log(match_rate)
         
         const response = await fetchWithCSRF(`/api/home/request`, {
             method: "POST",
@@ -47,9 +33,6 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
         })
         
         if (response.ok) {
-            // setConnect(true);
-            console.log("recipient", recipient)
-            console.log("connect working")
             bestiebutton.innerHTML="Just Asked!"
             bestiebutton.disabled = true
         }
@@ -63,13 +46,14 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
 
             { (first.length) &&
             <div className="match__similar">
+                <div>
                 <h2> Besties are recommended based on your answers to the questionnaire.
                      <br />You guys have stuff in common. 
                      <br />
                      However, opposites also attract! <br />click below if you want to find out. <br />
-                     <button onClick={oppositeHandler}>Opposite</button>
                 </h2>
-               
+                     <button onClick={oppositeHandler} >Opposite</button>
+                </div>
                 <div>
                     <img className = "match__photo" src="/images/friends.png" alt="match_photo_1" />
                     {first.map((person, index)=> (<div key={`${person.id}-${index}`}> <h2>{person.name}</h2> 
