@@ -8,23 +8,18 @@ This app will ask questions about you.
 
 
 ## Match compatibility based on question answers
-A user is not able to see other profile photos since Finding Bestie matches friends using their answers to the questionnaire. 
-Once a user submits the questionnaire, Finding Bestie will display 3 matches for that user. 
-A user can view only 3 matched profiles but not their photos.
+Finding Bestie matches friends using their answers to the questionnaire. 
+Once a user submits the questionnaire, Finding Bestie will display top 3 matches for that user.
+When a user click "opposite" button, bottom of 3 matches will be displayed.
 When a user clicks "BeBestie" and the other person accepts it, they will be able to send messages to each other directly. The status of both users will change to "Besties".  
-If a either of the Dating users wants to break up, by clicking the "Block" button, Finding Bestie will automatically initiate the break up and the status of each user will change to "Searching".
 
 
 ## Avatar
 A user can choose the avatar from "Finding Bestie".
 
 
-## Report/Alert
-A user can report inappropriate behavior to Finding Bestie. The violator's status will be changed to "Reported".
-
 ## Bonus: Adding Questions & Examples
 ## Bonus: Adding Rules for Matching Logic
-
 ## Bonus: Admin Role 
 Admin can change the status of "Reported" depending on findings. 
 
