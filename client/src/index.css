@@ -66,6 +66,7 @@ li {
 a {
   text-decoration: none;
   color: var(--color-white);
+  /* color: var(--color-black); */
   font-weight: var(--weight-semi-bold);
   cursor: pointer;
 }
