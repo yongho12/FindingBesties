@@ -47,7 +47,13 @@ const NavBar = () => {
                     <NavLink to="/login" activeClassName="active">
                         LogIn
                     </NavLink></li> */}
-                <li className={styles.navbarMenuItem} onClick={logoutHandler}>LogOut</li>
+                {/* <li className={styles.navbarMenuItem} onClick={logoutHandler} activeClassName="active">LogOut</li> */}
+                <li className={styles.navbarMenuItem} onClick={logoutHandler}>
+                    <NavLink to="/login" activeClassName="active">
+                    LogOut
+                    </NavLink>
+                </li>
+
                 <li className={styles.navbarMenuItem}>
                     <NavLink to="/profile" activeClassName="active">
                         Profile
