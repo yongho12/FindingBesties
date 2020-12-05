@@ -408,6 +408,14 @@ button:disabled {
   flex-wrap: wrap;
 }
 
+.profile__name {
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-yellow);
+  margin: 8px 0;
+
+}
+
 .profile__right--accept {
   display: flex;
   flex-direction: column;

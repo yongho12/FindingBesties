@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(100), nullable=False)
   avatar = db.Column(db.String(40), nullable=True)
   status = db.Column(db.String(20), nullable=True)
-  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.utcnow)
 
   asks = db.relationship('Ask', backref='user', lazy=True)
   friends = db.relationship('Friend', backref='user', lazy=True)
@@ -120,7 +120,9 @@ class Ask(db.Model):
   recipient = db.Column(db.Integer, nullable=True)
   match_rate = db.Column(db.Integer, nullable=True)
   status = db.Column(db.String(10), nullable=False)
-  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
+  # created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
+
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.utcnow)
 
   # requestor_user = db.relationship('User', foreign_keys=[requestor])
   # recipient_user = db.relationship('User', foreign_keys=[recipient])
@@ -150,7 +152,7 @@ class Friend(db.Model):
   friend_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'),nullable=False)
   match_rate = db.Column(db.Integer, nullable=True)
   status = db.Column(db.String(10), nullable=False)
-  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.utcnow)
 
   def to_dict(self):
     return {
@@ -183,7 +185,7 @@ class Message(db.Model):
   to_user = db.Column(db.Integer, nullable=False)
   message = db.Column(db.String(300), nullable=True)
   status = db.Column(db.String(10), nullable=False)
-  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.utcnow)
 
   def to_dict(self):
     return {
@@ -202,7 +204,7 @@ class Avartarsample(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   avartar_file = db.Column(db.String(40), nullable=False)
   status = db.Column(db.String(10), nullable=True)
-  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.now)
+  created_at = db.Column('created_at', db.DateTime, default=datetime.datetime.utcnow)
 
   def to_dict(self):
     return {

@@ -120,7 +120,8 @@ def messagereceived(user_id):
   response = db.session.query(Message) \
               .options(joinedload(Message.user)) \
               .filter(Message.to_user == user_id) \
-              .filter(Message.status == "open")
+              .filter(Message.status == "open") \
+              .order_by(Message.id.desc())
   return {'msgreceived':[ asked.to_dict() for asked in response ]},200 
 
 @bp.route('/messageread/<int:message_id>', methods=["PATCH"])
@@ -182,10 +183,8 @@ def answers():
   db.session.commit()
 
   #!!!!!!!!!!!!!!!Switch for Logic one or two!!!!!!
-
   # intimacyLogic is including current friends
   intimate_users = intimacyLogic(user_id)
-
   # intimacyLogic2 is excluding current friends
   # intimate_users = intimacyLogic2(user_id)
   

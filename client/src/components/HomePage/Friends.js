@@ -122,6 +122,7 @@ function Friends()
                     <div key={`${m.id}-${index}-message`} className='friends__message--card'>
                         <h3>{m.message}</h3>   
                         <p>from: {m.from_user_name}  {new Date(m.created_at).toLocaleString()} </p>
+                        {/* <p>from: {m.from_user_name}  {new Date(m.created_at).toLocaleString('en-US')} </p> */}
                         <button className="button smallButton" value={m.id} onClick={readHandler}>read</button>
                     </div>
                      ))}     
