@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink, Switch, Route, Redirect} from 'react-router-dom'; 
 import styles from './navbar.module.css';
-// import  './navbar.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/authActions';
 
@@ -54,7 +53,6 @@ const NavBar = () => {
                         Profile
                     </NavLink></li>
             </ul>
-            {/* <button onClick={LoginHandler}>Log in</button> */}
        
         </nav>
          <Switch>
