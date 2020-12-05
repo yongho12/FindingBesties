@@ -64,12 +64,12 @@ function App() {
                 <NavBar />
                 : null}
     <Switch>
-        <Route path="/login" exact={true} component={LoginPanel} />
         <Route path="/questionnaire" exact={true} component={Questions} />
         <Route path="/profile" exact={true} component={Profile}/>
         <Route path="/signup" exact={true} component={SignUp}/>
         <Route path="/friends" exact={true} component={Friends}/>
         <Route path="/" exact={true} component={HomePage}/>
+        <Route path="/login" exact={true} component={LoginPanel} />
     </Switch>
     </div>
   );

@@ -40,7 +40,7 @@ def signup():
                        ), 400
     name = request.json.get("name", None)
     password = request.json.get("password", None)
-    newUser = User(name=name, email=email, password=password)
+    newUser = User(name=name, email=email, password=password, avatar='/images/friends.png')
     db.session.add(newUser)
     db.session.commit()
     login_user(newUser)

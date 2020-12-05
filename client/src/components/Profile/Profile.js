@@ -142,7 +142,7 @@ function Profile() {
                 { changeBtn && 
                    photos.map((sa, index)=>
                    (
-                    <div className="profile__left__bottom--photo" key={`${sa.id}-${index}-change`}> 
+                    <div key={`${sa.id}-${index}-change`} className="profile__left__bottom--photo" > 
                         <img className="profile__photo--sample" src={`${sa.avartar_file}`} alt={`${sa.avartar}-${index}-sample`}/>
                         <button id={sa.id} value = {sa.avartar_file} onClick={selectPhoto}>select</button>
                     </div> 
@@ -155,9 +155,9 @@ function Profile() {
             <div className="profile__right__top">
                 {/* <h2>Besties requests</h2> */}
                 {beingAsked.map((asked, index)=>(
-                <div className='profile__right--accept'>
-                <h3 key={`${asked.id}-${index}`} >
-                    <h2>{asked.requestor_name}</h2> wants to be your bestie. 
+                <div key={`${asked.id}-${index}`} className='profile__right--accept'>
+                <h3>
+                    <div className="profile__name">{asked.requestor_name}</div> wants to be your bestie. 
                     <br /> Do you want to accept it?</h3> 
                     <div className="profile__right__button" >
                         <button value={asked.id} onClick={acceptHandle}>Accept</button>
@@ -167,12 +167,12 @@ function Profile() {
             </div>
             <div className="profile__right__bottom">
                 {/* <h2>You've asked to be a Bestie to persons below</h2> */}
-                {askingStatus.map((asking, index)=>(<>
-                    <div className='profile__asking--card' key={`${asking.id}-${index}-ask`} >
+                {askingStatus.map((asking, index)=>(
+                    <div key={`${asking.id}-${index}-ask`} className='profile__asking--card' >
                     <h3>{askingList[asking.recipient]}</h3>
                     <h3>status: waiting for acceptance</h3>
                     </div> 
-                </> ))}
+                 ))}
             </div>
         </div>           
     </div>

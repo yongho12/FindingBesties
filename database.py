@@ -199,7 +199,7 @@ with app.app_context():
   message1 = Message(from_user = 42, to_user=1, message = 'Hi Demo, so happy to connect with you!', status='open')
   message2 = Message(from_user = 41, to_user=1, message = 'Happy Birthday!', status='open')
   message3 = Message(from_user = 24, to_user=1, message = 'I watched this TV show. I think you will love this!', status='open')
-  message4 = Message(from_user = 4, to_user=1, message = 'Thanks for the tip, Have a great day! :)', status='open')
+  message4 = Message(from_user =  4, to_user=1, message = 'Thanks for the tip, Have a great day! :)', status='open')
   message5 = Message(from_user = 44, to_user=9, message = 'Hi Julie, so happy to connect with you!', status='open')
   message6 = Message(from_user = 33, to_user=9, message = 'Have a wonderful day!', status='open')
   message7 = Message(from_user = 10, to_user=9, message = 'I watched this TV show. I think you will love this!', status='open')
