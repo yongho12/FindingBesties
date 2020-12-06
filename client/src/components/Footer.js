@@ -7,8 +7,8 @@ import styled, { css, ThemeProvider } from "styled-components";
 
 const Footer = () => {
     return (
-        <div>
-           <section id="contact" class="section">
+        <div className = "footer">
+        <section id="contact" class="section">
         <h3 class="contact__email">Developed by Yongho Kim</h3>
         <div class="contact__links">
             <a href="https://github.com/yongho12" target="_blank">
@@ -19,7 +19,9 @@ const Footer = () => {
             </a>
         </div>
         <p class="contact__rights">
-            2020 yonghokim.info - All rights reserved
+            <a href="https://yonghokim.info" target="_blank">
+                   yonghokim.info - All rights reserved
+            </a>
         </p>
     </section>
         </div>
