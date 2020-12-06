@@ -9,18 +9,14 @@ const Footer = () => {
     return (
         <div>
            <section id="contact" class="section">
-        <h2 class="contact__email">winthisgame12@gmail.com</h2>
+        <h3 class="contact__email">Developed by Yongho Kim</h3>
         <div class="contact__links">
-            {/* <a href="https://github.com/yongho12" target="_blank">
-                <i class="fab fa-github"></i>
-            </a> */}
-            <GrGithub />
-            {/* <a href="https://www.linkedin.com/in/yongho-kim-024451199/" target="_blank">
-                <i class="fa fa-linkedin-square"></i>
-            </a> */}
-            <Link to="https://www.linkedin.com/in/yongho-kim-024451199/">
+            <a href="https://github.com/yongho12" target="_blank">
+                <GrGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/yongho-kim-024451199/" target="_blank">
                 <GrLinkedin />
-            </Link>
+            </a>
         </div>
         <p class="contact__rights">
             2020 yonghokim.info - All rights reserved
