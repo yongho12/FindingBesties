@@ -118,6 +118,7 @@ function Questions() {
                     </div>
                 </div>
                 <div><button  onClick={last?submitHandler:handleNextQuestion }>{last?'Submit':'Next'}</button></div>
+                <br /> <br /><br />
             </div>
             }
             {/* Results */}

@@ -8,6 +8,7 @@ import LoginPanel from './components/LoginPannel';
 import SignUp from './components/SignUp';
 import NavBar from './components/NavBar/NavBar';
 import Profile from './components/Profile/Profile';
+import Footer from './components/Footer';
 import { setCsrfFunc } from './actions/authActions';
 
 // const PrivateRoute = ({ component: Component, ...rest }) => { 
@@ -71,6 +72,7 @@ function App() {
         <Route path="/" exact={true} component={HomePage}/>
         <Route path="/login" exact={true} component={LoginPanel} />
     </Switch>
+    <Footer />
     </div>
   );
 }
