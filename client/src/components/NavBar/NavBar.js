@@ -23,8 +23,8 @@ const NavBar = () => {
         <>
         <nav className={styles.navbar} >
             <div className={styles.logo}>
-                <img className={styles.image} src="/images/favicon.png" alt="logo"></img>
-                <h1 className={styles.title}>Finding Besties</h1>
+                <img className={styles.yongho_logo} src="/images/favicon.png" alt="favicon"></img>
+                <a className={styles.title}> Finding Besties</a>
             </div>
 
             <ul className={styles.navbarMenu} >

@@ -125,6 +125,7 @@ function Profile() {
     }
 
     return (
+    <div>    
     <div className="profile__container">
         <div className="profile__container--left">
             {/* <h2>my profile</h2> */}
@@ -175,6 +176,7 @@ function Profile() {
                  ))}
             </div>
         </div>           
+    </div>
     </div>
     )
 }

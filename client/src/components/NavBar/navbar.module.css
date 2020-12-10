@@ -1,32 +1,51 @@
-.navbar {
+/* .navbar {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 100%;
+    width: 100%; 
     height: 7%;
-    /* background-color: var(--color-pink); */
+    /* background-color: var(--color-pink); 
+} */
 
+.navbar {
+    /* position: fixed; */
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:16px;
+    background-color: transparent;
+    transition: all var(--animation-duration) ease-in-out;
+    z-index: 1;
 }
 
-.logo {
-    /* width: 30%; */
+/* .logo {
     flex-basis: auto;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-} 
+}  */
 
-.title {
+.logo {
+    font-size: var(--font-medium);
+    font-weight: var(--weight-semi-bold);
+    color: white;
+    align-self: start;
+}
+
+/* .title {
     font-size: var(--font-medium);
     font-weight: var(--weight-semi-bold);
     color: white;
 }
-    
+     */
 
-.image {
-    height: 30%;
-    /* margin-left:10; */
-    justify-self: start;
+
+
+.yongho_logo {
+  width: 50px;
+  height: 50px;
 }
 
 
