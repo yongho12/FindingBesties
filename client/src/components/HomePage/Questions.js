@@ -80,9 +80,7 @@ function Questions() {
             setLastThird(match.last_third)
             setLastSecond(match.last_second);
             setLastFirst(match.last_first);
-            setFriends(match.friends);
-            
-                       
+            setFriends(match.friends);                
         }
     }
   

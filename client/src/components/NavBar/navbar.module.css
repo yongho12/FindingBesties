@@ -1,14 +1,7 @@
-/* .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%; 
-    height: 7%;
-    /* background-color: var(--color-pink); 
-} */
+
 
 .navbar {
-    /* position: fixed; */
+    /* positNavion: fixed; */
     width: 100%;
     height: 10%;
     display: flex;
@@ -20,12 +13,6 @@
     z-index: 1;
 }
 
-/* .logo {
-    flex-basis: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}  */
 
 .logo {
     font-size: var(--font-medium);
