@@ -16,7 +16,7 @@ const NavBar = () => {
     }
 
     if (!loggedOut) {
-        return <Redirect to="/login" />;
+        return <Redirect to="/login"/>;
     }
 
     return (
