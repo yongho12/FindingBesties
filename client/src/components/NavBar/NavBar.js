@@ -27,7 +27,7 @@ const NavBar = () => {
                 <a href= "https://github.com/yongho12/FindingBesties" target="_blank" className={styles.title}> Finding Besties</a>
             </div>
 
-            <ul className={styles.navbarMenu} >
+            <ul className={styles.navbarMenu}  >
                 <li className={styles.navbarMenuItem}>
                     <NavLink to="/" activeClassName="active">
                         Home
