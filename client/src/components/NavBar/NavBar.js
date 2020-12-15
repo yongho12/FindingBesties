@@ -29,7 +29,7 @@ const NavBar = () => {
 
             <ul className={styles.navbarMenu}  >
                 <li className={styles.navbarMenuItem}>
-                    <NavLink to="/" activeClassName="active">
+                    <NavLink to="/" activeClassName="active" >
                         Home
                     </NavLink>
                 </li>
