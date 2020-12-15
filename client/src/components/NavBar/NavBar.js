@@ -22,7 +22,7 @@ const NavBar = () => {
     return (
         <>
         <nav className={styles.navbar} >
-            <div className={styles.logo} >
+            <div className={styles.logo}>
                 <img className={styles.yongho_logo} src="/images/favicon.png" alt="favicon"></img>
                 <a href= "https://github.com/yongho12/FindingBesties" target="_blank" className={styles.title}> Finding Besties</a>
             </div>
