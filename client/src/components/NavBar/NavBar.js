@@ -28,7 +28,7 @@ const NavBar = () => {
             </div>
 
             <ul className={styles.navbarMenu} >
-                <li className={styles.navbarMenuItem}>
+                <li className={styles.navbarMenuItem} >
                     <NavLink to="/" activeClassName="active">
                         Home
                     </NavLink>
