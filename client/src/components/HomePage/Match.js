@@ -17,7 +17,7 @@ function Match({first, second, third, last_third, last_second, last_first,top_bo
     const connectHandler = async (e) => {
 
         let bestiebutton = document.getElementById(e.target.id);
-        const recipient = e.target.value
+        const recipient = e.target.value;
         const status = "asking"
         const match_rate = top_bottom_three[recipient]
         
